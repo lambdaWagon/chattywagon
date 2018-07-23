@@ -5,7 +5,7 @@
     "start": "exp start --ios",
     "android": "exp start --android",
     "precommit": "lint-staged",
-    "pretty": "prettier --semi true --print-width 100 --single-quote --trailing-comma all --write \"**/*.js\""
+    "pretty": "prettier --semi true --print-width 100 --single-quote --trailing-comma all --arrow-parens avoid --write \"**/*.js\""
   },
   "lint-staged": {
     "*.js": [
