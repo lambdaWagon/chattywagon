@@ -7,6 +7,7 @@ import {
   projectId,
   storageBucket,
   messagingSenderId,
+  fbAppId,
 } from 'react-native-dotenv';
 
 export const config = {
@@ -16,6 +17,7 @@ export const config = {
   projectId,
   storageBucket,
   messagingSenderId,
+  fbAppId,
 };
 
 firebase.initializeApp(config);
