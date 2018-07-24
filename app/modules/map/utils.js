@@ -1,4 +1,4 @@
-export function getRegionForCoordinates(points) {
+export function getRegionFromArray(points) {
   // points should be an array of { latitude: X, longitude: Y }
   const accuracy = 0.01;
   let minX;
@@ -35,7 +35,7 @@ export function getRegionForCoordinates(points) {
   };
 }
 
-export function regionFrom(lat, lon, d) {
+export function getRegionFromPoint(lat, lon, d) {
   const distance = d / 2;
   const circumference = 40075;
   const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
