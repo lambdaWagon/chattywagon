@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 
 import { getRegionFromArray, getRegionFromPoint } from './utils';
-import coords from './coords';
+import { database } from '../../config/firebase';
+
 import styles from '../../styles';
 
 export default class Map extends Component {
+  static navigationOptions = {
+    headerTransparent: true,
+    headerStyle: { zIndex: 100 },
+  };
+
   state = {
     region: {
       latitude: 0,
@@ -16,49 +22,42 @@ export default class Map extends Component {
     drivers: [],
   };
 
-  timer = null;
-
-  componentWillMount() {
+  async componentWillMount() {
+    const snapshot = await database.ref('drivers').once('value');
+    const drivers = snapshot.val();
+    const coords = drivers.map(driver => driver.position);
     const region = getRegionFromArray(coords);
-    const drivers = coords.map((pos, i) => ({ position: pos, id: i }));
     this.setState({ drivers, region });
   }
 
-  componentDidMount() {
-    this.moveDrivers();
+  async componentDidMount() {
+    await database.ref('drivers').on('child_added', this.onChildChange);
+    await database.ref('drivers').on('child_changed', this.onChildChange);
   }
 
-  componentWillUnmount() {
-    clearTimeout(timer);
-  }
+  onChildChange = data => {
+    let { drivers } = this.state;
+
+    const driver = data.val();
+    if (drivers.length > 0) {
+      drivers = drivers.map(obj => (driver.id === obj.id ? driver : obj));
+      this.setState({ drivers });
+    }
+  };
 
   pickLocationHandler = e => {
     const {
       coordinate: { latitude, longitude },
     } = e.nativeEvent;
-    const region = getRegionFromPoint(latitude, longitude, 50);
+    const region = getRegionFromPoint(latitude, longitude, 300);
     this.setState({ region });
   };
-
-  moveDrivers() {
-    let { drivers } = this.state;
-    timer = setTimeout(() => {
-      /* eslint no-bitwise: 0 */
-      // const i = Math.random() * drivers.length | 0;
-      drivers = drivers.map(({ id, position: { latitude, longitude } }) => ({
-        id,
-        position: { latitude: latitude + 0.00005, longitude: longitude - 0.00005 },
-      }));
-
-      this.setState({ drivers });
-      this.moveDrivers();
-    }, 1000);
-  }
 
   render() {
     const { drivers, region } = this.state;
     return (
-      <MapView style={styles.map} initialRegion={region} onPress={this.pickLocationHandler}>
+      <MapView style={styles.map} region={region} onPress={this.pickLocationHandler}>
+        <Marker pinColor="blue" title="Passenger" draggable coordinate={region} />
         {drivers.map(driver => <Marker key={driver.id} coordinate={driver.position} />)}
       </MapView>
     );

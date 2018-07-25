@@ -12,12 +12,11 @@ export default class LoginForm extends Component {
   };
 
   state = {
-    email: '',
-    password: '',
+    phoneNumber: '',
   };
 
   render() {
-    const { email, password } = this.state;
+    const { phoneNumber } = this.state;
     const {
       navigation: { navigate },
     } = this.props;
@@ -26,26 +25,13 @@ export default class LoginForm extends Component {
         <StatusBar barStyle="light-content" />
         <TextInput
           style={styles.input}
-          placeholder="username or email"
-          placeholderTextColor="rgb(219,220,226)"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
+          placeholder="Enter your phone number"
+          placeholderTextColor="rgb(255,255,255)"
+          keyboardType="phone-pad"
           returnKeyType="next"
-          onSubmitEditing={() => this.passwordInput.focus()}
-          value={email}
-          onChangeText={text => this.setState({ email: text })}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="password"
-          placeholderTextColor="rgb(219,220,226)"
-          returnKeyType="go"
-          secureTextEntry
-          ref={input => (this.passwordInput = input)}
+          value={phoneNumber}
+          onChangeText={num => this.setState({ phoneNumber: num })}
           onSubmitEditing={() => navigate('Map')}
-          value={password}
-          onChangeText={text => this.setState({ password: text })}
         />
         <View style={styles.buttonContainer}>
           <Button style={styles.buttonText} title="Login" onPress={() => navigate('Map')} />
