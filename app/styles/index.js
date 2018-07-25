@@ -13,13 +13,13 @@ export default StyleSheet.create({
   gradient: {
     height: screenHeight,
     width: screenWidth,
-    opacity: 15,
   },
 
   /* Map */
   map: {
     flex: 1,
     backgroundColor: '#fff',
+    height: screenHeight,
   },
 
   /* Login */

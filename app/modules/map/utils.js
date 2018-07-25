@@ -1,6 +1,6 @@
 export function getRegionFromArray(points) {
   // points should be an array of { latitude: X, longitude: Y }
-  const accuracy = 0.01;
+  const accuracy = 0.005;
   let minX;
   let maxX;
   let minY;
