@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
   /* General */
@@ -6,6 +9,11 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  gradient: {
+    height: screenHeight,
+    width: screenWidth,
+    opacity: 15,
   },
 
   /* Map */
