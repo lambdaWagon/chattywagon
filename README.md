@@ -5,27 +5,32 @@
 
 ## Prerequisites
 [node.js](http://nodejs.org/) Node 10+  
-Xcode or [Android Studio](https://developer.android.com/studio/) for emulation
+[Xcode](https://developer.apple.com/xcode/downloads/) for iOS simulator  
+[Android Studio](https://developer.android.com/studio/) for Android emulation
 
 ## Installation
 
 ```bash
 $ cd chattywagon
-$ yarn # | npm i
+$ yarn
 ```
-
+or
+```
+$ npm i
+```
+***
 ## Usage
 
 ```bash
-$ yarn start # | npm start
+$ yarn start
 ```
 
-Starts Expo CLI (commandline interface)/Metro bundler, then the iOS simulator.
+Starts Expo CLI and Metro bundler, then the iOS simulator.
 
 If you want to view the app in the Android emulator (requires [Android Studio](https://developer.android.com/studio/)), the command is:
 
 ```bash
-$ yarn android # | npm run android
+$ yarn android
 ```
 
 ***
@@ -39,8 +44,40 @@ $ yarn add <pkg>
 
 $ yarn add <pkg> --dev # for dev dependencies
 ```
+***
 
-👋
+## Dependencies
 
-[↑](#0)
+|Pkgs|Use|Description|Link|
+|----|---|-----------|----|
+|`expo`|||
+|`react`|||
+|`react-native`|||
+|`geofire`||location queries|
+|`mapbox`||calculate routes|
+|`react-native-maps`|||
+|`react-navigation`|||
+|`react-redux`|||
+|`redux`|||
+|`redux-thunk`|||
+|`prop-types`|||
+|`firebase`|||
+
+### Dev Dependencies
+
+|Pkgs|Use|Description|Link|
+|----|---|-----------|----|
+|`babel-eslint`|||
+|`eslint`|||
+|`eslint-config-airbnb`|||
+|`eslint-plugin-import`|||
+|`eslint-plugin-jsx-a11y`|||
+|`eslint-plugin-react`|||
+|`exp`|||
+|`husky`|||
+|`lint-staged`|||
+|`prettier`|||
+|`react-native-dotenv`|||
+
+[↑](#0) 👋
 ***
