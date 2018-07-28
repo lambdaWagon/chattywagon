@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import { Button, StatusBar, TextInput, View } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { Button, StatusBar, TextInput, View } from 'react-native'
+import PropTypes from 'prop-types'
 
-import styles from '../../styles';
+import styles from '../../styles'
 
 export default class LoginForm extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
-  };
+      navigate: PropTypes.func.isRequired
+    }).isRequired
+  }
 
   state = {
-    phoneNumber: '',
-  };
+    phoneNumber: ''
+  }
 
   render() {
-    const { phoneNumber } = this.state;
+    const { phoneNumber } = this.state
     const {
-      navigation: { navigate },
-    } = this.props;
+      navigation: { navigate }
+    } = this.props
     return (
       <View style={styles.formContainer}>
         <StatusBar barStyle="light-content" />
@@ -37,6 +37,6 @@ export default class LoginForm extends Component {
           <Button style={styles.buttonText} title="Login" onPress={() => navigate('Map')} />
         </View>
       </View>
-    );
+    )
   }
 }

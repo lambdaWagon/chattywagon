@@ -1,26 +1,21 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { createStackNavigator, NavigationActions } from 'react-navigation';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { createStackNavigator } from 'react-navigation'
 
-import store from './app/redux';
-import { Map } from './app/modules/map';
-import { Login, SplashScreen } from './app/modules/auth';
-import { auth } from './app/config/firebase';
-
-let navigator;
-
-auth.onAuthStateChanged(user => {
-  if (user) navigator.dispatch(NavigationActions.navigate('Map'));
-});
+import store from './app/redux'
+import { Map } from './app/modules/map'
+import { Login, SplashScreen } from './app/modules/auth'
 
 export default () => (
   <Provider store={store}>
-    <StackNavigator ref={ref => (navigator = ref)} />
+    <StackNavigator />
   </Provider>
-);
+)
+
+console.ignoredYellowBox = ['Remote debugger']
 
 const StackNavigator = createStackNavigator({
-  SplashScreen,
-  Login,
   Map,
-});
+  SplashScreen,
+  Login
+})

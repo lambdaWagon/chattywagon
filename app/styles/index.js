@@ -1,32 +1,32 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native'
 
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height
+const screenWidth = Dimensions.get('window').width
 
 export default StyleSheet.create({
   /* General */
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   gradient: {
     height: screenHeight,
-    width: screenWidth,
+    width: screenWidth
   },
 
   /* Map */
   map: {
     flex: 1,
     backgroundColor: '#fff',
-    height: screenHeight,
+    height: screenHeight
   },
 
   /* Login */
   logoContainer: {
     alignItems: 'center',
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   title: {
@@ -34,12 +34,12 @@ export default StyleSheet.create({
     marginTop: 10,
     width: 180,
     textAlign: 'center',
-    opacity: 0.9,
+    opacity: 0.9
   },
 
   /* LoginForm */
   formContainer: {
-    padding: 20,
+    padding: 20
   },
   input: {
     height: 40,
@@ -51,7 +51,7 @@ export default StyleSheet.create({
     width: 300,
     borderRadius: 50,
     borderWidth: 2,
-    borderColor: '#ffcd99',
+    borderColor: '#ffcd99'
   },
 
   buttonContainer: {
@@ -60,12 +60,28 @@ export default StyleSheet.create({
     height: 40,
     backgroundColor: 'rgba(255,130, 0,0.2)',
     borderWidth: 2,
-    borderColor: '#ffcd99',
+    borderColor: '#ffcd99'
   },
 
   buttonText: {
     justifyContent: 'center',
     textAlign: 'center',
-    fontWeight: '800',
+    fontWeight: '800'
   },
-});
+
+  /* SearchBar */
+  searchBar: {
+    flex: 1,
+    flexDirection: 'column',
+    position: 'absolute',
+    zIndex: 999,
+    left: 15,
+    height: 40
+  },
+  searchInput: {
+    backgroundColor: 'white',
+    padding: 10,
+    opacity: 0.9,
+    top: screenHeight - 360
+  }
+})

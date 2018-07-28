@@ -1,46 +1,45 @@
-import React, { Component } from 'react';
-import { Button, ImageBackground, View } from 'react-native';
-import { LinearGradient } from 'expo';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { Button, ImageBackground, View } from 'react-native'
+import { LinearGradient } from 'expo'
+import PropTypes from 'prop-types'
 
-import { auth } from '../../config/firebase';
-import styles from '../../styles';
+import { auth } from '../../config/firebase'
+import styles from '../../styles'
+
+const bg = require('../../../assets/splash.png')
 
 export default class Login extends Component {
-  static navigationOptions = {
-    header: null,
-  };
+  static navigationOptions = { header: null }
 
   static propTypes = {
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
-  };
+    navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
+  }
 
-  // componentDidMount() {
-  //   const {
-  //     navigation: { navigate },
-  //   } = this.props;
-  //   auth.onAuthStateChanged(user => {
-  //     if (user) navigate('Map');
-  //   });
-  // }
+  componentWillMount() {
+    const {
+      navigation: { navigate }
+    } = this.props
+    auth.onAuthStateChanged(user => {
+      if (user) navigate('Map')
+    })
+  }
+
+  onLayout = e => {
+    console.log(e.nativeEvent.layout)
+  }
 
   render() {
     const {
-      navigation: { navigate },
-    } = this.props;
+      navigation: { navigate }
+    } = this.props
     return (
-      <ImageBackground
-        source={require('../../../assets/splash.png')}
-        style={{ width: '100%', height: '100%' }}
-      >
+      <ImageBackground onLayout={this.onLayout} source={bg} style={styles.container}>
         <LinearGradient
           colors={[
             'rgba(196,244,255,0.8)',
             'rgba(196,244,255,0.8)',
             'rgba(232,134,60,0.8)',
-            'rgba(232,134,60,0.8)',
+            'rgba(232,134,60,0.8)'
           ]}
           style={styles.gradient}
         >
@@ -49,6 +48,6 @@ export default class Login extends Component {
           </View>
         </LinearGradient>
       </ImageBackground>
-    );
+    )
   }
 }

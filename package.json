@@ -5,7 +5,7 @@
     "start": "exp start --ios",
     "android": "exp start --android",
     "precommit": "lint-staged",
-    "pretty": "prettier --semi true --print-width 100 --single-quote --trailing-comma all --arrow-parens avoid --write \"**/*.js\"",
+    "pretty": "prettier --write \"**/*.js\"",
     "postinstall": "remotedev-debugger --hostname localhost --port 5678 --injectserver"
   },
   "lint-staged": {
@@ -24,6 +24,7 @@
     "react-native-maps": "^0.21.0",
     "react-native-maps-directions": "^1.6.0",
     "react-navigation": "^2.9.1",
+    "react-navigation-fluid-transitions": "^0.2.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
