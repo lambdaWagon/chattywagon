@@ -1,7 +1,6 @@
 import React from 'react'
 import { TextInput, View } from 'react-native'
 import { Transition } from 'react-navigation-fluid-transitions'
-import PropTypes from 'prop-types'
 
 import styles from '../styles'
 
@@ -14,16 +13,10 @@ const myCustomTransitionFunction = transitionInfo => {
   return { transform: [{ scale: scaleInterpolation }] }
 }
 
-export default function SearchBar({ navigation: { navigate } }) {
-  return (
-    <View style={styles.searchInput}>
-      <Transition disappear={myCustomTransitionFunction} shared="search">
-        <TextInput onKeyPress={() => navigate('Search')} />
-      </Transition>
-    </View>
-  )
-}
-
-SearchBar.propTypes = {
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
-}
+export default () => (
+  <View style={styles.searchInputFocus}>
+    <Transition appear={myCustomTransitionFunction} shared="search">
+      <TextInput />
+    </Transition>
+  </View>
+)
