@@ -1,5 +1,5 @@
-import * as firebase from 'firebase';
-import GeoFire from 'geofire';
+import * as firebase from 'firebase'
+import GeoFire from 'geofire'
 import {
   apiKey,
   authDomain,
@@ -8,8 +8,8 @@ import {
   storageBucket,
   messagingSenderId,
   fbAppId,
-  googleMapsApiKey,
-} from 'react-native-dotenv';
+  googleMapsApiKey
+} from 'react-native-dotenv'
 
 export const config = {
   apiKey,
@@ -19,13 +19,13 @@ export const config = {
   storageBucket,
   messagingSenderId,
   fbAppId,
-  googleMapsApiKey,
-};
+  googleMapsApiKey
+}
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
 
-export const database = firebase.database();
-export const auth = firebase.auth();
-export const provider = new firebase.auth.FacebookAuthProvider();
-export const storage = firebase.storage();
-export const geoFire = new GeoFire(database.ref('driverLocations'));
+export const database = firebase.database()
+export const auth = firebase.auth()
+export const provider = new firebase.auth.FacebookAuthProvider()
+export const storage = firebase.storage()
+export const geoFire = new GeoFire(database.ref('driverLocations'))

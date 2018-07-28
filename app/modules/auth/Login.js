@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { Button, KeyboardAvoidingView, View } from 'react-native';
-import { LinearGradient } from 'expo';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { Button, KeyboardAvoidingView, View } from 'react-native'
+import { LinearGradient } from 'expo'
+import PropTypes from 'prop-types'
 
-import LoginForm from './LoginForm';
-import { auth } from '../../config/firebase';
-import { signInWithFacebook } from './api';
-import styles from '../../styles';
+import LoginForm from './LoginForm'
+import { auth } from '../../config/firebase'
+import { signInWithFacebook } from './api'
+import styles from '../../styles'
 
 export default class Login extends Component {
   static navigationOptions = {
-    header: null,
-  };
+    header: null
+  }
 
   static propTypes = {
     navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
-  };
+      navigate: PropTypes.func.isRequired
+    }).isRequired
+  }
 
   // componentDidMount() {
   //   const { navigation: { navigate } } = this.props;
@@ -27,7 +27,7 @@ export default class Login extends Component {
   // }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation } = this.props
     return (
       <LinearGradient colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']} style={styles.gradient}>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -40,6 +40,6 @@ export default class Login extends Component {
           </View>
         </KeyboardAvoidingView>
       </LinearGradient>
-    );
+    )
   }
 }
