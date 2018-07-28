@@ -24,15 +24,16 @@ class Map extends Component {
 
   render() {
     const {
-      drivers,
+      currentLocation,
       destination,
       destinationSet,
+      drivers,
       locationSet,
-      currentLocation,
+      navigation,
       region,
       setDestination
     } = this.props
-    console.log('>>> GOT LOC', region, locationSet)
+    console.log('>>> GOT LOC', region)
     return (
       <MapView style={styles.map} region={region} onPress={setDestination}>
         {locationSet && (
@@ -49,7 +50,7 @@ class Map extends Component {
             strokeColor="#e8863c"
           />
         )}
-        <SearchBar />
+        <SearchBar navigation={navigation} />
       </MapView>
     )
   }

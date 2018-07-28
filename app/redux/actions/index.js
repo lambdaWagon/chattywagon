@@ -1,11 +1,6 @@
+import * as ActionType from '../constants'
 import { database, geoFire } from '../../config/firebase'
 import { getRegionFromPoint } from '../../modules/map/utils'
-
-export const GET_LOCATION = 'GET_LOCATION'
-export const GET_DRIVERS = 'GET_DRIVERS'
-export const ERROR = 'ERROR'
-export const SET_PICKUP = 'SET_PICKUP'
-export const SET_DESTINATION = 'SET_DESTINATION'
 
 const query = geoFire.query({
   center: [35.04563, -85.30968],
@@ -17,11 +12,11 @@ export const getLocation = () => dispatch => {
     ({ coords: { latitude, longitude } }) => {
       const currentLocation = { latitude, longitude }
       const region = getRegionFromPoint(latitude, longitude, 1000)
-      dispatch({ type: GET_LOCATION, currentLocation, region })
+      dispatch({ type: ActionType.GET_LOCATION, currentLocation, region })
     },
     error => {
       console.log(error)
-      dispatch({ type: ERROR, error })
+      dispatch({ type: ActionType.ERROR, error })
     },
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
   )
@@ -36,12 +31,11 @@ export const getDrivers = () => async dispatch => {
         latitude: v.l[0],
         longitude: v.l[1]
       }))
-      // const region = getRegionFromArray(drivers);
-      dispatch({ type: GET_DRIVERS, drivers })
+      dispatch({ type: ActionType.GET_DRIVERS, drivers })
     }
   } catch (error) {
     console.log(error)
-    dispatch({ type: ERROR, error })
+    dispatch({ type: ActionType.ERROR, error })
   }
 }
 
@@ -75,7 +69,7 @@ export const setPickupLocation = ({
   }
 }) => dispatch => {
   const pickupLocation = getRegionFromPoint(latitude, longitude, 300)
-  dispatch({ type: SET_PICKUP, pickupLocation })
+  dispatch({ type: ActionType.SET_PICKUP, pickupLocation })
 }
 
 export const setDestination = ({
@@ -84,5 +78,5 @@ export const setDestination = ({
   }
 }) => dispatch => {
   const destination = getRegionFromPoint(latitude, longitude, 300)
-  dispatch({ type: SET_DESTINATION, destination })
+  dispatch({ type: ActionType.SET_DESTINATION, destination })
 }

@@ -82,6 +82,12 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     opacity: 0.9,
-    top: screenHeight - 360
+    top: screenHeight - 380
+  },
+  searchInputFocus: {
+    backgroundColor: 'red',
+    padding: 10,
+    opacity: 0.9,
+    top: screenHeight - 750
   }
 })
