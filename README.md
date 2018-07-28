@@ -1,9 +1,11 @@
 # <a name="0"></a>ChattyWagon 🚕
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-***
+
+---
 
 ## Prerequisites
+
 [node.js](http://nodejs.org/) Node 10+  
 Xcode or [Android Studio](https://developer.android.com/studio/) for emulation
 
@@ -28,7 +30,7 @@ If you want to view the app in the Android emulator (requires [Android Studio](h
 $ yarn android # | npm run android
 ```
 
-***
+---
 
 ## Installing packages
 
@@ -40,7 +42,8 @@ $ yarn add <pkg>
 $ yarn add <pkg> --dev # for dev dependencies
 ```
 
-👋
+👋👋
 
 [↑](#0)
-***
+
+---
