@@ -30,7 +30,11 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@types/react": "^16.4.7",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-native": "^0.56.4",
     "babel-eslint": "^8.2.6",
+    "concurrently": "^3.6.1",
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
@@ -42,6 +46,9 @@
     "prettier": "^1.13.7",
     "react-native-dotenv": "^0.2.0",
     "remote-redux-devtools": "^0.5.12",
-    "remotedev-rn-debugger": "^0.8.3"
+    "remotedev-rn-debugger": "^0.8.3",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2"
   }
 }
