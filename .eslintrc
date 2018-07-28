@@ -25,6 +25,7 @@
     "jest": true
   },
   "globals": {
-    "fetch": false
+    "fetch": false,
+    "navigator": false
   }
 }
