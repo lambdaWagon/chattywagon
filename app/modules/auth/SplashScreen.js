@@ -17,14 +17,14 @@ export default class Login extends Component {
     }).isRequired,
   };
 
-  componentDidMount() {
-    const {
-      navigation: { navigate },
-    } = this.props;
-    auth.onAuthStateChanged(user => {
-      if (user) navigate('Map');
-    });
-  }
+  // componentDidMount() {
+  //   const {
+  //     navigation: { navigate },
+  //   } = this.props;
+  //   auth.onAuthStateChanged(user => {
+  //     if (user) navigate('Map');
+  //   });
+  // }
 
   render() {
     const {
