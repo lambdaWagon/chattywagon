@@ -15,7 +15,7 @@ const myCustomTransitionFunction = transitionInfo => {
 
 export default () => (
   <View style={styles.searchInputFocus}>
-    <Transition appear={myCustomTransitionFunction} shared="search">
+    <Transition shared="search">
       <TextInput />
     </Transition>
   </View>

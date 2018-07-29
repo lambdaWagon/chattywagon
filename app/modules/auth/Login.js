@@ -19,13 +19,6 @@ export default class Login extends Component {
     }).isRequired
   }
 
-  // componentDidMount() {
-  //   const { navigation: { navigate } } = this.props;
-  //   auth.onAuthStateChanged(user => {
-  //     if (user) navigate('Map');
-  //   });
-  // }
-
   render() {
     const { navigation } = this.props
     return (
@@ -35,9 +28,7 @@ export default class Login extends Component {
             <Button title="Facebook Login" onPress={signInWithFacebook} />
             <Button title="Facebook Logout" onPress={() => auth.signOut()} />
           </View>
-          <View>
-            <LoginForm navigation={navigation} />
-          </View>
+          <View>{/* <LoginForm navigation={navigation} /> */}</View>
         </KeyboardAvoidingView>
       </LinearGradient>
     )

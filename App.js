@@ -1,24 +1,14 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-// import { createStackNavigator } from 'react-navigation'
-import { FluidNavigator } from 'react-navigation-fluid-transitions'
 
-import store from './app/redux'
-import { Map } from './app/modules/map'
-import { Login, SplashScreen } from './app/modules/auth'
-import { Search } from './app/components'
+import store from './app/store'
+// import AppNavigator from './app/navigators'
+import Root from './app/modules/root/Root'
 
 export default () => (
-  <Provider store={store}>
-    <StackNavigator />
+  <Provider store={store()}>
+    <Root />
   </Provider>
 )
 
 console.ignoredYellowBox = ['Remote debugger']
-
-const StackNavigator = FluidNavigator({
-  Map,
-  Search,
-  SplashScreen,
-  Login
-})

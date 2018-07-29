@@ -3,25 +3,16 @@ import { Button, ImageBackground, View } from 'react-native'
 import { LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
 
-import { auth } from '../../config/firebase'
+// import { auth } from '../../config/firebase'
 import styles from '../../styles'
 
 const bg = require('../../../assets/splash.png')
 
-export default class Login extends Component {
+export default class SplashScreen extends Component {
   static navigationOptions = { header: null }
 
   static propTypes = {
     navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
-  }
-
-  componentWillMount() {
-    const {
-      navigation: { navigate }
-    } = this.props
-    auth.onAuthStateChanged(user => {
-      if (user) navigate('Map')
-    })
   }
 
   onLayout = e => {
