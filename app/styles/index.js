@@ -6,9 +6,11 @@ const screenWidth = Dimensions.get('window').width
 export default StyleSheet.create({
   /* General */
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // height: screenHeight,
+    // width: screenWidth
   },
   gradient: {
     height: screenHeight,
@@ -70,24 +72,46 @@ export default StyleSheet.create({
   },
 
   /* SearchBar */
+  searchContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
   searchBar: {
     flex: 1,
-    flexDirection: 'column',
-    position: 'absolute',
-    zIndex: 999,
-    left: 15,
-    height: 40
+    // flexDirection: 'column',
+    // position: 'absolute',
+    // zIndex: 999,
+    // backgroundColor: 'blue',
+    opacity: 0.1
+    // alignItems: 'center',
+    // justifyContent: 'flex-end',
+    // height: 120,
+    // top: screenHeight - 300
+  },
+  searchMenu: {
+    backgroundColor: 'white',
+    height: 300,
+    // top: screenHeight - 260,
+    width: screenWidth - 10
   },
   searchInput: {
+    zIndex: 999,
     backgroundColor: 'white',
     padding: 10,
     opacity: 0.9,
-    top: screenHeight - 380
+    height: 40,
+    // top: screenHeight - 300,
+    width: screenWidth - 10,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowRadius: 20,
+    shadowOffset: { width: 10, height: 10 }
   },
   searchInputFocus: {
     backgroundColor: 'red',
     padding: 10,
-    opacity: 0.9,
+    opacity: 0.95,
     top: screenHeight - 750
   }
 })

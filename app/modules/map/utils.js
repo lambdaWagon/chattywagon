@@ -1,3 +1,16 @@
+export function getRegionFromPoint(latitude, longitude, aspectRatio) {
+  const latitudeDelta = 0.00922
+  const longitudeDelta = latitudeDelta * aspectRatio
+  const offset = 0.0015
+
+  return {
+    latitude: latitude - offset,
+    longitude,
+    latitudeDelta,
+    longitudeDelta
+  }
+}
+
 export function getRegionFromArray(points) {
   // points should be an array of { latitude: X, longitude: Y }
   const accuracy = 0.005
@@ -32,27 +45,5 @@ export function getRegionFromArray(points) {
     longitude: midY,
     latitudeDelta: deltaX + accuracy,
     longitudeDelta: deltaY + accuracy
-  }
-}
-
-export function getRegionFromPoint(lat, lon, d) {
-  const distance = d / 2
-  const circumference = 40075
-  const oneDegreeOfLatitudeInMeters = 111.32 * 1000
-  const angularDistance = distance / circumference
-
-  const latitudeDelta = distance / oneDegreeOfLatitudeInMeters
-  const longitudeDelta = Math.abs(
-    Math.atan2(
-      Math.sin(angularDistance) * Math.cos(lat),
-      Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)
-    )
-  )
-
-  return {
-    latitude: lat,
-    longitude: lon,
-    latitudeDelta,
-    longitudeDelta
   }
 }

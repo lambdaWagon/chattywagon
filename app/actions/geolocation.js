@@ -1,22 +1,25 @@
-import * as ActionType from '../constants'
-import { database, geoFire } from '../../config/firebase'
-import { getRegionFromPoint } from '../../modules/map/utils'
+import { Dimensions } from 'react-native'
 
-const query = geoFire.query({
-  center: [35.04563, -85.30968],
-  radius: 10
-})
+import { database, geoFire } from '../config/firebase'
+import { getRegionFromPoint } from '../modules/map/utils'
+import * as ActionType from '../constants'
+
+const { width, height } = Dimensions.get('window')
+const aspectRatio = width / height
+
+const handleErrors = error => ({ type: ActionType.ERROR, error })
 
 export const getLocation = () => dispatch => {
   navigator.geolocation.getCurrentPosition(
     ({ coords: { latitude, longitude } }) => {
+      // console.log('📍 CURRENT LOCATION', latitude, longitude)
       const currentLocation = { latitude, longitude }
-      const region = getRegionFromPoint(latitude, longitude, 1000)
+      const region = getRegionFromPoint(latitude, longitude, aspectRatio)
       dispatch({ type: ActionType.GET_LOCATION, currentLocation, region })
     },
     error => {
       console.log(error)
-      dispatch({ type: ActionType.ERROR, error })
+      dispatch(handleErrors(error))
     },
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
   )
@@ -31,36 +34,29 @@ export const getDrivers = () => async dispatch => {
         latitude: v.l[0],
         longitude: v.l[1]
       }))
+      // console.log('🚕 DRIVERS', drivers)
       dispatch({ type: ActionType.GET_DRIVERS, drivers })
     }
   } catch (error) {
     console.log(error)
-    dispatch({ type: ActionType.ERROR, error })
+    dispatch(handleErrors(error))
   }
 }
 
 export const updateDrivers = () => {
-  // async componentDidMount() {
-  //   const query = await geoFire.query({
-  //     center: [35.04563, -85.30968],
-  //     radius: 10,
-  //   });
-  //   await query.on('key_moved', (key, location, distance) => {
-  //     this.onChildChange(key, location);
-  //     console.log(`${key} moved within query to ${location} ${distance} km from center`);
-  //   });
-  //   await query.on('key_exited', (key, location, distance) => {
-  //     console.log(`${key} exited query to ${location} ${distance} km from center`);
-  //   });
-  // }
-  // onChildChange = (key, location) => {
-  //   this.setState(p => ({
-  //     drivers: p.drivers.map(
-  //       driver =>
-  //         driver.id === key ? { id: key, latitude: location[0], longitude: location[1] } : driver,
-  //     ),
-  //   }));
-  // };
+  // TO-DO: redux-saga
+  // console.log(getState().geolocation.currentLocation)
+  // const query = geoFire.query({
+  //   center: [0, 0],
+  //   radius: 10
+  // })
+  // await query.on('key_moved', (key, location, distance) => {
+  //   dispatch({ type: 'DRIVER_UPDATED', key, location })
+  //   console.log(`${key} moved within query to ${location} ${distance} km from center`)
+  // })
+  // await query.on('key_exited', (key, location, distance) => {
+  //   console.log(`${key} exited query to ${location} ${distance} km from center`)
+  // })
 }
 
 export const setPickupLocation = ({
@@ -77,6 +73,9 @@ export const setDestination = ({
     coordinate: { latitude, longitude }
   }
 }) => dispatch => {
-  const destination = getRegionFromPoint(latitude, longitude, 300)
+  // const destination = getRegionFromPoint(latitude, longitude, 300)
+  const destination = { latitude, longitude }
   dispatch({ type: ActionType.SET_DESTINATION, destination })
 }
+
+export const setAddress = address => ({ type: 'SET_ADDRESS', address })

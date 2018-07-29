@@ -1,4 +1,4 @@
-import { ERROR } from '../actions'
+import { ERROR } from '../constants'
 
 export default (state = {}, action) => {
   switch (action.type) {
