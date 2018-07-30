@@ -42,15 +42,16 @@ class Map extends Component {
   }
 
   render() {
+    const { coords } = this.state
     const { currentLocation, drivers, locationSet } = this.props
-    console.log('🍕 >>>', region)
+
     return (
       <MapView ref={c => (this.map = c)} style={styles.map} initialRegion={region}>
         {locationSet && (
           <Marker pinColor="blue" title="Current Location" draggable coordinate={currentLocation} />
         )}
-        {drivers.map(driver => <Marker key={driver.id} coordinate={driver} />)}
-        <Directions coords={this.state.coords} fitToCoords={this.fitToCoords} />
+        {drivers.map(d => <Marker key={d.key} coordinate={d} />)}
+        <Directions coords={coords} fitToCoords={this.fitToCoords} />
         <Search />
       </MapView>
     )
@@ -60,30 +61,30 @@ class Map extends Component {
 Map.propTypes = {
   currentLocation: PropTypes.object.isRequired,
   drivers: PropTypes.array.isRequired,
-  destination: PropTypes.object.isRequired,
-  destinationSet: PropTypes.bool.isRequired,
-  locationSet: PropTypes.bool.isRequired,
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
-  region: PropTypes.object.isRequired
+  // destination: PropTypes.object.isRequired,
+  // destinationSet: PropTypes.bool.isRequired,
+  locationSet: PropTypes.bool.isRequired
+  // navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
+  // region: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   const {
     geolocation: {
-      address,
+      // address,
       currentLocation,
-      destination,
-      destinationSet,
+      // destination,
+      // destinationSet,
       drivers,
-      locationSet,
-      region
+      locationSet
+      // region
     }
   } = state
   return {
-    address,
+    // address,
     currentLocation,
-    destination,
-    destinationSet,
+    // destination,
+    // destinationSet,
     drivers,
     locationSet,
     region

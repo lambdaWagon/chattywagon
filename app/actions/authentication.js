@@ -1,18 +1,30 @@
-import * as ActionType from '../constants'
+import { eventChannel } from 'redux-saga'
+import { take, call, put } from 'redux-saga/effects'
+import * as types from '../constants'
 import { auth } from '../config/firebase'
 
-export const verifyAuth = () => dispatch => {
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      console.log(user)
-      dispatch({ type: ActionType.AUTH_USER, user })
-    } else {
-      dispatch({ type: ActionType.SIGN_OUT })
-    }
+const firebaseAuthStateChangeChannel = () =>
+  eventChannel(emit => {
+    auth.onAuthStateChanged(user => {
+      emit(user)
+    })
+    return () => {}
   })
+
+export function* verifyAuth() {
+  const channel = yield call(firebaseAuthStateChangeChannel)
+
+  while (true) {
+    const user = yield take(channel)
+    if (user) {
+      yield put({ type: types.AUTH_USER, user })
+    } else {
+      yield put({ type: types.SIGN_OUT })
+    }
+  }
 }
 
 export const signUserOut = () => async dispatch => {
   await auth.signOut()
-  dispatch({ type: ActionType.SIGN_OUT })
+  dispatch({ type: types.SIGN_OUT })
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, TouchableOpacity } from 'react-native'
-import { Transition } from 'react-navigation-fluid-transitions'
+// import { Transition } from 'react-navigation-fluid-transitions'
 import PropTypes from 'prop-types'
 
 import styles from '../styles'

@@ -3,7 +3,6 @@ import { Button, ImageBackground, View } from 'react-native'
 import { LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
 
-// import { auth } from '../../config/firebase'
 import styles from '../../styles'
 
 const bg = require('../../../assets/splash.png')

@@ -1,13 +1,13 @@
-import { Dimensions } from 'react-native'
+// import { Dimensions } from 'react-native'
 import { buffers, eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
 
 import { geoFire } from '../config/firebase'
-import { getRegionFromPoint } from '../modules/map/utils'
+// import { getRegionFromPoint } from '../modules/map/utils'
 import * as types from '../constants'
 
-const { width, height } = Dimensions.get('window')
-const aspectRatio = width / height
+// const { width, height } = Dimensions.get('window')
+// const aspectRatio = width / height
 
 const geoQuery = geoFire.query({
   center: [37.786279, -122.406456],

@@ -1,4 +1,4 @@
-import { GET_DRIVERS, GET_LOCATION, SET_PICKUP, SET_DESTINATION } from '../constants'
+import * as types from '../constants'
 
 const initialState = {
   address: '',
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
         ...state,
         drivers: state.drivers.map(d => (d.key === action.driver.key ? action.driver : d))
       }
-    case GET_LOCATION:
+    case types.GET_LOCATION:
       return {
         ...state,
         currentLocation: action.currentLocation,
