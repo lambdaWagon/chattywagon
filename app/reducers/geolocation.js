@@ -35,8 +35,6 @@ export default (state = initialState, action) => {
         ...state,
         drivers: state.drivers.map(d => (d.key === action.driver.key ? action.driver : d))
       }
-    case GET_DRIVERS:
-      return { ...state, drivers: action.drivers }
     case GET_LOCATION:
       return {
         ...state,
@@ -46,10 +44,10 @@ export default (state = initialState, action) => {
       }
     case 'SET_ADDRESS':
       return { ...state, address: action.address, destinationSet: true }
-    case SET_DESTINATION:
-      return { ...state, destination: action.destination, destinationSet: true }
-    case SET_PICKUP:
-      return { ...state, pickupLocation: action.pickupLocation }
+    // case SET_DESTINATION:
+    //   return { ...state, destination: action.destination, destinationSet: true }
+    // case SET_PICKUP:
+    //   return { ...state, pickupLocation: action.pickupLocation }
     default:
       return state
   }

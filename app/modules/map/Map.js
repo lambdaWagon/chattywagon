@@ -12,6 +12,13 @@ import styles from '../../styles'
 
 const { width, height } = Dimensions.get('window')
 
+const region = {
+  latitude: 37.784334,
+  longitude: -122.406417,
+  latitudeDelta: 0.00922,
+  longitudeDelta: 0.004258004926108375
+}
+
 class Map extends Component {
   static navigationOptions = {
     headerTransparent: true,
@@ -35,10 +42,10 @@ class Map extends Component {
   }
 
   render() {
-    const { currentLocation, drivers, locationSet, region } = this.props
+    const { currentLocation, drivers, locationSet } = this.props
     console.log('🍕 >>>', region)
     return (
-      <MapView ref={c => (this.map = c)} style={styles.map} region={region}>
+      <MapView ref={c => (this.map = c)} style={styles.map} initialRegion={region}>
         {locationSet && (
           <Marker pinColor="blue" title="Current Location" draggable coordinate={currentLocation} />
         )}
