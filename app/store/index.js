@@ -17,7 +17,7 @@ export default initialState => {
 
   const store = createStore(reducers, initialState, enhancer)
 
-  store.dispatch(verifyAuth())
+  saga.run(verifyAuth)
   store.dispatch(getLocation())
   saga.run(watchDrivers)
 
