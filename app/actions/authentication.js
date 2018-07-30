@@ -3,19 +3,19 @@ import { take, call, put } from 'redux-saga/effects'
 import * as types from '../constants'
 import { auth } from '../config/firebase'
 
-const firebaseAuthStateChangeChannel = () =>
+const authStateChange = () =>
   eventChannel(emit => {
     auth.onAuthStateChanged(user => {
-      emit(user)
+      emit({ user })
     })
     return () => {}
   })
 
 export function* verifyAuth() {
-  const channel = yield call(firebaseAuthStateChangeChannel)
+  const channel = yield call(authStateChange)
 
   while (true) {
-    const user = yield take(channel)
+    const { user } = yield take(channel)
     if (user) {
       yield put({ type: types.AUTH_USER, user })
     } else {
