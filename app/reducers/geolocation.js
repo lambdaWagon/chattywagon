@@ -28,6 +28,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'ADD_DRIVER_SUCCESS':
+      return { ...state, drivers: [...state.drivers, action.driver] }
+    case 'FETCH_DRIVER_SUCCESS':
+      return {
+        ...state,
+        drivers: state.drivers.map(d => (d.key === action.driver.key ? action.driver : d))
+      }
     case GET_DRIVERS:
       return { ...state, drivers: action.drivers }
     case GET_LOCATION:
@@ -36,16 +43,6 @@ export default (state = initialState, action) => {
         currentLocation: action.currentLocation,
         region: action.region,
         locationSet: true
-      }
-    case 'DRIVER_UPDATED':
-      return {
-        ...state,
-        drivers: state.drivers.map(
-          driver =>
-            driver.id === action.key
-              ? { id: action.key, latitude: action.location[0], longitude: action.location[1] }
-              : driver
-        )
       }
     case 'SET_ADDRESS':
       return { ...state, address: action.address, destinationSet: true }
