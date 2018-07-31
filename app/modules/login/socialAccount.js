@@ -55,10 +55,11 @@ class SocialAccount extends React.Component {
       buttonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: wp('5%'),
         backgroundColor: 'black',
         marginBottom: hp('2.25%'),
+        height: hp('9.5%'),
       },
       text: {
         color: 'white',
@@ -114,7 +115,6 @@ class SocialAccount extends React.Component {
 
           <View style={styles.buttonContainer}>
             <Text style={styles.text}>CHOOSE AN ACCOUNT</Text>
-            {/* <Icon name="long-arrow-right" size={wp('7.5%')} color="white" /> */}
           </View>
         </View>
       </View>

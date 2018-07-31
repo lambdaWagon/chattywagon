@@ -43,6 +43,7 @@ class GetRide extends React.Component {
         padding: wp('5%'),
         backgroundColor: 'black',
         width: wp('80%'),
+        height: hp('9.5%'),
       },
       text: {
         color: 'white',

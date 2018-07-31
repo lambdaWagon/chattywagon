@@ -24,23 +24,38 @@ class PhoneInput extends React.Component {
   };
 
   state = {
-    phoneNum: '',
-    // value: '',
+    input: '',
   };
 
   //  TODO refactor to update after each part of the number
-  handleNumber = value => {
-    if (value.length === 10) {
-      //  reformat and return num number
-      // const phoneNum = value.replace(/(\d{3})/, '($1) ');
-      const phoneNum = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-      this.setState({ phoneNum });
+  // handleNumber = value => {
+  //   if (value.length === 10) {
+  //     //  reformat and return num number
+  //     // const phoneNum = value.replace(/(\d{3})/, '($1) ');
+  //     const phoneNum = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+  //     this.setState({ phoneNum });
+  //   }
+  // };
+
+  phoneNumberFormatter = n => {
+    const num = n.replace(/[^0-9]/g, '');
+    if (num.length >= 8) {
+      return `(${num.substr(0, 3)}) ${num.substr(3, 3)}-${num.substr(6)}`;
     }
+    if (num.length >= 3 && num.length < 8) {
+      return `${num.substr(0, 3)}-${num.substr(3)}`;
+    }
+    return num;
+  };
+
+  handleInput = i => {
+    const input = this.phoneNumberFormatter(i);
+    this.setState({ input });
   };
 
   render() {
     const { navigation } = this.props;
-    const { phoneNum } = this.state;
+    const { input } = this.state;
 
     const styles = StyleSheet.create({
       container: {
@@ -59,7 +74,7 @@ class PhoneInput extends React.Component {
       },
       inputContainer: {
         flex: 1,
-        paddingTop: hp('5%'),
+        paddingTop: hp('4%'),
         paddingLeft: wp('5%'),
         backgroundColor: 'white',
       },
@@ -87,6 +102,7 @@ class PhoneInput extends React.Component {
         padding: wp('5%'),
         backgroundColor: 'black',
         marginBottom: hp('2.25%'),
+        height: hp('9.5%'),
       },
       text: {
         color: 'white',
@@ -118,15 +134,18 @@ class PhoneInput extends React.Component {
                 keyboardType="number-pad"
                 name="phoneNum"
                 type="number"
-                onChangeText={this.handleNumber}
-                value={phoneNum}
+                onChangeText={this.handleInput}
+                value={input}
                 maxLength={14}
               />
               <Icon name="mobile" size={wp('7.5%')} color="black" />
             </View>
             <Text style={styles.belowInputText}>We'll text a code to verify your phone</Text>
           </View>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => navigation.navigate('CodeInput')}
+          >
             <Text style={styles.text}>Get Code</Text>
             <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
           </TouchableOpacity>
@@ -143,19 +162,3 @@ class PhoneInput extends React.Component {
 }
 
 export default PhoneInput;
-
-/*
-<TextInput
-placeholder="____"
-placeholderStyle={{ backgroundColor: 'blue' }}
-style={{ letterSpacing: 10 }}
-keyboardType="number-pad"
-name="value"
-type="number"
-onChangeText={value => {
-  this.setState({ value });
-}}
-value={this.state.value}
-maxLength={4}
-/>
-*/

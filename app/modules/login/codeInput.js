@@ -8,6 +8,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,18 +16,20 @@ import {
 
 import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
-class SocialLogin extends React.Component {
+class CodeInput extends React.Component {
   static navigationOptions = {
     headerTransparent: true,
     headerStyle: { zIndex: 100 },
   };
 
-  state = {};
+  state = {
+    value: '',
+  };
 
   render() {
     const { navigation } = this.props;
+    const { value } = this.state;
 
     const styles = StyleSheet.create({
       container: {
@@ -40,24 +43,19 @@ class SocialLogin extends React.Component {
         width: wp('100%'),
       },
       middleContainer: {
-        height: hp('40%'),
+        height: hp('31%'),
         width: wp('80%'),
+      },
+      aboveInputText: {
+        fontSize: wp('3%'),
+        fontWeight: 'bold',
+        marginBottom: hp('1.5%'),
       },
       inputContainer: {
         flex: 1,
         paddingTop: hp('5%'),
         paddingLeft: wp('5%'),
         backgroundColor: 'white',
-      },
-      aboveInputText: {
-        fontSize: wp('3%'),
-        fontWeight: 'bold',
-      },
-      inputRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginRight: wp('6%'),
-        marginBottom: hp('4%'),
       },
       buttonContainer: {
         flexDirection: 'row',
@@ -74,6 +72,14 @@ class SocialLogin extends React.Component {
         fontSize: wp('4.5%'),
         fontWeight: 'bold',
       },
+      noCodeContainer: {
+        width: wp('80%'),
+      },
+      noCodeText: {
+        fontWeight: 'bold',
+        fontSize: wp('3.25%'),
+        textAlign: 'center',
+      },
     });
 
     return (
@@ -82,41 +88,33 @@ class SocialLogin extends React.Component {
 
         <View style={styles.middleContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.aboveInputText}>EMAIL</Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                placeholder="name@mail.com"
-                returnKeyType="next"
-                onSubmitEditing={() => this.passwordInput.focus()}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-              />
-              <Icon name="envelope" size={wp('7.5%')} color="black" />
-            </View>
-            <View
-              style={{
-                borderBottomColor: 'black',
-                borderBottomWidth: 1,
-                marginBottom: hp('3%'),
-                width: wp('70%'),
-                opacity: 0.1,
+            <Text style={styles.aboveInputText}>ENTER YOUR PHONE NUMBER</Text>
+            <TextInput
+              placeholder="__       __       __       __"
+              placeholderStyle={{ backgroundColor: 'blue' }}
+              style={{ letterSpacing: 40, fontSize: hp('3%'), fontWeight: 'bold' }}
+              keyboardType="number-pad"
+              name="value"
+              type="number"
+              onChangeText={value => {
+                this.setState({ value });
               }}
+              value={value}
+              maxLength={4}
             />
-            <Text style={styles.aboveInputText}>PASSWORD</Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                placeholder="******"
-                returnKeyType="go"
-                secureTextEntry
-                ref={input => (this.passwordInput = input)}
-              />
-              <Ionicons name="md-key" size={wp('7.5%')} color="black" />
-            </View>
           </View>
-          <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={styles.text}>SIGN IN</Text>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => navigation.navigate('Map')}
+          >
+            <Text style={styles.text}>VERIFY Code</Text>
             <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.noCodeContainer}
+            // onPress={() => navigation.navigate('SocialAccount')}
+          >
+            <Text style={styles.noCodeText}>I DIDN'T RECEIVE A CODE</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -124,4 +122,4 @@ class SocialLogin extends React.Component {
   }
 }
 
-export default SocialLogin;
+export default CodeInput;
