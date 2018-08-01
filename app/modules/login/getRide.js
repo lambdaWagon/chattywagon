@@ -48,7 +48,7 @@ class GetRide extends React.Component {
       text: {
         color: 'white',
         paddingLeft: wp('1%'),
-        fontSize: wp('4.5%'),
+        fontSize: wp('3%'),
         fontWeight: 'bold',
       },
     });
@@ -62,16 +62,12 @@ class GetRide extends React.Component {
         >
           <LinearGradient colors={['#7fbeff', '#fff', '#ff8200']} style={styles.linearGradient} />
 
-          <TouchableOpacity
-            style={styles.touchContainer}
-            underlayColor="white"
-            onPress={() => navigate('PhoneInput')}
-          >
-            <View style={styles.buttonContainer}>
+          <View style={styles.touchContainer} underlayColor="white">
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('PhoneInput')}>
               <Text style={styles.text}>Get a Ride</Text>
               <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
         </ImageBackground>
       </View>
     );

@@ -25,24 +25,26 @@ import Profile from './app/modules/settings/profile';
 import Rides from './app/modules/settings/rides';
 
 const CustomDrawComponent = props => (
-  <SafeAreaView style={{ height: hp('100%'), flex: 1 }}>
-    <View
-      style={{
-        height: 150,
-        backgroundColor: '#ff8200',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Image
-        source={require('./avatarplaceholder.png')}
-        style={{ height: 100, width: 100, borderRadius: 50 }}
-      />
-    </View>
-    <ScrollView style={{ height: hp('100%'), backgroundColor: '#ff8200' }}>
-      <DrawerItems style={{ backgroundColor: '#ff8200' }} {...props} />
-    </ScrollView>
-  </SafeAreaView>
+  <View style={{ backgroundColor: '#ff8200', height: hp('100%'), flex: 1 }}>
+    <SafeAreaView style={{ height: hp('100%'), flex: 1 }}>
+      <View
+        style={{
+          height: 150,
+          backgroundColor: '#ff8200',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Image
+          source={require('./avatarplaceholder.png')}
+          style={{ height: 100, width: 100, borderRadius: 50 }}
+        />
+      </View>
+      <ScrollView style={{ height: hp('100%'), backgroundColor: '#ff8200' }}>
+        <DrawerItems style={{ backgroundColor: '#ff8200' }} {...props} />
+      </ScrollView>
+    </SafeAreaView>
+  </View>
 );
 
 export default class App extends React.Component {
@@ -83,6 +85,6 @@ const StackNavigator = createStackNavigator({
 });
 
 const RootNavigation = createSwitchNavigator({
-  auth: StackNavigator,
+  // auth: StackNavigator,
   main: DrawerNavigator,
 });

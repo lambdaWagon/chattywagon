@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -22,9 +22,9 @@ class Help extends React.Component {
     });
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text>HELP</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 }
