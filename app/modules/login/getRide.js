@@ -17,7 +17,7 @@ class GetRide extends React.Component {
   state = {};
 
   render() {
-    const { navigation } = this.props;
+    const { navigate } = this.props.navigation;
 
     const styles = StyleSheet.create({
       linearGradient: {
@@ -65,7 +65,7 @@ class GetRide extends React.Component {
           <TouchableOpacity
             style={styles.touchContainer}
             underlayColor="white"
-            onPress={() => navigation.navigate('PhoneInput')}
+            onPress={() => navigate('PhoneInput')}
           >
             <View style={styles.buttonContainer}>
               <Text style={styles.text}>Get a Ride</Text>

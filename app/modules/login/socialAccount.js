@@ -18,7 +18,7 @@ class SocialAccount extends React.Component {
   state = {};
 
   render() {
-    const { navigation } = this.props;
+    const { navigate } = this.props.navigation;
 
     const styles = StyleSheet.create({
       container: {
@@ -75,26 +75,17 @@ class SocialAccount extends React.Component {
 
         <View style={styles.middleContainer}>
           <View style={styles.socialIconsContainer}>
-            <TouchableOpacity
-              style={styles.socialTouch}
-              onPress={() => navigation.navigate('SocialLogin')}
-            >
+            <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon style={styles.socialIcons} name="google" size={wp('7.5%')} color="black" />
               <Text style={styles.socialText}>Google</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.socialTouch}
-              onPress={() => navigation.navigate('SocialLogin')}
-            >
+            <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon style={styles.socialIcons} name="twitter" size={wp('7.5%')} color="black" />
               <Text style={styles.socialText}>Twitter</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.socialTouch}
-              onPress={() => navigation.navigate('SocialLogin')}
-            >
+            <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon
                 style={styles.socialIcons}
                 name="facebook-square"
@@ -104,10 +95,7 @@ class SocialAccount extends React.Component {
               <Text style={styles.socialText}>Facebook</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.socialTouch}
-              onPress={() => navigation.navigate('SocialLogin')}
-            >
+            <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon style={styles.socialIcons} name="envelope" size={wp('7.5%')} color="black" />
               <Text style={styles.socialText}>Email</Text>
             </TouchableOpacity>

@@ -54,7 +54,7 @@ class PhoneInput extends React.Component {
   };
 
   render() {
-    const { navigation } = this.props;
+    const { navigate } = this.props.navigation;
     const { input } = this.state;
 
     const styles = StyleSheet.create({
@@ -142,18 +142,12 @@ class PhoneInput extends React.Component {
             </View>
             <Text style={styles.belowInputText}>We'll text a code to verify your phone</Text>
           </View>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => navigation.navigate('CodeInput')}
-          >
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('CodeInput')}>
             <Text style={styles.text}>Get Code</Text>
             <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.socialContainer}
-          onPress={() => navigation.navigate('SocialAccount')}
-        >
+        <TouchableOpacity style={styles.socialContainer} onPress={() => navigate('SocialAccount')}>
           <Text style={styles.socialText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

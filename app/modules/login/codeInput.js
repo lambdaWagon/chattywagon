@@ -28,7 +28,7 @@ class CodeInput extends React.Component {
   };
 
   render() {
-    const { navigation } = this.props;
+    const { navigate } = this.props.navigation;
     const { value } = this.state;
 
     const styles = StyleSheet.create({
@@ -103,17 +103,11 @@ class CodeInput extends React.Component {
               maxLength={4}
             />
           </View>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => navigation.navigate('Map')}
-          >
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('main')}>
             <Text style={styles.text}>VERIFY Code</Text>
             <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.noCodeContainer}
-            // onPress={() => navigation.navigate('SocialAccount')}
-          >
+          <TouchableOpacity style={styles.noCodeContainer}>
             <Text style={styles.noCodeText}>I DIDN'T RECEIVE A CODE</Text>
           </TouchableOpacity>
         </View>

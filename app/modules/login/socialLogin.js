@@ -26,7 +26,7 @@ class SocialLogin extends React.Component {
   state = {};
 
   render() {
-    const { navigation } = this.props;
+    const { navigate } = this.props.navigation;
 
     const styles = StyleSheet.create({
       container: {
@@ -114,7 +114,7 @@ class SocialLogin extends React.Component {
               <Ionicons name="md-key" size={wp('7.5%')} color="black" />
             </View>
           </View>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('main')}>
             <Text style={styles.text}>SIGN IN</Text>
             <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
           </TouchableOpacity>

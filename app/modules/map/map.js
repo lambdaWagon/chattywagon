@@ -1,10 +1,11 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const region = {
   latitude: 37.784334,
@@ -15,13 +16,22 @@ const region = {
 
 class Map extends React.Component {
   static navigationOptions = {
-    headerTransparent: true,
-    headerStyle: { zIndex: 100 },
+    headerLeft: (
+      <View style={{ marginTop: hp('15%'), marginLeft: wp('5%') }}>
+        <Icon
+          name="bars"
+          size={wp('7.5%')}
+          color="black"
+          onPress={() => this.props.navigation.openDrawer()}
+        />
+      </View>
+    ),
   };
 
   state = {};
 
   render() {
+    // const { navigation } = this.props;
     const styles = StyleSheet.create({
       mapContainer: {
         flex: 1,
