@@ -1,4 +1,4 @@
-import * as ActionType from '../constants'
+import * as types from '../constants'
 
 const initialState = {
   authenicated: false,
@@ -7,9 +7,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.AUTH_USER:
+    case types.AUTH_USER:
       return { ...state, authenicated: true, user: action.user }
-    case ActionType.SIGN_OUT:
+    case types.SIGN_OUT:
       return { authenicated: false, user: null }
     default:
       return state

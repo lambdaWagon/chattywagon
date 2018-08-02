@@ -1,7 +1,6 @@
 import * as types from '../constants'
 
 const initialState = {
-  address: '',
   drivers: [],
   currentLocation: {},
   locationSet: false,
@@ -28,9 +27,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_DRIVER_SUCCESS':
+    case types.ADD_DRIVER_SUCCESS:
       return { ...state, drivers: [...state.drivers, action.driver] }
-    case 'FETCH_DRIVER_SUCCESS':
+    case types.FETCH_DRIVER_SUCCESS:
       return {
         ...state,
         drivers: state.drivers.map(d => (d.key === action.driver.key ? action.driver : d))
@@ -48,8 +47,6 @@ export default (state = initialState, action) => {
         destination: { ...state.destination, ...action.destination },
         destinationSet: true
       }
-    // case SET_PICKUP:
-    //   return { ...state, pickupLocation: action.pickupLocation }
     default:
       return state
   }

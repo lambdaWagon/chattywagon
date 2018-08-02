@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, SafeAreaView, View, Text, TextInput, Image } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -7,22 +7,6 @@ import { connect } from 'react-redux'
 import * as actions from '../../actions'
 import { config } from '../../config/firebase'
 import styles from '../../styles'
-
-const window = Dimensions.get('window')
-
-const searchInputTwo = {
-  textInputContainer: {
-    width: window.width - 10,
-    top: 50,
-    zIndex: 999
-  },
-  description: {
-    fontWeight: 'bold'
-  },
-  predefinedPlacesDescription: {
-    color: '#1faadb'
-  }
-}
 
 /**
  * Work in Progress 😱
@@ -33,7 +17,7 @@ const GooglePlacesInput = props => {
     props.setDestination(data)
     props.navigation.goBack()
   }
-  console.log(props)
+
   return (
     <SafeAreaView style={styles.container}>
       <GooglePlacesAutocomplete
@@ -58,7 +42,6 @@ const GooglePlacesInput = props => {
         // renderDescription={row => console.log(row)}
         enablePoweredByContainer={false}
         onPress={data => handleSubmit(data)}
-        // renderLeftButton={() => <Text>Back</Text>}
         styles={{
           container: {
             backgroundColor: 'rgba(0,0,0,0)',

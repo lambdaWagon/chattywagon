@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dimensions, TextInput } from 'react-native'
+import { Dimensions } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -61,33 +61,18 @@ class Map extends Component {
 Map.propTypes = {
   currentLocation: PropTypes.object.isRequired,
   drivers: PropTypes.array.isRequired,
-  // destination: PropTypes.object.isRequired,
-  // destinationSet: PropTypes.bool.isRequired,
   locationSet: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
-  // region: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   const {
-    geolocation: {
-      // address,
-      currentLocation,
-      // destination,
-      // destinationSet,
-      drivers,
-      locationSet
-      // region
-    }
+    geolocation: { currentLocation, drivers, locationSet }
   } = state
   return {
-    // address,
     currentLocation,
-    // destination,
-    // destinationSet,
     drivers,
-    locationSet,
-    region
+    locationSet
   }
 }
 

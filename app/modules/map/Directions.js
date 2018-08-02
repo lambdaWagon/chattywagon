@@ -9,7 +9,7 @@ import { config } from '../../config/firebase'
 
 const Directions = props => {
   const { coords, destination, currentLocation, destinationSet, fitToCoords } = props
-  console.log(destination)
+
   return (
     <Fragment>
       {destinationSet && (
