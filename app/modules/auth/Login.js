@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import LoginForm from './LoginForm'
 import { auth } from '../../config/firebase'
-import { signInWithFacebook } from './api'
+import { signInWithFacebook } from './utils'
 import styles from '../../styles'
 
 export default class Login extends Component {

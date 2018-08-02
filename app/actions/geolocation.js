@@ -1,13 +1,8 @@
-// import { Dimensions } from 'react-native'
 import { buffers, eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
 
 import { geoFire } from '../config/firebase'
-// import { getRegionFromPoint } from '../modules/map/utils'
 import * as types from '../constants'
-
-// const { width, height } = Dimensions.get('window')
-// const aspectRatio = width / height
 
 const geoQuery = geoFire.query({
   center: [37.786279, -122.406456],
@@ -32,16 +27,6 @@ export const getLocation = () => dispatch => {
   )
 }
 
-// export const setDestination = ({
-//   nativeEvent: {
-//     coordinate: { latitude, longitude }
-//   }
-// }) => dispatch => {
-//   const destination = getRegionFromPoint(latitude, longitude, 300)
-//   const destination = { latitude, longitude }
-//   dispatch({ type: types.SET_DESTINATION, destination })
-// }
-
 export const setDestination = dest => {
   const { description, place_id, structured_formatting } = dest
   const destination = { description, place_id, structured_formatting }
@@ -56,10 +41,10 @@ const updateDriver = (type, { key, location, distance }) => ({
 function subscribe(buffer) {
   return eventChannel(emit => {
     geoQuery.on('key_entered', (key, location, distance) => {
-      emit(updateDriver('ADD_DRIVER_SUCCESS', { key, location, distance }))
+      emit(updateDriver(types.ADD_DRIVER_SUCCESS, { key, location, distance }))
     })
     geoQuery.on('key_moved', (key, location, distance) => {
-      emit(updateDriver('UPDATE_DRIVER_SUCCESS', { key, location, distance }))
+      emit(updateDriver(types.FETCH_DRIVER_SUCCESS, { key, location, distance }))
     })
     geoQuery.on('key_exited', key => emit({ type: 'REMOVE_DRIVER_SUCCESS', key }))
     return () => geoQuery.cancel()

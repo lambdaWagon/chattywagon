@@ -21,7 +21,8 @@
     "no-return-assign": 0,
     "global-require": 0,
     "semi": 0,
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "camelcase": 0
   },
   "globals": {
     "fetch": false,
