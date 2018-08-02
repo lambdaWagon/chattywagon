@@ -74,7 +74,7 @@ export default StyleSheet.create({
   /* SearchBar */
   searchContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   searchBar: {
@@ -89,9 +89,9 @@ export default StyleSheet.create({
     // height: 120,
     // top: screenHeight - 300
   },
-  searchMenu: {
-    backgroundColor: 'white',
-    height: 300,
+  searchBuffer: {
+    backgroundColor: 'transparent',
+    height: 100,
     // top: screenHeight - 260,
     width: screenWidth - 10
   },
@@ -105,7 +105,7 @@ export default StyleSheet.create({
     width: screenWidth - 10,
     shadowColor: 'black',
     shadowOpacity: 0.25,
-    shadowRadius: 20,
+    shadowRadius: 10,
     shadowOffset: { width: 10, height: 10 }
   },
   searchInputFocus: {

@@ -42,10 +42,12 @@ export default (state = initialState, action) => {
         region: action.region,
         locationSet: true
       }
-    case 'SET_ADDRESS':
-      return { ...state, address: action.address, destinationSet: true }
-    // case SET_DESTINATION:
-    //   return { ...state, destination: action.destination, destinationSet: true }
+    case types.SET_DESTINATION:
+      return {
+        ...state,
+        destination: { ...state.destination, ...action.destination },
+        destinationSet: true
+      }
     // case SET_PICKUP:
     //   return { ...state, pickupLocation: action.pickupLocation }
     default:

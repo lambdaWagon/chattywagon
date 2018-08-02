@@ -1,13 +1,13 @@
 import { Platform } from 'react-native'
 import { createStore, applyMiddleware, compose } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware, { END } from 'redux-saga'
 import thunk from 'redux-thunk'
 import devTools from 'remote-redux-devtools'
 
-import { getLocation, watchDrivers, verifyAuth } from '../actions'
+import root, { getLocation } from '../actions'
 import reducers from '../reducers'
 
-export default initialState => {
+export default (initialState => {
   const saga = createSagaMiddleware()
 
   const enhancer = compose(
@@ -17,9 +17,9 @@ export default initialState => {
 
   const store = createStore(reducers, initialState, enhancer)
 
-  saga.run(verifyAuth)
+  saga.run(root)
+  store.close = () => store.dispatch(END)
   store.dispatch(getLocation())
-  saga.run(watchDrivers)
 
   return store
-}
+})()
