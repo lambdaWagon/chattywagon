@@ -32,8 +32,8 @@ const Search = ({ setAddress }) => {
       behavior="padding"
       enabled
     >
+      <View style={styles.searchBuffer} />
       <Form />
-      <View style={styles.searchMenu} />
     </KeyboardAvoidingView>
   )
 }

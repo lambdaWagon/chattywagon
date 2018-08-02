@@ -32,15 +32,6 @@ export const getLocation = () => dispatch => {
   )
 }
 
-// export const setPickupLocation = ({
-//   nativeEvent: {
-//     coordinate: { latitude, longitude }
-//   }
-// }) => dispatch => {
-//   const pickupLocation = getRegionFromPoint(latitude, longitude, 300)
-//   dispatch({ type: types.SET_PICKUP, pickupLocation })
-// }
-
 // export const setDestination = ({
 //   nativeEvent: {
 //     coordinate: { latitude, longitude }
@@ -51,7 +42,11 @@ export const getLocation = () => dispatch => {
 //   dispatch({ type: types.SET_DESTINATION, destination })
 // }
 
-export const setAddress = address => ({ type: 'SET_ADDRESS', address })
+export const setDestination = dest => {
+  const { description, place_id, structured_formatting } = dest
+  const destination = { description, place_id, structured_formatting }
+  return { type: types.SET_DESTINATION, destination }
+}
 
 const updateDriver = (type, { key, location, distance }) => ({
   type,

@@ -13,7 +13,7 @@ import styles from '../../styles'
 const { width, height } = Dimensions.get('window')
 
 const region = {
-  latitude: 37.784334,
+  latitude: 37.785834,
   longitude: -122.406417,
   latitudeDelta: 0.00922,
   longitudeDelta: 0.004258004926108375
@@ -27,10 +27,10 @@ class Map extends Component {
 
   map = null
 
-  state = { coords: null }
+  state = { coordinates: null }
 
   fitToCoords = ({ coordinates }) => {
-    this.setState({ coords: coordinates })
+    this.setState({ coordinates })
     this.map.fitToCoordinates(coordinates, {
       edgePadding: {
         right: width / 10,
@@ -42,7 +42,7 @@ class Map extends Component {
   }
 
   render() {
-    const { coords } = this.state
+    const { coordinates } = this.state
     const { currentLocation, drivers, locationSet } = this.props
 
     return (
@@ -51,7 +51,7 @@ class Map extends Component {
           <Marker pinColor="blue" title="Current Location" draggable coordinate={currentLocation} />
         )}
         {drivers.map(d => <Marker key={d.key} coordinate={d} />)}
-        <Directions coords={coords} fitToCoords={this.fitToCoords} />
+        <Directions coords={coordinates} fitToCoords={this.fitToCoords} />
         <Search />
       </MapView>
     )

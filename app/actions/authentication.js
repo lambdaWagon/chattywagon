@@ -11,7 +11,7 @@ const authStateChange = () =>
     return () => {}
   })
 
-export function* verifyAuth() {
+export function* watchUserAuth() {
   const channel = yield call(authStateChange)
 
   while (true) {

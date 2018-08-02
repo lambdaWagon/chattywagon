@@ -1,11 +1,12 @@
-// import { createStackNavigator } from 'react-navigation'
-import { createFluidNavigator } from 'react-navigation-fluid-transitions'
+import { createStackNavigator } from 'react-navigation'
+// import { createFluidNavigator } from 'react-navigation-fluid-transitions'
 
-import { Map } from '../modules/map'
-import { Search, SearchBar } from '../components'
+import { Map, SearchTwo } from '../modules/map'
+import { Search } from '../components'
 
-export default createFluidNavigator(
+export default createStackNavigator(
   {
+    SearchTwo,
     Map,
     Search: {
       screen: Search

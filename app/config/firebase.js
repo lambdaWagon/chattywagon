@@ -8,7 +8,8 @@ import {
   storageBucket,
   messagingSenderId,
   fbAppId,
-  googleMapsApiKey
+  googleMapsApiKey,
+  googlePlacesApiKey
 } from 'react-native-dotenv'
 
 export const config = {
@@ -19,7 +20,8 @@ export const config = {
   storageBucket,
   messagingSenderId,
   fbAppId,
-  googleMapsApiKey
+  googleMapsApiKey,
+  googlePlacesApiKey
 }
 
 firebase.initializeApp(config)

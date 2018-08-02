@@ -1,7 +1,8 @@
 export function getRegionFromPoint(latitude, longitude, aspectRatio) {
   const latitudeDelta = 0.00922
   const longitudeDelta = latitudeDelta * aspectRatio
-  const offset = 0.0015
+  // const offset = 0.0015
+  const offset = 0.0
 
   return {
     latitude: latitude - offset,

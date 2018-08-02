@@ -54,7 +54,6 @@ $ yarn add <pkg> --dev # for dev dependencies
 |`react`|||
 |`react-native`|||
 |`geofire`||location queries|
-|`mapbox`||calculate routes|
 |`react-native-maps`|||
 |`react-navigation`|||
 |`react-redux`|||
