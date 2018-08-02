@@ -8,13 +8,14 @@ import * as actions from '../../actions'
 import { config } from '../../config/firebase'
 
 const Directions = props => {
-  const { address, coords, currentLocation, destinationSet, fitToCoords } = props
+  const { coords, destination, currentLocation, destinationSet, fitToCoords } = props
+  console.log(destination)
   return (
     <Fragment>
       {destinationSet && (
         <MapViewDirections
           origin={currentLocation}
-          destination={address}
+          destination={destination}
           apikey={config.googleMapsApiKey}
           strokeWidth={3}
           strokeColor="black"
@@ -36,9 +37,9 @@ const Directions = props => {
   )
 }
 
-const mapStateToProps = ({ geolocation: { address, currentLocation, destinationSet } }) => ({
-  address,
+const mapStateToProps = ({ geolocation: { currentLocation, destination, destinationSet } }) => ({
   currentLocation,
+  destination: `place_id:${destination.place_id}`,
   destinationSet
 })
 

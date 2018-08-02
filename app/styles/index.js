@@ -89,19 +89,14 @@ export default StyleSheet.create({
     // height: 120,
     // top: screenHeight - 300
   },
-  searchBuffer: {
-    backgroundColor: 'transparent',
-    height: 100,
-    // top: screenHeight - 260,
-    width: screenWidth - 10
-  },
   searchInput: {
+    alignSelf: 'center',
     zIndex: 999,
     backgroundColor: 'white',
     padding: 10,
     opacity: 0.9,
     height: 40,
-    // top: screenHeight - 300,
+    top: 100,
     width: screenWidth - 10,
     shadowColor: 'black',
     shadowOpacity: 0.25,

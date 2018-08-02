@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Dimensions } from 'react-native'
+import { Dimensions, TextInput } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Directions from './Directions'
-import Search from './Search'
+import SearchButton from './SearchButton'
 import * as actions from '../../actions'
 import styles from '../../styles'
 
@@ -43,7 +43,7 @@ class Map extends Component {
 
   render() {
     const { coordinates } = this.state
-    const { currentLocation, drivers, locationSet } = this.props
+    const { currentLocation, drivers, locationSet, navigation } = this.props
 
     return (
       <MapView ref={c => (this.map = c)} style={styles.map} initialRegion={region}>
@@ -52,7 +52,7 @@ class Map extends Component {
         )}
         {drivers.map(d => <Marker key={d.key} coordinate={d} />)}
         <Directions coords={coordinates} fitToCoords={this.fitToCoords} />
-        <Search />
+        <SearchButton navigation={navigation} />
       </MapView>
     )
   }
@@ -63,8 +63,8 @@ Map.propTypes = {
   drivers: PropTypes.array.isRequired,
   // destination: PropTypes.object.isRequired,
   // destinationSet: PropTypes.bool.isRequired,
-  locationSet: PropTypes.bool.isRequired
-  // navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
+  locationSet: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
   // region: PropTypes.object.isRequired
 }
 
