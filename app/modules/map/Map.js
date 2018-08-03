@@ -12,6 +12,7 @@ import styles from '../../styles'
 
 const { width, height } = Dimensions.get('window')
 
+/* prod: get region from currentLocation */
 const region = {
   latitude: 37.785834,
   longitude: -122.406417,
@@ -65,16 +66,11 @@ Map.propTypes = {
   navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
 }
 
-const mapStateToProps = state => {
-  const {
-    geolocation: { currentLocation, drivers, locationSet }
-  } = state
-  return {
-    currentLocation,
-    drivers,
-    locationSet
-  }
-}
+const mapStateToProps = ({ geolocation: { currentLocation, drivers, locationSet } }) => ({
+  currentLocation,
+  drivers,
+  locationSet
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 

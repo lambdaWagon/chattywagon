@@ -33,8 +33,8 @@ class Root extends Component {
   }
 }
 
-Root.propTypes = { user: PropTypes.object }
 Root.defaultProps = { user: null }
+Root.propTypes = { user: PropTypes.object }
 
 const mapStateToProps = ({ authentication: { user } }) => ({ user })
 

@@ -7,10 +7,6 @@ export default StyleSheet.create({
   /* General */
   container: {
     flex: 1
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // height: screenHeight,
-    // width: screenWidth
   },
   gradient: {
     height: screenHeight,
@@ -79,15 +75,7 @@ export default StyleSheet.create({
   },
   searchBar: {
     flex: 1,
-    // flexDirection: 'column',
-    // position: 'absolute',
-    // zIndex: 999,
-    // backgroundColor: 'blue',
     opacity: 0.1
-    // alignItems: 'center',
-    // justifyContent: 'flex-end',
-    // height: 120,
-    // top: screenHeight - 300
   },
   searchInput: {
     alignSelf: 'center',

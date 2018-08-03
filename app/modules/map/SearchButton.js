@@ -1,10 +1,11 @@
 import React from 'react'
 import { Platform, TextInput, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types'
 
 import styles from '../../styles'
 
-export default ({ navigation: { navigate } }) => {
-  return Platform.OS === 'ios' ? (
+const SearchButton = ({ navigation: { navigate } }) =>
+  Platform.OS === 'ios' ? (
     <TextInput
       editable={false}
       placeholder="Where to?"
@@ -23,4 +24,9 @@ export default ({ navigation: { navigate } }) => {
       />
     </TouchableOpacity>
   )
+
+SearchButton.propTypes = {
+  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
 }
+
+export default SearchButton

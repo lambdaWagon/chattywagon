@@ -4,6 +4,7 @@ import { take, call, put } from 'redux-saga/effects'
 import { geoFire } from '../config/firebase'
 import * as types from '../constants'
 
+/* prod: get region from currentLocation */
 const geoQuery = geoFire.query({
   center: [37.786279, -122.406456],
   radius: 10
