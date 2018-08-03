@@ -5,15 +5,15 @@ import { setCustomText, setCustomTextInput } from 'react-native-global-props'
 import PropTypes from 'prop-types'
 
 import { AppNavigator, AuthNavigator } from '../../navigators'
-import customProps from '../../styles/customProps'
+import { customProps } from '../../styles'
 
 class Root extends Component {
   state = { isReady: false }
 
   async componentDidMount() {
     await Font.loadAsync({
-      'circular-std-bold': require('../../../assets/fonts/bold.otf'),
-      'circular-std-book': require('../../../assets/fonts/book.otf')
+      'circular-std-bold': require('../../assets/fonts/bold.otf'),
+      'circular-std-book': require('../../assets/fonts/book.otf')
     })
     this.setState({ isReady: true })
     setCustomText(customProps.text)

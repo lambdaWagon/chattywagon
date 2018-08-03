@@ -168,3 +168,8 @@ export const searchPickupStyle = {
     width: screenWidth - 20
   }
 }
+
+export const customProps = {
+  text: { style: { fontFamily: 'circular-std-book' } },
+  textInput: { style: { fontFamily: 'circular-std-book' } }
+}
