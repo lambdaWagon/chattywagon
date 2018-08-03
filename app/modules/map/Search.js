@@ -7,10 +7,6 @@ import SearchDestinaton from './SearchDestination'
 import SearchPickup from './SearchPickup'
 import * as actions from '../../actions'
 
-/**
- * Work in Progress 😱
- * Please don't judge the hideous code
- */
 class GooglePlacesInput extends Component {
   static navigationOptions = {
     headerTransparent: true,

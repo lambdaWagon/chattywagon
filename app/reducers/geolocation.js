@@ -10,20 +10,20 @@ const initialState = {
     latitudeDelta: 0,
     longitudeDelta: 0
   },
-  pickupLocation: {
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0,
-    longitudeDelta: 0
-  },
-  pickupLocationSet: false,
   destination: {
     latitude: 0,
     longitude: 0,
     latitudeDelta: 0,
     longitudeDelta: 0
   },
-  destinationSet: false
+  destinationSet: false,
+  pickupLocation: {
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0,
+    longitudeDelta: 0
+  },
+  pickupLocationSet: false
 }
 
 export default (state = initialState, action) => {
