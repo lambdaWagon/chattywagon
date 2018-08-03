@@ -16,6 +16,7 @@ const initialState = {
     latitudeDelta: 0,
     longitudeDelta: 0
   },
+  pickupLocationSet: false,
   destination: {
     latitude: 0,
     longitude: 0,
@@ -46,6 +47,12 @@ export default (state = initialState, action) => {
         ...state,
         destination: { ...state.destination, ...action.destination },
         destinationSet: true
+      }
+    case types.SET_PICKUP:
+      return {
+        ...state,
+        pickupLocation: { ...state.pickupLocation, ...action.pickupLocation },
+        pickupLocationSet: true
       }
     default:
       return state

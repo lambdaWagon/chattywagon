@@ -3,14 +3,4 @@ import { createStackNavigator } from 'react-navigation'
 
 import { Map, Search } from '../modules/map'
 
-export default createStackNavigator(
-  {
-    Map,
-    Search
-  },
-  {
-    navigationOptions: {
-      headerTransparent: true
-    }
-  }
-)
+export default createStackNavigator({ Map, Search })

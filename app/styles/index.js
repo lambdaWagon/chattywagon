@@ -93,11 +93,12 @@ export default StyleSheet.create({
     alignSelf: 'center',
     zIndex: 999,
     backgroundColor: 'white',
+    borderRadius: 5,
+    fontSize: 16,
     padding: 10,
-    opacity: 0.9,
     height: 40,
     top: 100,
-    width: screenWidth - 10,
+    width: screenWidth - 20,
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowRadius: 10,
@@ -110,3 +111,60 @@ export default StyleSheet.create({
     top: screenHeight - 750
   }
 })
+
+export const searchDestStyle = {
+  container: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    paddingTop: 133,
+    alignSelf: 'center',
+    position: 'absolute',
+    top: 0
+  },
+  listView: { top: 4 },
+  textInputContainer: {
+    alignSelf: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    width: screenWidth - 20
+  },
+  textInput: {
+    marginLeft: 0,
+    marginRight: 0,
+    height: 40,
+    color: '#5d5d5d',
+    fontSize: 16,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowOffset: { width: 10, height: 10 },
+    width: screenWidth - 20
+  }
+}
+
+export const searchPickupStyle = {
+  container: {
+    backgroundColor: 'white',
+    paddingTop: 92
+  },
+  listView: { top: 45 },
+  textInputContainer: {
+    alignSelf: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    width: screenWidth - 20
+  },
+  textInput: {
+    marginLeft: 0,
+    marginRight: 0,
+    height: 40,
+    color: '#5d5d5d',
+    fontSize: 16,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowOffset: { width: 10, height: 10 },
+    width: screenWidth - 20
+  }
+}
