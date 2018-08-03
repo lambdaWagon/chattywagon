@@ -8,6 +8,7 @@ export default ({ navigation: { navigate } }) => {
     <TextInput
       editable={false}
       placeholder="Where to?"
+      placeholderTextColor="black"
       style={styles.searchInput}
       onTouchStart={() => navigate('Search')}
     />
@@ -16,6 +17,7 @@ export default ({ navigation: { navigate } }) => {
       <TextInput
         editable={false}
         placeholder="Where to?"
+        placeholderTextColor="black"
         pointerEvents="none"
         style={styles.searchInput}
       />

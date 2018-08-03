@@ -33,6 +33,12 @@ export const setDestination = dest => {
   return { type: types.SET_DESTINATION, destination }
 }
 
+export const setPickup = pickup => {
+  const { description, place_id, structured_formatting } = pickup
+  const pickupLocation = { description, place_id, structured_formatting }
+  return { type: types.SET_PICKUP, pickupLocation }
+}
+
 const updateDriver = (type, { key, location, distance }) => ({
   type,
   driver: { key, latitude: location[0], longitude: location[1], distance }

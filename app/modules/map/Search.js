@@ -1,75 +1,72 @@
-import React from 'react'
-import { SafeAreaView } from 'react-native'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+import React, { Component, Fragment } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
+import SearchDestinaton from './SearchDestination'
+import SearchPickup from './SearchPickup'
 import * as actions from '../../actions'
-import { config } from '../../config/firebase'
-import styles from '../../styles'
 
 /**
  * Work in Progress 😱
  * Please don't judge the hideous code
  */
-const GooglePlacesInput = props => {
-  const handleSubmit = data => {
-    props.setDestination(data)
-    props.navigation.goBack()
+class GooglePlacesInput extends Component {
+  static navigationOptions = {
+    headerTransparent: true,
+    headerStyle: { zIndex: 100 }
   }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <GooglePlacesAutocomplete
-        debounce={200}
-        fetchDetails={false}
-        returnKeyType="search"
-        minLength={2}
-        placeholder="Where to?"
-        query={{
-          key: config.googlePlacesApiKey,
-          language: 'en', // language of the results
-          types: ['establishment', 'geocode'], // default: 'geocode'
-          location: '37.786279,-122.406456',
-          radius: '15000',
-          components: 'country:us'
-        }}
-        nearByPlacesAPI="GooglePlacesSearch"
-        GooglePlacesSearchQuery={{
-          rankby: 'distance',
-          types: 'establishment'
-        }}
-        // renderDescription={row => console.log(row)}
-        enablePoweredByContainer={false}
-        onPress={data => handleSubmit(data)}
-        styles={{
-          container: {
-            backgroundColor: 'rgba(0,0,0,0)',
-            top: 43
-          },
-          textInputContainer: {
-            backgroundColor: 'rgba(0,0,0,0)',
-            borderTopWidth: 0,
-            borderBottomWidth: 0
-          },
-          textInput: {
-            marginLeft: 0,
-            marginRight: 0,
-            height: 38,
-            color: '#5d5d5d',
-            fontSize: 16,
-            shadowColor: 'black',
-            shadowOpacity: 0.25,
-            shadowRadius: 10,
-            shadowOffset: { width: 10, height: 10 }
-          },
-          predefinedPlacesDescription: {
-            color: '#1faadb'
-          }
-        }}
-      />
-    </SafeAreaView>
-  )
+  destinationInput = null
+
+  state = {
+    displayPickup: false,
+    displayDestination: false
+  }
+
+  setRef = r => {
+    if (r) this.destinationInput = r.refs.textInput
+  }
+
+  handleDisplay = (name, bool) => this.setState({ [name]: bool })
+
+  handlePickupSubmit = data => {
+    const { setPickup } = this.props
+    setPickup(data)
+    this.destinationInput.focus()
+  }
+
+  handleDestination = data => {
+    const { navigation, setDestination } = this.props
+    setDestination(data)
+    navigation.goBack()
+  }
+
+  render() {
+    const { displayPickup, displayDestination } = this.state
+
+    return (
+      <Fragment>
+        <SearchPickup
+          displayPickup={displayPickup}
+          handleDisplay={this.handleDisplay}
+          handlePickupSubmit={this.handlePickupSubmit}
+        />
+        <SearchDestinaton
+          displayDestination={displayDestination}
+          handleDisplay={this.handleDisplay}
+          handleDestination={this.handleDestination}
+          setRef={this.setRef}
+        />
+      </Fragment>
+    )
+  }
+}
+
+GooglePlacesInput.propTypes = {
+  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
+  setDestination: PropTypes.func.isRequired,
+  setPickup: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
