@@ -1,5 +1,6 @@
 import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
+
 import * as types from '../constants'
 import { auth } from '../config/firebase'
 
