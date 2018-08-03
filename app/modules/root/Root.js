@@ -12,8 +12,8 @@ class Root extends Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'circular-std-bold': require('../../assets/fonts/bold.otf'),
-      'circular-std-book': require('../../assets/fonts/book.otf')
+      'circular-std-bold': require('../../../assets/fonts/bold.otf'),
+      'circular-std-book': require('../../../assets/fonts/book.otf')
     })
     this.setState({ isReady: true })
     setCustomText(customProps.text)
