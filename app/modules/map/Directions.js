@@ -37,7 +37,7 @@ const Directions = ({ coords, destination, currentLocation, destinationSet, fitT
 Directions.defaultProps = { coords: null }
 
 Directions.propTypes = {
-  coords: PropTypes.arrayOf(PropTypes.number),
+  coords: PropTypes.arrayOf(PropTypes.object),
   currentLocation: PropTypes.object.isRequired,
   destination: PropTypes.string.isRequired,
   destinationSet: PropTypes.bool.isRequired,
