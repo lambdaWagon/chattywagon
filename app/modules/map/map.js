@@ -1,6 +1,6 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -31,15 +31,29 @@ class Map extends React.Component {
   state = {};
 
   render() {
-    // const { navigation } = this.props;
+    const { navigation } = this.props;
     const styles = StyleSheet.create({
       mapContainer: {
         flex: 1,
         height: hp('100%'),
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      container: {
+        width: 100,
+        height: 100,
+        backgroundColor: 'red',
       },
     });
 
-    return <MapView region={region} style={styles.mapContainer} />;
+    return (
+      <MapView region={region} style={styles.mapContainer}>
+        <TouchableOpacity
+          style={styles.container}
+          onPress={() => this.props.navigation.openDrawer()}
+        />
+      </MapView>
+    );
   }
 }
 

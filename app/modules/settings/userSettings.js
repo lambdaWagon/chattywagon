@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -18,12 +18,22 @@ class Settings extends React.Component {
       container: {
         flex: 1,
         height: hp('100%'),
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      touchContainer: {
+        width: 100,
+        height: 100,
+        backgroundColor: 'red',
       },
     });
 
     return (
       <SafeAreaView style={styles.container}>
-        <Text>Settings</Text>
+        <TouchableOpacity
+          style={styles.touchContainer}
+          onPress={() => this.props.navigation.openDrawer()}
+        />
       </SafeAreaView>
     );
   }

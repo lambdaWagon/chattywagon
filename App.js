@@ -81,10 +81,9 @@ const StackNavigator = createStackNavigator({
   CodeInput,
   SocialAccount,
   SocialLogin,
-  Map,
 });
 
 const RootNavigation = createSwitchNavigator({
-  // auth: StackNavigator,
+  auth: StackNavigator,
   main: DrawerNavigator,
 });
