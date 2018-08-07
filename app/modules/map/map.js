@@ -15,43 +15,35 @@ const region = {
 };
 
 class Map extends React.Component {
-  static navigationOptions = {
-    headerLeft: (
-      <View style={{ marginTop: hp('15%'), marginLeft: wp('5%') }}>
-        <Icon
-          name="bars"
-          size={wp('7.5%')}
-          color="black"
-          onPress={() => this.props.navigation.openDrawer()}
-        />
-      </View>
-    ),
-  };
-
   state = {};
 
   render() {
     const { navigation } = this.props;
+
     const styles = StyleSheet.create({
       mapContainer: {
         flex: 1,
         height: hp('100%'),
-        justifyContent: 'center',
-        alignItems: 'center',
       },
-      container: {
-        width: 100,
-        height: 100,
-        backgroundColor: 'red',
+      icon: {
+        marginLeft: hp('3%'),
       },
     });
 
     return (
       <MapView region={region} style={styles.mapContainer}>
-        <TouchableOpacity
-          style={styles.container}
-          onPress={() => this.props.navigation.openDrawer()}
-        />
+        <SafeAreaView>
+          drawerIcon: (
+          <SafeAreaView style={styles.icon}>
+            <Icon
+              name="bars"
+              size={wp('7.5%')}
+              color="black"
+              onPress={() => navigation.openDrawer()}
+            />
+          </SafeAreaView>
+          ),
+        </SafeAreaView>
       </MapView>
     );
   }
