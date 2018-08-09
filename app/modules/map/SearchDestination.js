@@ -29,7 +29,7 @@ const SearchDestination = ({ displayDestination, handleDisplay, handleDestinatio
       onFocus: () => handleDisplay(displayDestination, true)
     }}
     query={{
-      key: config.googlePlacesApiKey,
+      key: config.apiKey,
       language: 'en',
       types: ['establishment', 'geocode'],
       location: '37.786279,-122.406456',

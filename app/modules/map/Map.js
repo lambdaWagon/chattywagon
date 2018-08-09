@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Dimensions } from 'react-native'
+import React, { Component, Fragment } from 'react'
+import { Dimensions, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -28,10 +28,14 @@ class Map extends Component {
 
   map = null
 
-  state = { coordinates: null }
+  state = {
+    coordinates: null,
+    distance: null,
+    duration: null
+  }
 
-  fitToCoords = ({ coordinates }) => {
-    this.setState({ coordinates })
+  handleDirections = ({ coordinates, distance, duration }) => {
+    this.setState({ coordinates, distance, duration })
     this.map.fitToCoordinates(coordinates, {
       edgePadding: {
         right: width / 10,
@@ -47,14 +51,27 @@ class Map extends Component {
     const { currentLocation, drivers, locationSet, navigation } = this.props
 
     return (
-      <MapView ref={c => (this.map = c)} style={styles.map} initialRegion={region}>
-        {locationSet && (
-          <Marker pinColor="blue" title="Current Location" draggable coordinate={currentLocation} />
-        )}
-        {drivers.map(d => <Marker key={d.key} coordinate={d} />)}
-        <Directions coords={coordinates} fitToCoords={this.fitToCoords} />
-        <SearchButton navigation={navigation} />
-      </MapView>
+      <Fragment>
+        <MapView ref={c => (this.map = c)} style={styles.map} initialRegion={region}>
+          {locationSet && (
+            <Marker
+              pinColor="blue"
+              title="Current Location"
+              draggable
+              coordinate={currentLocation}
+            />
+          )}
+          {drivers.map(d => (
+            <Marker key={d.key} coordinate={d} />
+          ))}
+          <Directions coords={coordinates} handleDirections={this.handleDirections} />
+        </MapView>
+        <View style={styles.mapUI}>
+          <SearchButton {...this.state} navigation={navigation}>
+            Where to?
+          </SearchButton>
+        </View>
+      </Fragment>
     )
   }
 }

@@ -8,19 +8,19 @@ import PropTypes from 'prop-types'
 import * as actions from '../../actions'
 import { config } from '../../config/firebase'
 
-const Directions = ({ coords, destination, currentLocation, destinationSet, fitToCoords }) => (
+const Directions = ({ coords, destination, currentLocation, destinationSet, handleDirections }) => (
   <Fragment>
     {destinationSet && (
       <MapViewDirections
         origin={currentLocation}
         destination={destination}
-        apikey={config.googleMapsApiKey}
+        apikey={config.apiKey}
         strokeWidth={3}
         strokeColor="black"
         onStart={params =>
           console.log(`Started routing between "${params.origin}" and "${params.destination}"`)
         }
-        onReady={fitToCoords}
+        onReady={handleDirections}
       />
     )}
     {coords && (
@@ -41,7 +41,7 @@ Directions.propTypes = {
   currentLocation: PropTypes.object.isRequired,
   destination: PropTypes.string.isRequired,
   destinationSet: PropTypes.bool.isRequired,
-  fitToCoords: PropTypes.func.isRequired
+  handleDirections: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ geolocation: { currentLocation, destination, destinationSet } }) => ({
