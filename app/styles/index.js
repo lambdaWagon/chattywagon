@@ -38,9 +38,14 @@ export default StyleSheet.create({
 
   /* Map */
   map: {
+    flex: 1
+  },
+  mapUI: {
+    position: 'absolute',
     flex: 1,
-    backgroundColor: '#fff',
-    height: screenHeight
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginTop: 100
   },
 
   /* Login */
@@ -93,27 +98,6 @@ export default StyleSheet.create({
   searchBar: {
     flex: 1,
     opacity: 0.1
-  },
-  searchInput: {
-    alignSelf: 'center',
-    zIndex: 999,
-    backgroundColor: 'white',
-    borderRadius: 5,
-    fontSize: 16,
-    padding: 10,
-    height: 40,
-    top: 100,
-    width: screenWidth - 20,
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    shadowOffset: { width: 10, height: 10 }
-  },
-  searchInputFocus: {
-    backgroundColor: 'red',
-    padding: 10,
-    opacity: 0.95,
-    top: screenHeight - 750
   }
 })
 

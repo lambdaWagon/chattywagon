@@ -29,7 +29,7 @@ const SearchPickup = ({ displayPickup, handleDisplay, handlePickupSubmit }) => (
       onFocus: () => handleDisplay(displayPickup, true)
     }}
     query={{
-      key: config.googlePlacesApiKey,
+      key: config.apiKey,
       language: 'en',
       types: ['establishment', 'geocode'],
       location: '37.786279,-122.406456',

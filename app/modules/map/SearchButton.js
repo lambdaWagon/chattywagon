@@ -1,31 +1,44 @@
 import React from 'react'
-import { Platform, TextInput, TouchableOpacity } from 'react-native'
+import { Dimensions, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 
-import styles from '../../styles'
+const style = {
+  button: {
+    backgroundColor: 'white',
+    borderRadius: 2,
+    height: 40,
+    width: Dimensions.get('window').width - 20,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowOffset: { width: 10, height: 10 }
+  },
+  buttonText: {
+    fontSize: 16,
+    padding: 10
+  }
+}
 
-const SearchButton = ({ navigation: { navigate } }) =>
-  Platform.OS === 'ios' ? (
-    <TextInput
-      editable={false}
-      placeholder="Where to?"
-      placeholderTextColor="black"
-      style={styles.searchInput}
-      onTouchStart={() => navigate('Search')}
-    />
-  ) : (
-    <TouchableOpacity onPress={() => navigate('Search')}>
-      <TextInput
-        editable={false}
-        placeholder="Where to?"
-        placeholderTextColor="black"
-        pointerEvents="none"
-        style={styles.searchInput}
-      />
-    </TouchableOpacity>
-  )
+const SearchButton = ({ children, distance, duration, navigation: { navigate } }) => (
+  <TouchableOpacity style={style.button} activeOpacity={0.9} onPress={() => navigate('Search')}>
+    <Text style={style.buttonText}>
+      {distance && duration
+        ? `${distance.toFixed(1)} miles, ${Math.round(duration)} minutes`
+        : children}
+    </Text>
+  </TouchableOpacity>
+)
+
+SearchButton.defaultProps = {
+  children: null,
+  distance: null,
+  duration: null
+}
 
 SearchButton.propTypes = {
+  children: PropTypes.string,
+  distance: PropTypes.number,
+  duration: PropTypes.number,
   navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
 }
 

@@ -5,14 +5,14 @@ import PropTypes from 'prop-types'
 
 const style = {
   button: {
-    backgroundColor: 'black',
-    borderRadius: 2,
-    height: 73,
-    width: 294,
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'space-between',
+    backgroundColor: 'black',
+    borderRadius: 2,
+    height: 73,
+    width: 294,
     padding: 25
   },
   buttonText: {
