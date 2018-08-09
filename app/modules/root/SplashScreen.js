@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Button, ImageBackground, View } from 'react-native'
+import { ImageBackground, Text, View } from 'react-native'
 import { LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
 
+import Button from '../common/Button'
 import styles from '../../styles'
 
 const bg = require('../../../assets/splash.png')
@@ -14,14 +15,11 @@ export default class SplashScreen extends Component {
     navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
   }
 
-  onLayout = e => {
-    console.log(e.nativeEvent.layout)
-  }
+  onPress = () => this.props.navigation.navigate('Login')
+
+  onLayout = e => console.log(e.nativeEvent.layout)
 
   render() {
-    const {
-      navigation: { navigate }
-    } = this.props
     return (
       <ImageBackground onLayout={this.onLayout} source={bg} style={styles.container}>
         <LinearGradient
@@ -34,7 +32,10 @@ export default class SplashScreen extends Component {
           style={styles.gradient}
         >
           <View style={styles.logoContainer}>
-            <Button title="Get Started →" onPress={() => navigate('Login')} />
+            <Text style={styles.logo}>ChattyWagon</Text>
+          </View>
+          <View style={{ height: '30%' }}>
+            <Button navigate={this.onPress}>GET A RIDE</Button>
           </View>
         </LinearGradient>
       </ImageBackground>

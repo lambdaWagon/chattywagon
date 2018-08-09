@@ -12,6 +12,29 @@ export default StyleSheet.create({
     height: screenHeight,
     width: screenWidth
   },
+  arrow: {
+    height: 10
+  },
+
+  /* Splashscreen */
+  logoContainer: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+  logo: {
+    top: 190,
+    fontFamily: 'logo',
+    fontSize: 48,
+    color: '#e8863c',
+    padding: 15,
+    textShadowColor: 'rgba(0, 0, 0, 0.15)',
+    textShadowOffset: {
+      width: -2,
+      height: 4
+    },
+    textShadowRadius: 0.5
+  },
 
   /* Map */
   map: {
@@ -21,12 +44,6 @@ export default StyleSheet.create({
   },
 
   /* Login */
-  logoContainer: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center'
-  },
-
   title: {
     color: '#AAADBA',
     marginTop: 10,
@@ -158,6 +175,6 @@ export const searchPickupStyle = {
 }
 
 export const customProps = {
-  text: { style: { fontFamily: 'circular-std-book' } },
-  textInput: { style: { fontFamily: 'circular-std-book' } }
+  text: { style: { fontFamily: 'book' } },
+  textInput: { style: { fontFamily: 'book' } }
 }
