@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { ImageBackground, Text, View } from 'react-native'
-import { LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
 
 import Button from '../common/Button'
@@ -20,22 +19,12 @@ export default class SplashScreen extends Component {
   render() {
     return (
       <ImageBackground source={bg} style={styles.container}>
-        <LinearGradient
-          colors={[
-            'rgba(196,244,255,0.8)',
-            'rgba(196,244,255,0.8)',
-            'rgba(232,134,60,0.8)',
-            'rgba(232,134,60,0.8)'
-          ]}
-          style={styles.gradient}
-        >
-          <View style={styles.logoContainer}>
-            <Text style={styles.logo}>ChattyWagon</Text>
-          </View>
-          <View style={styles.splashButtonContainer}>
-            <Button navigate={this.onPress}>GET A RIDE</Button>
-          </View>
-        </LinearGradient>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logo}>ChattyWagon</Text>
+        </View>
+        <View style={styles.splashButtonContainer}>
+          <Button navigate={this.onPress}>GET A RIDE</Button>
+        </View>
       </ImageBackground>
     )
   }
