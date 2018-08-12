@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { AppLoading, Font } from 'expo'
+import { AppLoading, Asset, Font } from 'expo'
 import { setCustomText, setCustomTextInput } from 'react-native-global-props'
 import PropTypes from 'prop-types'
 
 import { AppNavigator, AuthNavigator } from '../../navigators'
 import { customProps } from '../../styles'
 
+async function loadAssets() {
+  const bg = require('../../../assets/splash.png')
+  const fonts = Font.loadAsync({
+    logo: require('../../../assets/fonts/logo.otf'),
+    book: require('../../../assets/fonts/book.otf'),
+    bold: require('../../../assets/fonts/bold.otf'),
+    black: require('../../../assets/fonts/black.otf')
+  })
+  const image = Asset.fromModule(bg).downloadAsync()
+
+  await Promise.all([fonts, image])
+}
+
 class Root extends Component {
   state = { isReady: false }
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      logo: require('../../../assets/fonts/logo.otf'),
-      book: require('../../../assets/fonts/book.otf'),
-      bold: require('../../../assets/fonts/bold.otf'),
-      black: require('../../../assets/fonts/black.otf')
-    })
-    this.setState({ isReady: true })
+  onAssetLoad = () => {
     setCustomText(customProps.text)
     setCustomTextInput(customProps.textInput)
+    this.setState({ isReady: true })
   }
 
   render() {
@@ -31,7 +38,7 @@ class Root extends Component {
     if (isReady) {
       return <AuthNavigator />
     }
-    return <AppLoading />
+    return <AppLoading startAsync={loadAssets} onFinish={this.onAssetLoad} />
   }
 }
 
