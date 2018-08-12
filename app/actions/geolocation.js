@@ -1,8 +1,13 @@
 import { buffers, eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
+import { Dimensions } from 'react-native'
 
-import { geoFire } from '../config/firebase'
+import { config, geoFire } from '../config/firebase'
 import * as types from '../constants'
+import { getRegionFromPoint } from '../modules/map/utils'
+
+const { height, width } = Dimensions.get('window')
+const aspectRatio = width / height
 
 /* prod: get region from currentLocation */
 const geoQuery = geoFire.query({
@@ -10,22 +15,29 @@ const geoQuery = geoFire.query({
   radius: 10
 })
 
-const handleErrors = error => ({ type: types.ERROR, error })
+const handleErrors = (d, error) => d({ type: types.ERROR, error })
 
 export const getLocation = () => dispatch => {
-  navigator.geolocation.getCurrentPosition(
-    ({ coords: { latitude, longitude } }) => {
-      // console.log('📍 CURRENT LOCATION', latitude, longitude)
-      const currentLocation = { latitude, longitude }
-      // const region = getRegionFromPoint(latitude, longitude, aspectRatio)
-      dispatch({ type: types.GET_LOCATION, currentLocation })
-    },
-    error => {
-      console.log(error)
-      dispatch(handleErrors(error))
-    },
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  )
+  async function success({ coords: { latitude, longitude } }) {
+    const qs = `key=${config.apiKey}&latlng=${latitude},${longitude}`
+    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?${qs}`)
+    const { results } = await response.json()
+    const region = getRegionFromPoint(latitude, longitude, aspectRatio)
+    dispatch({
+      type: types.SET_LOCATION,
+      currentLocation: {
+        latitude,
+        longitude,
+        address: results[0].formatted_address,
+        place_id: results[0].place_id
+      },
+      region
+    })
+  }
+
+  const options = { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+
+  navigator.geolocation.getCurrentPosition(success, e => handleErrors(dispatch, e), options)
 }
 
 export const setDestination = dest => {
@@ -39,6 +51,8 @@ export const setPickup = pickup => {
   const pickupLocation = { description, place_id, structured_formatting }
   return { type: types.SET_PICKUP, pickupLocation }
 }
+
+export const setDirections = directions => ({ type: types.SET_DIRECTIONS, directions })
 
 const updateDriver = (type, { key, location, distance }) => ({
   type,
