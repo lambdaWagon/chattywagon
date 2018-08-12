@@ -119,6 +119,6 @@ const StackNavigator = createStackNavigator({
 });
 
 const RootNavigation = createSwitchNavigator({
-  // auth: StackNavigator,
+  auth: StackNavigator,
   main: DrawerNavigator,
 });
