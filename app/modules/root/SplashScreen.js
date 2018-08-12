@@ -17,11 +17,9 @@ export default class SplashScreen extends Component {
 
   onPress = () => this.props.navigation.navigate('Login')
 
-  onLayout = e => console.log(e.nativeEvent.layout)
-
   render() {
     return (
-      <ImageBackground onLayout={this.onLayout} source={bg} style={styles.container}>
+      <ImageBackground source={bg} style={styles.container}>
         <LinearGradient
           colors={[
             'rgba(196,244,255,0.8)',
@@ -34,7 +32,7 @@ export default class SplashScreen extends Component {
           <View style={styles.logoContainer}>
             <Text style={styles.logo}>ChattyWagon</Text>
           </View>
-          <View style={{ height: '30%' }}>
+          <View style={styles.splashButtonContainer}>
             <Button navigate={this.onPress}>GET A RIDE</Button>
           </View>
         </LinearGradient>

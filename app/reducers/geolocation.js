@@ -2,27 +2,22 @@ import * as types from '../constants'
 
 const initialState = {
   drivers: [],
+  directions: {
+    coordinates: null,
+    distance: null,
+    duration: null
+  },
   currentLocation: {},
-  locationSet: false,
+  currentLocationSet: false,
   region: {
     latitude: 0,
     longitude: 0,
     latitudeDelta: 0,
     longitudeDelta: 0
   },
-  destination: {
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0,
-    longitudeDelta: 0
-  },
+  destination: {},
   destinationSet: false,
-  pickupLocation: {
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0,
-    longitudeDelta: 0
-  },
+  pickupLocation: {},
   pickupLocationSet: false
 }
 
@@ -35,12 +30,12 @@ export default (state = initialState, action) => {
         ...state,
         drivers: state.drivers.map(d => (d.key === action.driver.key ? action.driver : d))
       }
-    case types.GET_LOCATION:
+    case types.SET_LOCATION:
       return {
         ...state,
         currentLocation: action.currentLocation,
         region: action.region,
-        locationSet: true
+        currentLocationSet: true
       }
     case types.SET_DESTINATION:
       return {
@@ -54,6 +49,8 @@ export default (state = initialState, action) => {
         pickupLocation: { ...state.pickupLocation, ...action.pickupLocation },
         pickupLocationSet: true
       }
+    case types.SET_DIRECTIONS:
+      return { ...state, directions: action.directions }
     default:
       return state
   }

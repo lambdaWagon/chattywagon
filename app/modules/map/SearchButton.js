@@ -8,6 +8,7 @@ const style = {
     borderRadius: 2,
     height: 40,
     width: Dimensions.get('window').width - 20,
+    marginTop: 100,
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowRadius: 10,
@@ -19,7 +20,7 @@ const style = {
   }
 }
 
-const SearchButton = ({ children, distance, duration, navigation: { navigate } }) => (
+const SearchButton = ({ children, distance, duration, navigate }) => (
   <TouchableOpacity style={style.button} activeOpacity={0.9} onPress={() => navigate('Search')}>
     <Text style={style.buttonText}>
       {distance && duration
@@ -39,7 +40,7 @@ SearchButton.propTypes = {
   children: PropTypes.string,
   distance: PropTypes.number,
   duration: PropTypes.number,
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
+  navigate: PropTypes.func.isRequired
 }
 
 export default SearchButton

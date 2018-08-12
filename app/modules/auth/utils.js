@@ -71,7 +71,7 @@ export async function signInWithFacebook() {
       const credential = await firebase.auth.FacebookAuthProvider.credential(token)
       await auth.signInAndRetrieveDataWithCredential(credential)
       getUser(auth.currentUser, (loggedIn, user, error) => {
-        console.log(loggedIn, user, error)
+        // console.log(loggedIn, user, error)
       })
     }
   } catch (e) {
