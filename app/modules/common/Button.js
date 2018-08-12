@@ -3,17 +3,20 @@ import { Text, TouchableOpacity } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
 
-const style = {
+const styles = {
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'black',
     borderRadius: 2,
     height: 73,
     width: 294,
-    padding: 25
+    padding: 25,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowOffset: { width: 10, height: 10 }
   },
   buttonText: {
     fontFamily: 'black',
@@ -23,18 +26,19 @@ const style = {
   }
 }
 
-const Button = ({ children, navigate }) => (
-  <TouchableOpacity style={style.button} onPress={navigate}>
-    <Text style={style.buttonText}>{children}</Text>
+const Button = ({ children, navigate, style }) => (
+  <TouchableOpacity style={[style, styles.button]} onPress={navigate}>
+    <Text style={styles.buttonText}>{children}</Text>
     <SvgComponent />
   </TouchableOpacity>
 )
 
-Button.defaultProps = { children: null }
+Button.defaultProps = { children: null, style: null }
 
 Button.propTypes = {
   children: PropTypes.string,
-  navigate: PropTypes.func.isRequired
+  navigate: PropTypes.func.isRequired,
+  style: PropTypes.object
 }
 
 const SvgComponent = props => (

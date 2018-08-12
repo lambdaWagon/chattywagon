@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react'
-import { Marker } from 'react-native-maps'
+import React from 'react'
 import MapViewDirections from 'react-native-maps-directions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -8,46 +7,54 @@ import PropTypes from 'prop-types'
 import * as actions from '../../actions'
 import { config } from '../../config/firebase'
 
-const Directions = ({ coords, destination, currentLocation, destinationSet, handleDirections }) => (
-  <Fragment>
-    {destinationSet && (
-      <MapViewDirections
-        origin={currentLocation}
-        destination={destination}
-        apikey={config.apiKey}
-        strokeWidth={3}
-        strokeColor="black"
-        onStart={params =>
-          console.log(`Started routing between "${params.origin}" and "${params.destination}"`)
-        }
-        onReady={handleDirections}
-      />
-    )}
-    {coords && (
-      <Marker
-        pinColor="yellow"
-        title="Destination"
-        draggable
-        coordinate={coords[coords.length - 1]}
-      />
-    )}
-  </Fragment>
-)
+const Directions = ({
+  destination,
+  currentLocation,
+  destinationSet,
+  fitToCoords,
+  pickupLocation,
+  pickupLocationSet,
+  setDirections
+}) =>
+  destinationSet && (
+    <MapViewDirections
+      apikey={config.apiKey}
+      destination={`place_id:${destination.place_id}`}
+      origin={
+        pickupLocationSet
+          ? `place_id:${pickupLocation.place_id}`
+          : `place_id:${currentLocation.place_id}`
+      }
+      onReady={data => {
+        fitToCoords(data.coordinates)
+        setDirections(data)
+      }}
+      strokeWidth={3}
+      strokeColor="black"
+    />
+  )
 
-Directions.defaultProps = { coords: null }
-
-Directions.propTypes = {
-  coords: PropTypes.arrayOf(PropTypes.object),
-  currentLocation: PropTypes.object.isRequired,
-  destination: PropTypes.string.isRequired,
-  destinationSet: PropTypes.bool.isRequired,
-  handleDirections: PropTypes.func.isRequired
+Directions.defaultProps = {
+  pickupLocation: null
 }
 
-const mapStateToProps = ({ geolocation: { currentLocation, destination, destinationSet } }) => ({
+Directions.propTypes = {
+  currentLocation: PropTypes.object.isRequired,
+  destination: PropTypes.object.isRequired,
+  destinationSet: PropTypes.bool.isRequired,
+  pickupLocation: PropTypes.object,
+  pickupLocationSet: PropTypes.bool.isRequired,
+  setDirections: PropTypes.func.isRequired
+}
+
+const mapStateToProps = ({
+  geolocation: { currentLocation, destination, destinationSet, pickupLocation, pickupLocationSet }
+}) => ({
   currentLocation,
-  destination: `place_id:${destination.place_id}`,
-  destinationSet
+  destination,
+  destinationSet,
+  pickupLocation,
+  pickupLocationSet
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)

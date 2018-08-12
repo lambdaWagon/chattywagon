@@ -1,24 +1,25 @@
 import React, { Component, Fragment } from 'react'
 import { Dimensions, View } from 'react-native'
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import Button from '../common/Button'
 import Directions from './Directions'
 import SearchButton from './SearchButton'
+import MarkerDriver from './MarkerDriver'
+import MarkerCurrentLocation from './MarkerCurrentLocation'
+import MarkerDestination from './MarkerDestination'
+import MarkerOrigin from './MarkerOrigin'
+import MapUISearch from './MapUISearch'
+import MapUIConfirm from './MapUIConfirm'
+
 import * as actions from '../../actions'
 import styles from '../../styles'
+import mapStyle from '../../styles/mapStyle'
 
 const { width, height } = Dimensions.get('window')
-
-/* prod: get region from currentLocation */
-const region = {
-  latitude: 37.785834,
-  longitude: -122.406417,
-  latitudeDelta: 0.00922,
-  longitudeDelta: 0.004258004926108375
-}
 
 class Map extends Component {
   static navigationOptions = {
@@ -28,14 +29,11 @@ class Map extends Component {
 
   map = null
 
-  state = {
-    coordinates: null,
-    distance: null,
-    duration: null
-  }
+  marker = null
 
-  handleDirections = ({ coordinates, distance, duration }) => {
-    this.setState({ coordinates, distance, duration })
+  setMarkerRef = m => (this.marker = m)
+
+  fitToCoords = coordinates => {
     this.map.fitToCoordinates(coordinates, {
       edgePadding: {
         right: width / 10,
@@ -47,46 +45,47 @@ class Map extends Component {
   }
 
   render() {
-    const { coordinates } = this.state
-    const { currentLocation, drivers, locationSet, navigation } = this.props
-
+    const { destinationSet, drivers, navigation, region } = this.props
     return (
       <Fragment>
-        <MapView ref={c => (this.map = c)} style={styles.map} initialRegion={region}>
-          {locationSet && (
-            <Marker
-              pinColor="blue"
-              title="Current Location"
-              draggable
-              coordinate={currentLocation}
-            />
-          )}
-          {drivers.map(d => (
-            <Marker key={d.key} coordinate={d} />
+        <MapView
+          customMapStyle={mapStyle}
+          initialRegion={region}
+          provider={PROVIDER_GOOGLE}
+          ref={c => (this.map = c)}
+          onRegionChangeComplete={() => this.marker && this.marker.showCallout()}
+          showsPointsOfInterest={false}
+          style={styles.map}
+        >
+          {drivers.map((d, i) => (
+            <MarkerDriver key={d.key} d={d} i={i} />
           ))}
-          <Directions coords={coordinates} handleDirections={this.handleDirections} />
+          <Directions fitToCoords={this.fitToCoords} />
+          {!destinationSet && <MarkerCurrentLocation />}
+          <MarkerOrigin setMarkerRef={this.setMarkerRef} />
+          <MarkerDestination />
         </MapView>
-        <View style={styles.mapUI}>
-          <SearchButton {...this.state} navigation={navigation}>
-            Where to?
-          </SearchButton>
-        </View>
+        {destinationSet ? (
+          <MapUIConfirm navigate={navigation.navigate} />
+        ) : (
+          <MapUISearch navigate={navigation.navigate} />
+        )}
       </Fragment>
     )
   }
 }
 
 Map.propTypes = {
-  currentLocation: PropTypes.object.isRequired,
+  destinationSet: PropTypes.bool.isRequired,
   drivers: PropTypes.array.isRequired,
-  locationSet: PropTypes.bool.isRequired,
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
+  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
+  region: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ geolocation: { currentLocation, drivers, locationSet } }) => ({
-  currentLocation,
+const mapStateToProps = ({ geolocation: { destinationSet, drivers, region } }) => ({
+  destinationSet,
   drivers,
-  locationSet
+  region
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)

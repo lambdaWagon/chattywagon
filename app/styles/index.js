@@ -1,7 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 
-const screenHeight = Dimensions.get('window').height
-const screenWidth = Dimensions.get('window').width
+const { height, width } = Dimensions.get('window')
 
 export default StyleSheet.create({
   /* General */
@@ -9,8 +8,8 @@ export default StyleSheet.create({
     flex: 1
   },
   gradient: {
-    height: screenHeight,
-    width: screenWidth
+    height,
+    width
   },
   arrow: {
     height: 10
@@ -18,7 +17,7 @@ export default StyleSheet.create({
 
   /* Splashscreen */
   logoContainer: {
-    flexGrow: 1,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
@@ -35,6 +34,10 @@ export default StyleSheet.create({
     },
     textShadowRadius: 0.5
   },
+  splashButtonContainer: {
+    height: '30%',
+    alignItems: 'center'
+  },
 
   /* Map */
   map: {
@@ -42,13 +45,17 @@ export default StyleSheet.create({
   },
   mapUI: {
     position: 'absolute',
-    flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 10,
-    marginTop: 100
+    height,
+    width
   },
 
   /* Login */
+  loginContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   title: {
     color: '#AAADBA',
     marginTop: 10,
@@ -115,7 +122,7 @@ export const searchDestStyle = {
     backgroundColor: 'rgba(0,0,0,0)',
     borderTopWidth: 0,
     borderBottomWidth: 0,
-    width: screenWidth - 20
+    width: width - 20
   },
   textInput: {
     marginLeft: 0,
@@ -127,7 +134,7 @@ export const searchDestStyle = {
     shadowOpacity: 0.25,
     shadowRadius: 10,
     shadowOffset: { width: 10, height: 10 },
-    width: screenWidth - 20
+    width: width - 20
   }
 }
 
@@ -142,7 +149,7 @@ export const searchPickupStyle = {
     backgroundColor: 'rgba(0,0,0,0)',
     borderTopWidth: 0,
     borderBottomWidth: 0,
-    width: screenWidth - 20
+    width: width - 20
   },
   textInput: {
     marginLeft: 0,
@@ -154,7 +161,7 @@ export const searchPickupStyle = {
     shadowOpacity: 0.25,
     shadowRadius: 10,
     shadowOffset: { width: 10, height: 10 },
-    width: screenWidth - 20
+    width: width - 20
   }
 }
 
