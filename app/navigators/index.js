@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { Animated, Easing, Image, StyleSheet, View } from 'react-native'
 import { createDrawerNavigator, createSwitchNavigator, DrawerItems } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
@@ -8,10 +8,9 @@ import {
 } from 'react-native-responsive-screen'
 
 import { Map, Search } from '../modules/map'
-// import { Login } from '../modules/auth'
+import { CodeInput, PhoneInput, SocialAccount, SocialLogin } from '../modules/auth'
+import { Help, Payment, Promos, Profile, Rides, Settings } from '../modules/dashboard'
 import SplashScreen from '../modules/root/SplashScreen'
-
-let navigator
 
 const style = StyleSheet.create({
   drawerContainer: {
@@ -39,7 +38,13 @@ const Dashboard = props => (
 const DrawerNavigation = createDrawerNavigator(
   {
     Map,
-    Search
+    // Search,
+    Help,
+    Payment,
+    Promos,
+    Profile,
+    Rides,
+    Settings
   },
   {
     contentComponent: Dashboard,
@@ -51,28 +56,28 @@ const DrawerNavigation = createDrawerNavigator(
   }
 )
 
-export const DrawerWrapper = () => (
+export const DrawerWrapper = ({ navigation }) => (
   <Fragment>
     <Icon
       name="bars"
       size={wp('7.5%')}
       color="black"
       style={{ position: 'absolute', marginLeft: wp('7%'), marginTop: hp('5%'), zIndex: 999 }}
-      onPress={() => {
-        navigator._navigation.toggleDrawer()
-      }}
+      onPress={() => navigation.toggleDrawer()}
     />
-    <DrawerNavigation ref={r => (navigator = r)} />
+    <DrawerNavigation navigation={navigation} />
   </Fragment>
 )
 
+DrawerWrapper.router = DrawerNavigation.router
+
 export const AuthNavigator = createSwitchNavigator({
-  SplashScreen
+  SplashScreen,
+  PhoneInput,
+  CodeInput,
+  SocialAccount,
+  SocialLogin
   // Login,
-  //   PhoneInput,
-  //   CodeInput,
-  //   SocialAccount,
-  //   SocialLogin,
 })
 
 // const StackNavigator = createSwitchNavigator({
@@ -83,40 +88,40 @@ export const AuthNavigator = createSwitchNavigator({
 //   SocialLogin,
 // })
 
-// export const AppNavigator = createSwitchNavigator(
-//   {
-//     auth: AuthNavigator,
-//     main: DrawerWrapper,
-//   },
-//   {
-//     headerMode: 'none',
-//     mode: 'modal',
-//     navigationOptions: {
-//       gesturesEnabled: false,
-//     },
-//     transitionConfig: () => ({
-//       transitionSpec: {
-//         duration: 300,
-//         easing: Easing.out(Easing.poly(4)),
-//         timing: Animated.timing,
-//       },
-//       screenInterpolator: sceneProps => {
-//         const { layout, position, scene } = sceneProps;
-//         const { index } = scene;
+export const AppNavigator = createSwitchNavigator(
+  {
+    auth: AuthNavigator,
+    main: DrawerWrapper
+  },
+  {
+    headerMode: 'none',
+    mode: 'modal',
+    navigationOptions: {
+      gesturesEnabled: false
+    },
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 300,
+        easing: Easing.out(Easing.poly(4)),
+        timing: Animated.timing
+      },
+      screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps
+        const { index } = scene
 
-//         const height = layout.initHeight;
-//         const translateY = position.interpolate({
-//           inputRange: [index - 1, index, index + 1],
-//           outputRange: [height, 0, 0],
-//         });
+        const height = layout.initHeight
+        const translateY = position.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [height, 0, 0]
+        })
 
-//         const opacity = position.interpolate({
-//           inputRange: [index - 1, index - 0.99, index],
-//           outputRange: [0, 1, 1],
-//         });
+        const opacity = position.interpolate({
+          inputRange: [index - 1, index - 0.99, index],
+          outputRange: [0, 1, 1]
+        })
 
-//         return { opacity, transform: [{ translateY }] };
-//       },
-//     }),
-//   },
-// )
+        return { opacity, transform: [{ translateY }] }
+      }
+    })
+  }
+)

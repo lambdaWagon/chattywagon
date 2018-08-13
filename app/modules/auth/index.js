@@ -1,2 +1,6 @@
 export { default as Login } from './Login'
 export { default as LoginForm } from './LoginForm'
+export { default as PhoneInput } from './PhoneInput'
+export { default as CodeInput } from './CodeInput'
+export { default as SocialAccount } from './SocialAccount'
+export { default as SocialLogin } from './SocialLogin'

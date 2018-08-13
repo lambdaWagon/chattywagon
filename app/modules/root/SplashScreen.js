@@ -14,7 +14,7 @@ export default class SplashScreen extends Component {
     navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
   }
 
-  onPress = () => this.props.navigation.navigate('Login')
+  onPress = () => this.props.navigation.navigate('PhoneInput')
 
   render() {
     return (
