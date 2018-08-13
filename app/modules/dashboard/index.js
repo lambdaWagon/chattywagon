@@ -1,0 +1,6 @@
+export { default as Help } from './Placeholder'
+export { default as Payment } from './Placeholder'
+export { default as Promos } from './Placeholder'
+export { default as Profile } from './Placeholder'
+export { default as Rides } from './Placeholder'
+export { default as Settings } from './Placeholder'

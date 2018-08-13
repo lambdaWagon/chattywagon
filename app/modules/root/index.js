@@ -4,7 +4,7 @@ import { AppLoading, Asset, Font } from 'expo'
 import { setCustomText, setCustomTextInput } from 'react-native-global-props'
 import PropTypes from 'prop-types'
 
-import { DrawerWrapper, AuthNavigator } from '../../navigators'
+import { DrawerWrapper, AppNavigator, AuthNavigator } from '../../navigators'
 import { customProps } from '../../styles'
 
 async function loadAssets() {
@@ -31,12 +31,12 @@ class Root extends Component {
 
   render() {
     const { isReady } = this.state
-    const { user } = this.props
-    if (isReady && user) {
-      return <DrawerWrapper />
-    }
+    // const { user } = this.props
+    // if (isReady && user) {
+    //   return <DrawerWrapper />
+    // }
     if (isReady) {
-      return <AuthNavigator />
+      return <AppNavigator />
     }
     return <AppLoading startAsync={loadAssets} onFinish={this.onAssetLoad} />
   }
