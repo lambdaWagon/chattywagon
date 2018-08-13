@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Dimensions, View } from 'react-native'
+import { Dimensions } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -36,10 +36,10 @@ class Map extends Component {
   fitToCoords = coordinates => {
     this.map.fitToCoordinates(coordinates, {
       edgePadding: {
-        right: width / 10,
-        bottom: height / 3,
-        left: width / 10,
-        top: height / 10
+        right: width / 5,
+        bottom: height / 5,
+        left: width / 5,
+        top: height / 5
       }
     })
   }
