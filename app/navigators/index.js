@@ -1,8 +1,122 @@
-import { createStackNavigator } from 'react-navigation'
+import React, { Fragment } from 'react'
+import { Image, StyleSheet, View } from 'react-native'
+import { createDrawerNavigator, createSwitchNavigator, DrawerItems } from 'react-navigation'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 import { Map, Search } from '../modules/map'
-import { Login } from '../modules/auth'
+// import { Login } from '../modules/auth'
 import SplashScreen from '../modules/root/SplashScreen'
 
-export const AppNavigator = createStackNavigator({ Map, Search })
-export const AuthNavigator = createStackNavigator({ SplashScreen, Login })
+let navigator
+
+const style = StyleSheet.create({
+  drawerContainer: {
+    flex: 1,
+    paddingTop: 75,
+    backgroundColor: '#ff8200'
+  },
+  drawerView: {
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  drawerImage: { height: 100, width: 100 }
+})
+
+const Dashboard = props => (
+  <View style={style.drawerContainer}>
+    <View style={style.drawerView}>
+      <Image style={style.drawerImage} source={require('../../assets/avatarplaceholder.png')} />
+    </View>
+    <DrawerItems {...props} />
+  </View>
+)
+
+const DrawerNavigation = createDrawerNavigator(
+  {
+    Map,
+    Search
+  },
+  {
+    contentComponent: Dashboard,
+    contentOptions: {
+      activeTintColor: 'black',
+      inactiveTintColor: 'white'
+    },
+    drawerType: 'push-screen'
+  }
+)
+
+export const DrawerWrapper = () => (
+  <Fragment>
+    <Icon
+      name="bars"
+      size={wp('7.5%')}
+      color="black"
+      style={{ position: 'absolute', marginLeft: wp('7%'), marginTop: hp('5%'), zIndex: 999 }}
+      onPress={() => {
+        navigator._navigation.toggleDrawer()
+      }}
+    />
+    <DrawerNavigation ref={r => (navigator = r)} />
+  </Fragment>
+)
+
+export const AuthNavigator = createSwitchNavigator({
+  SplashScreen
+  // Login,
+  //   PhoneInput,
+  //   CodeInput,
+  //   SocialAccount,
+  //   SocialLogin,
+})
+
+// const StackNavigator = createSwitchNavigator({
+//   Home,
+//   PhoneInput,
+//   CodeInput,
+//   SocialAccount,
+//   SocialLogin,
+// })
+
+// export const AppNavigator = createSwitchNavigator(
+//   {
+//     auth: AuthNavigator,
+//     main: DrawerWrapper,
+//   },
+//   {
+//     headerMode: 'none',
+//     mode: 'modal',
+//     navigationOptions: {
+//       gesturesEnabled: false,
+//     },
+//     transitionConfig: () => ({
+//       transitionSpec: {
+//         duration: 300,
+//         easing: Easing.out(Easing.poly(4)),
+//         timing: Animated.timing,
+//       },
+//       screenInterpolator: sceneProps => {
+//         const { layout, position, scene } = sceneProps;
+//         const { index } = scene;
+
+//         const height = layout.initHeight;
+//         const translateY = position.interpolate({
+//           inputRange: [index - 1, index, index + 1],
+//           outputRange: [height, 0, 0],
+//         });
+
+//         const opacity = position.interpolate({
+//           inputRange: [index - 1, index - 0.99, index],
+//           outputRange: [0, 1, 1],
+//         });
+
+//         return { opacity, transform: [{ translateY }] };
+//       },
+//     }),
+//   },
+// )
