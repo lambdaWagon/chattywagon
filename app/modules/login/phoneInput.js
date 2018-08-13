@@ -17,25 +17,91 @@ import {
 import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  linearGradient: {
+    position: 'absolute',
+    height: hp('100%'),
+    width: wp('100%'),
+  },
+  middleContainer: {
+    height: hp('31%'),
+    width: wp('80%'),
+  },
+  inputContainer: {
+    flex: 1,
+    paddingTop: hp('4%'),
+    paddingLeft: wp('5%'),
+    backgroundColor: 'white',
+  },
+  aboveInputText: {
+    fontSize: wp('3%'),
+    fontWeight: 'bold',
+    marginBottom: hp('1.5%'),
+  },
+  inputRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: wp('6%'),
+  },
+  textInput: {
+    width: wp('35%'),
+  },
+  belowInputText: {
+    marginTop: hp('2%'),
+    fontSize: wp('3%'),
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: wp('5%'),
+    backgroundColor: 'black',
+    marginBottom: hp('2.25%'),
+    height: hp('9.5%'),
+  },
+  text: {
+    color: 'white',
+    paddingLeft: wp('1%'),
+    fontSize: wp('4.5%'),
+    fontWeight: 'bold',
+  },
+  socialContainer: {
+    width: wp('80%'),
+  },
+  socialText: {
+    fontWeight: 'bold',
+    fontSize: wp('3.25%'),
+    textAlign: 'center',
+  },
+});
+
 class PhoneInput extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     headerTransparent: true,
-    headerStyle: { zIndex: 100 },
-  };
+    headerLeft: (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Text>Go Back</Text>
+      </TouchableOpacity>
+    ),
+  });
+
+  // static navigationOptions = {
+  //   headerTransparent: true,
+  //   headerStyle: { zIndex: 100 },
+  // };
 
   state = {
     input: '',
   };
-
-  //  TODO refactor to update after each part of the number
-  // handleNumber = value => {
-  //   if (value.length === 10) {
-  //     //  reformat and return num number
-  //     // const phoneNum = value.replace(/(\d{3})/, '($1) ');
-  //     const phoneNum = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-  //     this.setState({ phoneNum });
-  //   }
-  // };
 
   phoneNumberFormatter = n => {
     const num = n.replace(/[^0-9]/g, '');
@@ -56,69 +122,6 @@ class PhoneInput extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { input } = this.state;
-
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      linearGradient: {
-        position: 'absolute',
-        height: hp('100%'),
-        width: wp('100%'),
-      },
-      middleContainer: {
-        height: hp('31%'),
-        width: wp('80%'),
-      },
-      inputContainer: {
-        flex: 1,
-        paddingTop: hp('4%'),
-        paddingLeft: wp('5%'),
-        backgroundColor: 'white',
-      },
-      aboveInputText: {
-        fontSize: wp('3%'),
-        fontWeight: 'bold',
-        marginBottom: hp('1.5%'),
-      },
-      inputRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginRight: wp('6%'),
-      },
-      textInput: {
-        width: wp('35%'),
-      },
-      belowInputText: {
-        marginTop: hp('2%'),
-        fontSize: wp('3%'),
-      },
-      buttonContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: wp('5%'),
-        backgroundColor: 'black',
-        marginBottom: hp('2.25%'),
-        height: hp('9.5%'),
-      },
-      text: {
-        color: 'white',
-        paddingLeft: wp('1%'),
-        fontSize: wp('4.5%'),
-        fontWeight: 'bold',
-      },
-      socialContainer: {
-        width: wp('80%'),
-      },
-      socialText: {
-        fontWeight: 'bold',
-        fontSize: wp('3.25%'),
-        textAlign: 'center',
-      },
-    });
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>

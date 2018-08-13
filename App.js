@@ -1,21 +1,16 @@
-import React from 'react';
-
+import React, { Fragment } from 'react';
+import { Animated, Easing, Image, View, StyleSheet } from 'react-native';
 import {
+  DrawerItems,
   createStackNavigator,
   createDrawerNavigator,
-  DrawerItems,
   createSwitchNavigator,
 } from 'react-navigation';
-
-import { View, SafeAreaView, ScrollView, Image, Text } from 'react-native';
-
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import Hamburger from 'react-native-hamburger';
 
 import Home from './app/modules/login/getRide';
 import PhoneInput from './app/modules/login/phoneInput';
@@ -30,66 +25,32 @@ import Help from './app/modules/settings/help';
 import Profile from './app/modules/settings/profile';
 import Rides from './app/modules/settings/rides';
 
-const CustomDrawComponent = props => (
-  <View style={{ backgroundColor: '#ff8200', height: hp('100%'), flex: 1 }}>
-    <SafeAreaView style={{ height: hp('100%'), flex: 1 }}>
-      drawerIcon: (
-      <SafeAreaView style={{ marginLeft: hp('3%') }}>
-        <Icon
-          name="close"
-          size={wp('7.5%')}
-          color="black"
-          onPress={() => props.navigation.closeDrawer()}
-        />
-      </SafeAreaView>
-      ),
-      <View
-        style={{
-          height: 150,
-          backgroundColor: '#ff8200',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Image
-          source={require('./avatarplaceholder.png')}
-          style={{ height: 100, width: 100, borderRadius: 50 }}
-        />
-      </View>
-      <ScrollView style={{ height: hp('100%'), backgroundColor: '#ff8200' }}>
-        <DrawerItems style={{ backgroundColor: '#ff8200' }} {...props} />
-      </ScrollView>
-    </SafeAreaView>
+const style = StyleSheet.create({
+  drawerContainer: {
+    flex: 1,
+    paddingTop: 75,
+    backgroundColor: '#ff8200',
+  },
+  drawerView: {
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  drawerImage: { height: 100, width: 100 },
+});
+
+export default () => <RootNavigation />;
+
+const Dashboard = props => (
+  <View style={style.drawerContainer}>
+    <View style={style.drawerView}>
+      <Image style={style.drawerImage} source={require('./avatarplaceholder.png')} />
+    </View>
+    <DrawerItems {...props} />
   </View>
 );
 
-export default class App extends React.Component {
-  state = {
-    // active: false,
-  };
-
-  // hamburgerAnimation = props => {
-  //   // const { openDrawer, closeDrawer } = props.navigation;
-  //   const { active } = this.state;
-  //   if (!this.state.active) {
-  //     this.setState({ active: !active });
-  //     props.openDrawer();
-  //   } else {
-  //     this.setState({ active: !active });
-  //     props.closeDrawer();
-  //   }
-  // };
-
-  render() {
-    const { active } = this.state;
-    // const propsForTheScreen = { active, hamburger: this.hamburgerAnimation };
-    // screenProps={propsForTheScreen}
-
-    return <RootNavigation />;
-  }
-}
-
-const DrawerNavigator = createDrawerNavigator(
+const DrawerNavigation = createDrawerNavigator(
   {
     Map,
     Rides,
@@ -100,25 +61,74 @@ const DrawerNavigator = createDrawerNavigator(
     Settings,
   },
   {
-    initialRouteName: 'Map',
-    contentComponent: CustomDrawComponent,
+    contentComponent: Dashboard,
     contentOptions: {
       activeTintColor: 'black',
       inactiveTintColor: 'white',
     },
+    drawerType: 'push-screen',
   },
 );
 
-const StackNavigator = createStackNavigator({
+const DrawerWrapper = ({ navigation }) => (
+  <Fragment>
+    <Icon
+      name="bars"
+      size={wp('7.5%')}
+      color="black"
+      style={{ position: 'absolute', marginLeft: wp('7%'), marginTop: hp('5%'), zIndex: 999 }}
+      onPress={() => navigation.toggleDrawer()}
+    />
+    <DrawerNavigation navigation={navigation} />
+  </Fragment>
+);
+
+DrawerWrapper.router = DrawerNavigation.router;
+
+const StackNavigator = createSwitchNavigator({
   Home,
   PhoneInput,
   CodeInput,
   SocialAccount,
   SocialLogin,
-  Map,
 });
 
-const RootNavigation = createSwitchNavigator({
-  auth: StackNavigator,
-  main: DrawerNavigator,
-});
+const RootNavigation = createStackNavigator(
+  {
+    auth: StackNavigator,
+    main: DrawerWrapper,
+  },
+  {
+    headerMode: 'none',
+    mode: 'modal',
+    navigationOptions: {
+      gesturesEnabled: false,
+    },
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 300,
+        easing: Easing.out(Easing.poly(4)),
+        timing: Animated.timing,
+      },
+      screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps;
+        const { index } = scene;
+
+        const height = layout.initHeight;
+        const translateY = position.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [height, 0, 0],
+        });
+
+        const opacity = position.interpolate({
+          inputRange: [index - 1, index - 0.99, index],
+          outputRange: [0, 1, 1],
+        });
+
+        return { opacity, transform: [{ translateY }] };
+      },
+    }),
+  },
+);
+
+console.ignoredYellowBox = ['Remote debugger'];

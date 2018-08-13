@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,42 +7,22 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-class Settings extends React.Component {
-  static navigationOptions = {
-    headerTransparent: true,
-    headerStyle: { zIndex: 100 },
-  };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: hp('100%'),
+  },
+  icon: {
+    marginLeft: hp('3%'),
+  },
+});
 
-  state = {};
-
-  render() {
-    const { navigation } = this.props;
-
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        height: hp('100%'),
-      },
-      icon: {
-        marginLeft: hp('3%'),
-      },
-    });
-
-    return (
-      <SafeAreaView style={styles.container}>
-        drawerIcon: (
-        <SafeAreaView style={styles.icon}>
-          <Icon
-            name="bars"
-            size={wp('7.5%')}
-            color="black"
-            onPress={() => navigation.openDrawer()}
-          />
-        </SafeAreaView>
-        ),
-      </SafeAreaView>
-    );
-  }
-}
-
-export default Settings;
+export default ({ navigation }) => (
+  <SafeAreaView style={styles.container}>
+    drawerIcon: (
+    <SafeAreaView style={styles.icon}>
+      <Icon name="bars" size={wp('7.5%')} color="black" onPress={() => navigation.openDrawer()} />
+    </SafeAreaView>
+    )
+  </SafeAreaView>
+);

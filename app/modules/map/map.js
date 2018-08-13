@@ -14,38 +14,30 @@ const region = {
   longitudeDelta: 0.004258004926108375,
 };
 
+const styles = StyleSheet.create({
+  mapContainer: {
+    flex: 1,
+    height: hp('100%'),
+  },
+  icon: {
+    position: 'absolute',
+    marginLeft: wp('7%'),
+    marginTop: hp('5%'),
+  },
+});
+
 class Map extends React.Component {
+  static navigationOptions = {
+    header: true,
+    headerMode: 'screen',
+  };
+
   state = {};
 
   render() {
-    const { navigation } = this.props;
-
-    const styles = StyleSheet.create({
-      mapContainer: {
-        flex: 1,
-        height: hp('100%'),
-      },
-      icon: {
-        marginLeft: hp('3%'),
-      },
-    });
-
-    return (
-      <MapView region={region} style={styles.mapContainer}>
-        <SafeAreaView>
-          drawerIcon: (
-          <SafeAreaView style={styles.icon}>
-            <Icon
-              name="bars"
-              size={wp('7.5%')}
-              color="black"
-              onPress={() => navigation.openDrawer()}
-            />
-          </SafeAreaView>
-          ),
-        </SafeAreaView>
-      </MapView>
-    );
+    // const { navigation } = this.props
+    console.log(this.props.navigation.state);
+    return <MapView region={region} style={styles.mapContainer} />;
   }
 }
 

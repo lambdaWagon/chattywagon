@@ -60,7 +60,10 @@ class GetRide extends React.Component {
           style={{ width: wp('100%'), height: hp('100%') }}
           resizeMode="cover"
         >
-          <LinearGradient colors={['#7fbeff', '#fff', '#ff8200']} style={styles.linearGradient} />
+          <LinearGradient
+            colors={['#7fbeff', '#7fbeff', '#e88c36']}
+            style={styles.linearGradient}
+          />
 
           <View style={styles.touchContainer} underlayColor="white">
             <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('PhoneInput')}>
