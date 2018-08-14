@@ -31,7 +31,6 @@ const Dashboard = props => (
     <View style={style.drawerView}>
       <Image style={style.drawerImage} source={require('../../assets/avatarplaceholder.png')} />
     </View>
-    {console.log(props)}
     <DrawerItems {...props} />
   </View>
 )
@@ -73,21 +72,12 @@ export const DrawerWrapper = ({ navigation }) => (
 DrawerWrapper.router = DrawerNavigation.router
 
 export const AuthNavigator = createSwitchNavigator({
-  CodeInput,
-  PhoneInput,
   SplashScreen,
+  PhoneInput,
+  CodeInput,
   SocialAccount,
   SocialLogin
-  // Login,
 })
-
-// const StackNavigator = createSwitchNavigator({
-//   Home,
-//   PhoneInput,
-//   CodeInput,
-//   SocialAccount,
-//   SocialLogin,
-// })
 
 export const AppNavigator = createSwitchNavigator(
   {
