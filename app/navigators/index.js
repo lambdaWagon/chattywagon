@@ -73,9 +73,9 @@ export const DrawerWrapper = ({ navigation }) => (
 DrawerWrapper.router = DrawerNavigation.router
 
 export const AuthNavigator = createSwitchNavigator({
-  SplashScreen,
-  PhoneInput,
   CodeInput,
+  PhoneInput,
+  SplashScreen,
   SocialAccount,
   SocialLogin
   // Login,
