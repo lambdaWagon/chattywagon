@@ -23,6 +23,7 @@ const { width, height } = Dimensions.get('window')
 
 class Map extends Component {
   static navigationOptions = {
+    drawerLabel: () => null,
     headerTransparent: true,
     headerStyle: { zIndex: 100 }
   }
