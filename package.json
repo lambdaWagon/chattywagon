@@ -4,6 +4,7 @@
   "scripts": {
     "start": "exp start --ios",
     "android": "exp start --android",
+    "publish": "exp publish",
     "precommit": "lint-staged",
     "pretty": "prettier --write \"**/*.js\"",
     "postinstall": "remotedev-debugger --hostname localhost --port 5678 --injectserver"

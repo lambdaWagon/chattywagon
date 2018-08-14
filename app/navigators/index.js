@@ -31,6 +31,7 @@ const Dashboard = props => (
     <View style={style.drawerView}>
       <Image style={style.drawerImage} source={require('../../assets/avatarplaceholder.png')} />
     </View>
+    {console.log(props)}
     <DrawerItems {...props} />
   </View>
 )
@@ -38,13 +39,13 @@ const Dashboard = props => (
 const DrawerNavigation = createDrawerNavigator(
   {
     Map,
-    // Search,
     Help,
     Payment,
     Promos,
     Profile,
     Rides,
-    Settings
+    Settings,
+    Search
   },
   {
     contentComponent: Dashboard,

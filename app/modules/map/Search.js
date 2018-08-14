@@ -9,6 +9,7 @@ import * as actions from '../../actions'
 
 class GooglePlacesInput extends Component {
   static navigationOptions = {
+    drawerLabel: () => null,
     headerTransparent: true,
     headerStyle: { zIndex: 100 }
   }
