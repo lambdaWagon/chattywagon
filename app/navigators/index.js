@@ -1,41 +1,29 @@
 import React, { Fragment } from 'react'
-import { Animated, Easing, Image, StyleSheet, View } from 'react-native'
-import { createDrawerNavigator, createSwitchNavigator, DrawerItems } from 'react-navigation'
+import { Animated, Easing, StyleSheet } from 'react-native'
+import { createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
+import PropTypes from 'prop-types'
 
 import { Map, Search } from '../modules/map'
 import { CodeInput, PhoneInput, SocialAccount, SocialLogin } from '../modules/auth'
-import { Help, Payment, Promos, Profile, Rides, Settings } from '../modules/dashboard'
+import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../modules/dashboard'
 import SplashScreen from '../modules/root/SplashScreen'
+import BackButton from '../modules/common/BackButton'
 
-const style = StyleSheet.create({
-  drawerContainer: {
-    flex: 1,
-    paddingTop: 75,
-    backgroundColor: '#ff8200'
-  },
-  drawerView: {
-    height: 150,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  drawerImage: { height: 100, width: 100 }
+const styles = StyleSheet.create({
+  button: {
+    position: 'absolute',
+    marginLeft: wp('7%'),
+    marginTop: hp('7%'),
+    zIndex: 999
+  }
 })
 
-const Dashboard = props => (
-  <View style={style.drawerContainer}>
-    <View style={style.drawerView}>
-      <Image style={style.drawerImage} source={require('../../assets/avatarplaceholder.png')} />
-    </View>
-    <DrawerItems {...props} />
-  </View>
-)
-
-const DrawerNavigation = createDrawerNavigator(
+const DrawerNavigator = createDrawerNavigator(
   {
     Map,
     Help,
@@ -62,26 +50,44 @@ export const DrawerWrapper = ({ navigation }) => (
       name="bars"
       size={wp('7.5%')}
       color="black"
-      style={{ position: 'absolute', marginLeft: wp('7%'), marginTop: hp('5%'), zIndex: 999 }}
+      style={styles.button}
       onPress={() => navigation.toggleDrawer()}
     />
-    <DrawerNavigation navigation={navigation} />
+    <DrawerNavigator navigation={navigation} />
   </Fragment>
 )
 
-DrawerWrapper.router = DrawerNavigation.router
+DrawerWrapper.router = DrawerNavigator.router
+DrawerWrapper.propTypes = { navigation: PropTypes.object.isRequired }
 
 export const AuthNavigator = createSwitchNavigator({
-  SplashScreen,
   PhoneInput,
   CodeInput,
   SocialAccount,
   SocialLogin
 })
 
+export const AuthWrapper = ({ navigation }) => {
+  const { index } = navigation.state
+  const previous = navigation.state.routes[index - 1]
+
+  return (
+    <Fragment>
+      {index > 0 && (
+        <BackButton style={styles.button} navigate={() => navigation.navigate(previous)} />
+      )}
+      <AuthNavigator navigation={navigation} />
+    </Fragment>
+  )
+}
+
+AuthWrapper.router = AuthNavigator.router
+AuthWrapper.propTypes = { navigation: PropTypes.object.isRequired }
+
 export const AppNavigator = createSwitchNavigator(
   {
-    auth: AuthNavigator,
+    SplashScreen,
+    auth: AuthWrapper,
     main: DrawerWrapper
   },
   {

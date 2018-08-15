@@ -1,9 +1,9 @@
 import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
 
-const styles = {
+const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -24,7 +24,7 @@ const styles = {
     color: 'white',
     letterSpacing: 1.5
   }
-}
+})
 
 const Button = ({ children, navigate, style }) => (
   <TouchableOpacity style={[style, styles.button]} onPress={navigate}>

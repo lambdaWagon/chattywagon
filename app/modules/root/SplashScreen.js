@@ -14,7 +14,7 @@ export default class SplashScreen extends Component {
     navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
   }
 
-  onPress = () => this.props.navigation.navigate('PhoneInput')
+  onPress = () => this.props.navigation.navigate('auth')
 
   render() {
     return (
@@ -22,6 +22,7 @@ export default class SplashScreen extends Component {
         <View style={styles.logoContainer}>
           <Text style={styles.logo}>ChattyWagon</Text>
         </View>
+
         <View style={styles.splashButtonContainer}>
           <Button navigate={this.onPress}>GET A RIDE</Button>
         </View>
