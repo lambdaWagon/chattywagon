@@ -48,7 +48,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'black',
     letterSpacing: 40,
-    marginLeft: 5
+    marginLeft: 5,
+    height: 30,
+    zIndex: 2
   },
   underline: {
     fontSize: 20,
@@ -56,7 +58,8 @@ const styles = StyleSheet.create({
     top: 66,
     left: 25,
     position: 'absolute',
-    letterSpacing: 13
+    letterSpacing: 13,
+    zIndex: 1
   },
   noCodeContainer: {
     marginTop: 20,
