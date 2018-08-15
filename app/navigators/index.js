@@ -9,7 +9,7 @@ import {
 
 import { Map, Search } from '../modules/map'
 import { CodeInput, PhoneInput, SocialAccount, SocialLogin } from '../modules/auth'
-import { Help, Payment, Promos, Profile, Rides, Settings } from '../modules/dashboard'
+import { Help, Payment, Promos, Profile, Rides, Settings, Contact } from '../modules/dashboard'
 import SplashScreen from '../modules/root/SplashScreen'
 
 const style = StyleSheet.create({
@@ -43,7 +43,8 @@ const DrawerNavigation = createDrawerNavigator(
     // Payment,
     // Promos,
     // Profile,
-    Rides
+    // Rides,
+    Contact
     // Settings
   },
   {

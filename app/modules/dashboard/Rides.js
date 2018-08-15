@@ -1,48 +1,10 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native'
 import { LinearGradient } from 'expo'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
 
-import genStyles from '../../styles'
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: hp('100%'),
-    alignItems: 'center',
-    top: hp('15%')
-  },
-  icon: {
-    marginLeft: wp('3%')
-  },
-  RideContainer: {
-    borderWidth: 1,
-    backgroundColor: 'rgba(211, 211, 211, 0.3)',
-    padding: wp('3%'),
-    borderRadius: 7,
-    width: wp('80%'),
-    marginBottom: hp('1%')
-  },
-  textMargin: {
-    marginBottom: hp('2%')
-  },
-  bottomText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-})
+import styles from '../../styles'
 
 class Rides extends React.Component {
-  static navigationOptions = () => ({
-    headerTintColor: 'grey',
-    headerStyle: {
-      backgroundColor: 'lightGrey'
-    }
-  })
-
   state = {
     rides: [
       {
@@ -86,35 +48,18 @@ class Rides extends React.Component {
         end: '1515 Rome St',
         distance: 0.01,
         travelTime: '30sec'
-      },
-      {
-        timestamp: '03-19-28',
-        start: '1514 Rome St',
-        end: '1515 Rome St',
-        distance: 0.01,
-        travelTime: '30sec'
-      },
-      {
-        timestamp: '03-19-08',
-        start: '1514 Rome St',
-        end: '1515 Rome St',
-        distance: 0.01,
-        travelTime: '30sec'
       }
     ]
   }
 
   render() {
     return (
-      <LinearGradient
-        colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']}
-        style={genStyles.gradient}
-      >
-        <SafeAreaView style={styles.container}>
+      <LinearGradient colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']} style={styles.gradient}>
+        <View style={styles.rideViewContainer}>
           <ScrollView>
             {this.state.rides.map(ride => {
               return (
-                <View style={styles.RideContainer} key={ride.timestamp}>
+                <View style={styles.rideContainer} key={ride.timestamp}>
                   <Text style={styles.textMargin}>Date: {ride.timestamp}</Text>
                   <Text>Start: {ride.start}</Text>
                   <Text style={styles.textMargin}>End: {ride.end}</Text>
@@ -126,7 +71,7 @@ class Rides extends React.Component {
               )
             })}
           </ScrollView>
-        </SafeAreaView>
+        </View>
       </LinearGradient>
     )
   }

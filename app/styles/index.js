@@ -1,5 +1,10 @@
 import { Dimensions, StyleSheet } from 'react-native'
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
+
 const { height, width } = Dimensions.get('window')
 
 export default StyleSheet.create({
@@ -105,6 +110,31 @@ export default StyleSheet.create({
   searchBar: {
     flex: 1,
     opacity: 0.1
+  },
+  /* Ride View */
+  rideViewContainer: {
+    flex: 1,
+    height: hp('100%'),
+    alignItems: 'center',
+    top: hp('15%')
+  },
+  icon: {
+    marginLeft: wp('3%')
+  },
+  rideContainer: {
+    borderWidth: 1,
+    backgroundColor: 'rgba(211, 211, 211, 0.3)',
+    padding: wp('3%'),
+    borderRadius: 7,
+    width: wp('80%'),
+    marginBottom: hp('1%')
+  },
+  textMargin: {
+    marginBottom: hp('2%')
+  },
+  bottomText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 })
 
