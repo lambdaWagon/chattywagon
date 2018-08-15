@@ -37,14 +37,14 @@ const Dashboard = props => (
 
 const DrawerNavigation = createDrawerNavigator(
   {
-    Map,
+    // Map,
     // Search,
-    Help,
-    Payment,
-    Promos,
-    Profile,
-    Rides,
-    Settings
+    // Help,
+    // Payment,
+    // Promos,
+    // Profile,
+    Rides
+    // Settings
   },
   {
     contentComponent: Dashboard,
@@ -90,7 +90,7 @@ export const AuthNavigator = createSwitchNavigator({
 
 export const AppNavigator = createSwitchNavigator(
   {
-    auth: AuthNavigator,
+    // auth: AuthNavigator,
     main: DrawerWrapper
   },
   {
