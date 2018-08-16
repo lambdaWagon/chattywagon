@@ -9,7 +9,7 @@ import {
 
 import { Map, Search } from '../modules/map'
 import { CodeInput, PhoneInput, SocialAccount, SocialLogin } from '../modules/auth'
-import { Help, Payment, Promos, Profile, Rides, Settings, Contact } from '../modules/dashboard'
+import { Help, Payment, Promos, Profile, Rides, Contact } from '../modules/dashboard'
 import SplashScreen from '../modules/root/SplashScreen'
 
 const style = StyleSheet.create({
@@ -37,15 +37,14 @@ const Dashboard = props => (
 
 const DrawerNavigation = createDrawerNavigator(
   {
-    // Map,
-    // Search,
+    Map,
+    Search,
+    Rides,
+    Profile,
+    Contact
     // Help,
     // Payment,
     // Promos,
-    Profile
-    // Rides,
-    // Contact
-    // Settings
   },
   {
     contentComponent: Dashboard,
