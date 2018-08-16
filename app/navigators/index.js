@@ -42,9 +42,9 @@ const DrawerNavigation = createDrawerNavigator(
     // Help,
     // Payment,
     // Promos,
-    // Profile,
+    Profile
     // Rides,
-    Contact
+    // Contact
     // Settings
   },
   {

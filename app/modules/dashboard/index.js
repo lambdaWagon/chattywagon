@@ -4,6 +4,6 @@
 
 export { default as Help } from './Placeholder'
 export { default as Contact } from './Contact'
-export { default as Profile } from './Placeholder'
+export { default as Profile } from './Profile'
 export { default as Rides } from './Rides'
 export { default as Settings } from './Placeholder'

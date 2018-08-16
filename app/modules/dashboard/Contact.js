@@ -90,7 +90,7 @@ class Contact extends React.Component {
               keyboardType="default"
               type="text"
               value={this.state.title}
-              onChangeText={title => this.setState({ title })}
+              onChangeText={title => this.setState({ title })} // may need to refactor for performance
               returnKeyType="next"
               onSubmitEditing={() => this.titleInput.focus()}
             />
