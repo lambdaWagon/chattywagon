@@ -90,7 +90,7 @@ export const AuthNavigator = createSwitchNavigator({
 
 export const AppNavigator = createSwitchNavigator(
   {
-    // auth: AuthNavigator,
+    auth: AuthNavigator,
     main: DrawerWrapper
   },
   {
