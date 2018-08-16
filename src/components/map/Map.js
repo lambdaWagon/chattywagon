@@ -5,9 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Button from '../shared/Button'
 import Directions from './Directions'
-import SearchButton from './SearchButton'
 import MarkerDriver from './MarkerDriver'
 import MarkerCurrentLocation from './MarkerCurrentLocation'
 import MarkerDestination from './MarkerDestination'
@@ -32,13 +30,11 @@ class Map extends Component {
 
   marker = null
 
-  setMarkerRef = m => (this.marker = m)
-
   fitToCoords = coordinates => {
     this.map.fitToCoordinates(coordinates, {
       edgePadding: {
         right: width / 5,
-        bottom: height / 5,
+        bottom: height / 4,
         left: width / 5,
         top: height / 5
       }
@@ -50,21 +46,21 @@ class Map extends Component {
     return (
       <Fragment>
         <MapView
-          customMapStyle={mapStyle}
+          ref={c => (this.map = c)}
           initialRegion={region}
           provider={PROVIDER_GOOGLE}
-          ref={c => (this.map = c)}
           onRegionChangeComplete={() => this.marker && this.marker.showCallout()}
           showsPointsOfInterest={false}
           style={styles.map}
+          customMapStyle={mapStyle}
         >
           {drivers.map(d => (
             <MarkerDriver key={d.key} d={d} />
           ))}
           <Directions fitToCoords={this.fitToCoords} />
           {!destinationSet && <MarkerCurrentLocation />}
-          <MarkerOrigin setMarkerRef={this.setMarkerRef} />
-          <MarkerDestination />
+          <MarkerOrigin />
+          <MarkerDestination setMarkerRef={m => (this.marker = m)} />
         </MapView>
         {destinationSet ? (
           <MapUIConfirm navigate={navigation.navigate} />

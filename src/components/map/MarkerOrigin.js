@@ -1,17 +1,15 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
-import { Callout, Marker } from 'react-native-maps'
+import { Marker } from 'react-native-maps'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const styles = {
-  callout: {
-    flex: 1,
-    flexGrow: 1,
-    minWidth: 150,
-    position: 'absolute'
+  image: {
+    width: 15,
+    height: 15,
+    marginTop: 5
   },
-  image: { width: 15, height: 15, marginTop: 5 },
   originView: {
     flexDirection: 'row',
     backgroundColor: 'white',
@@ -22,83 +20,50 @@ const styles = {
     shadowRadius: 2,
     shadowOffset: { width: 2, height: 3 }
   },
-  originText: { paddingVertical: 3, paddingHorizontal: 10 },
-  timeView: {
-    flex: 0,
-    borderTopLeftRadius: 2,
-    borderBottomLeftRadius: 2,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
+  originText: {
     paddingVertical: 3,
     paddingHorizontal: 10
-  },
-  timeText: { fontSize: 16, color: 'white' },
-  minText: { fontSize: 10, color: 'white', marginTop: -1 }
+  }
 }
 
-const MarkerOrigin = ({
-  address,
-  coordinates,
-  duration,
-  pickupLocation,
-  pickupLocationSet,
-  setMarkerRef
-}) =>
+const MarkerOrigin = ({ address, coordinates, pickupLocation, pickupLocationSet }) =>
   coordinates ? (
-    <Marker
-      anchor={{ x: 0.05, y: 1 }}
-      coordinate={coordinates[0]}
-      calloutVisible
-      ref={setMarkerRef}
-      zIndex={5}
-    >
-      <Callout tooltip style={styles.callout}>
-        <View style={styles.originView}>
-          <View style={styles.timeView}>
-            <Text style={styles.timeText}>{Math.round(duration)}</Text>
-            <Text style={styles.minText}>min</Text>
-          </View>
-          {pickupLocationSet ? (
-            <Text style={styles.originText}>{pickupLocation.structured_formatting.main_text}</Text>
-          ) : (
-            <Text style={styles.originText}>{address.substr(0, address.indexOf(','))}</Text>
-          )}
-        </View>
-      </Callout>
+    <Marker anchor={{ x: 0.05, y: 1 }} coordinate={coordinates[0]} zIndex={5}>
+      <View style={styles.originView}>
+        {pickupLocationSet ? (
+          <Text style={styles.originText}>{pickupLocation.structured_formatting.main_text}</Text>
+        ) : (
+          <Text style={styles.originText}>{address.substr(0, address.indexOf(','))}</Text>
+        )}
+      </View>
       <Image style={styles.image} source={require('../../../assets/marker4.png')} />
     </Marker>
   ) : null
 
 MarkerOrigin.defaultProps = {
   address: null,
-  coordinates: null,
-  duration: null
+  coordinates: null
 }
 
 MarkerOrigin.propTypes = {
   address: PropTypes.string,
   coordinates: PropTypes.array,
-  duration: PropTypes.number,
   pickupLocation: PropTypes.object.isRequired,
-  pickupLocationSet: PropTypes.bool.isRequired,
-  setMarkerRef: PropTypes.func.isRequired
+  pickupLocationSet: PropTypes.bool.isRequired
 }
 
 export default connect(
   ({
     geolocation: {
       currentLocation: { address },
-      directions: { coordinates, duration },
+      directions: { coordinates },
       pickupLocation,
       pickupLocationSet
     }
   }) => ({
     address,
     coordinates,
-    duration,
     pickupLocation,
     pickupLocationSet
-  }),
-  null
+  })
 )(MarkerOrigin)
