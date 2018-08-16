@@ -108,7 +108,7 @@ class CodeInput extends React.Component {
             />
           </View>
           <View style={styles.splashButtonContainer}>
-            <Button navigate={this.onPress}>GET CODE</Button>
+            <Button navigate={this.onPress}>SIGN IN</Button>
           </View>
           <TouchableOpacity style={styles.noCodeContainer}>
             <Text style={styles.noCodeText}>I DIDN'T RECEIVE A CODE</Text>
