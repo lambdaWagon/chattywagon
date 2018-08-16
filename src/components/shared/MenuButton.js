@@ -4,15 +4,26 @@ import PropTypes from 'prop-types'
 
 export default class MenuButton extends Component {
   static propTypes = {
+    color: PropTypes.string.isRequired,
     style: PropTypes.number.isRequired,
-    navigate: PropTypes.func.isRequired
+    navigate: PropTypes.func.isRequired,
+    type: PropTypes.string
   }
+
+  static defaultProps = { type: null }
 
   state = { active: false }
 
+  componentWillReceiveProps({ type }) {
+    if (type === 'arrow') {
+      this.setState(p => ({ active: !p.active }))
+      this.arrow()
+    }
+  }
+
   cross = () => {
     if (this.state.active) {
-      this.setState({ active: false })
+      this.setState(p => ({ active: !p.active }))
 
       Animated.spring(this.topBar, { toValue: 0 }).start()
       Animated.spring(this.bottomBar, { toValue: 0 }).start()
@@ -26,20 +37,63 @@ export default class MenuButton extends Component {
     }
   }
 
+  arrow = () => {
+    if (this.state.active) {
+      this.setState(p => ({ active: !p.active }))
+
+      Animated.spring(this.bottomBar, { toValue: 1 }).start()
+      Animated.spring(this.bottomBarMargin, { toValue: 2.5 }).start()
+      Animated.spring(this.topBar, { toValue: 1 }).start()
+      Animated.spring(this.topBarMargin, { toValue: -2.5 }).start()
+      Animated.spring(this.width, { toValue: 14 }).start()
+      Animated.spring(this.marginLeft, { toValue: -14.75 }).start()
+    } else {
+      Animated.spring(this.bottomBar, { toValue: 0 }).start()
+      Animated.spring(this.bottomBarMargin, { toValue: 4 }).start()
+      Animated.spring(this.topBar, { toValue: 0 }).start()
+      Animated.spring(this.topBarMargin, { toValue: 0 }).start()
+      Animated.spring(this.width, { toValue: 25 }).start()
+      Animated.spring(this.marginLeft, { toValue: 0 }).start()
+    }
+  }
+
   animate = () => {
-    this.setState(prev => ({ active: !prev.active }))
-    this.cross()
-    this.props.navigate()
+    const {
+      props: { navigate, type }
+    } = this
+    this.setState(p => ({ active: !p.active }))
+
+    switch (type) {
+      case 'arrow':
+        this.arrow()
+        navigate()
+        break
+      default:
+        this.cross()
+        navigate()
+        break
+    }
   }
 
   render() {
-    const { style } = this.props
+    const {
+      props: { color, style, type }
+    } = this
 
     if (this.state.active) {
-      this.topBar = this.topBar || new Animated.Value(0.9)
-      this.bottomBar = this.bottomBar || new Animated.Value(0.9)
-      this.bottomBarMargin = this.bottomBarMargin || new Animated.Value(-10)
-      this.middleBarOpacity = this.middleBarOpacity || new Animated.Value(0)
+      if (type === 'cross') {
+        this.topBar = this.topBar || new Animated.Value(0.9)
+        this.bottomBar = this.bottomBar || new Animated.Value(0.9)
+        this.bottomBarMargin = this.bottomBarMargin || new Animated.Value(-10)
+        this.middleBarOpacity = this.middleBarOpacity || new Animated.Value(0)
+      }
+    } else if (type === 'arrow') {
+      this.topBar = this.topBar || new Animated.Value(1)
+      this.topBarMargin = this.topBarMargin || new Animated.Value(-2)
+      this.bottomBar = this.bottomBar || new Animated.Value(1)
+      this.bottomBarMargin = this.bottomBarMargin || new Animated.Value(2)
+      this.width = this.width || new Animated.Value(14)
+      this.marginLeft = this.marginLeft || new Animated.Value(-13)
     }
 
     this.containerAnim = this.containerAnim || new Animated.Value(0)
@@ -71,7 +125,7 @@ export default class MenuButton extends Component {
         width: this.width,
         marginLeft: this.marginLeft,
         marginBottom: this.topBarMargin,
-        backgroundColor: 'black',
+        backgroundColor: color,
         transform: [
           {
             rotate: this.topBar.interpolate({
@@ -85,7 +139,7 @@ export default class MenuButton extends Component {
         height: 3,
         width: 25,
         opacity: this.middleBarOpacity,
-        backgroundColor: 'black',
+        backgroundColor: color,
         marginTop: 4
       },
       bottomBar: {
@@ -93,7 +147,7 @@ export default class MenuButton extends Component {
         width: this.width,
         marginLeft: this.marginLeft,
         marginTop: this.bottomBarMargin,
-        backgroundColor: 'black',
+        backgroundColor: color,
         transform: [
           {
             rotate: this.bottomBar.interpolate({

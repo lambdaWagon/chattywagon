@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 import { createDrawerNavigator } from 'react-navigation'
 import {
   widthPercentageToDP as wp,
@@ -8,7 +9,7 @@ import {
 import PropTypes from 'prop-types'
 
 import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../components/dashboard'
-import { Map, Search } from '../components/map'
+import { Map, MapUIConfirm, Search } from '../components/map'
 import { MenuButton } from '../components/shared'
 
 const styles = StyleSheet.create({
@@ -29,7 +30,8 @@ export const MainNavigator = createDrawerNavigator(
     Profile,
     Rides,
     Settings,
-    Search
+    Search,
+    MapUIConfirm
   },
   {
     contentComponent: Dashboard,
@@ -41,14 +43,27 @@ export const MainNavigator = createDrawerNavigator(
   }
 )
 
-const Main = ({ navigation }) => (
-  <Fragment>
-    <MenuButton style={styles.button} navigate={() => navigation.toggleDrawer()} />
-    <MainNavigator navigation={navigation} />
-  </Fragment>
-)
+const Main = props => {
+  console.log(props)
+  const { destinationSet, navigation } = props
+  const goBack = () => navigation.navigate('Map')
+  const toggle = () => navigation.toggleDrawer()
+  const type = destinationSet ? 'arrow' : 'cross'
+  const color = destinationSet ? '#e8863c' : 'black'
+  const navigate = destinationSet ? toggle : toggle
+
+  return (
+    <Fragment>
+      <MenuButton color={color} type={type} style={styles.button} navigate={navigate} />
+      <MainNavigator navigation={navigation} />
+    </Fragment>
+  )
+}
 
 Main.router = MainNavigator.router
-Main.propTypes = { navigation: PropTypes.object.isRequired }
+Main.propTypes = {
+  destinationSet: PropTypes.bool.isRequired,
+  navigation: PropTypes.object.isRequired
+}
 
-export default Main
+export default connect(({ geolocation: { destinationSet } }) => ({ destinationSet }))(Main)
