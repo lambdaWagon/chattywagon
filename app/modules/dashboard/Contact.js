@@ -6,7 +6,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native'
 import { LinearGradient } from 'expo'
 
@@ -26,13 +27,15 @@ class Contact extends React.Component {
   }
 
   handleSubmit = () => {
-    const contacts = [...this.state.contacts, { title: this.state.title, text: this.state.text }]
+    if (!this.state.title.length || !this.state.text.length) {
+      return Alert.alert('Please fill out both tilte and text fields before submitting')
+    }
 
+    const contacts = [...this.state.contacts, { title: this.state.title, text: this.state.text }]
     this.setState({ contacts, title: '', text: '' })
   }
 
   render() {
-    console.log('here', this.state)
     const styles = StyleSheet.create({
       titleContainer: {
         width: wp('80%'),
