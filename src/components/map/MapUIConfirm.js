@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, View } from 'react-native'
 
-import Button from '../common/Button'
+import Button from '../shared/Button'
 import styles from '../../styles'
 
 const { height } = Dimensions.get('window')

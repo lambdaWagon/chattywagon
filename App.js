@@ -1,8 +1,8 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 
-import store from './app/store'
-import Root from './app/modules/root'
+import store from './src/store'
+import Root from './src/navigators'
 
 export default () => (
   <Provider store={store}>

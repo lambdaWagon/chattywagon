@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-screen'
 import PropTypes from 'prop-types'
 
-import Button from '../common/Button'
+import Button from '../shared/Button'
 
 const styles = StyleSheet.create({
   linearGradient: {

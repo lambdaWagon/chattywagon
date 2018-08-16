@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Button from '../common/Button'
+import Button from '../shared/Button'
 import Directions from './Directions'
 import SearchButton from './SearchButton'
 import MarkerDriver from './MarkerDriver'

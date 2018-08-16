@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native'
 
 import { config, geoFire } from '../config/firebase'
 import * as types from '../constants'
-import { getRegionFromPoint } from '../modules/map/utils'
+import { getRegionFromPoint } from '../components/map/utils'
 
 const { height, width } = Dimensions.get('window')
 const aspectRatio = width / height

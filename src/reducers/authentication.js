@@ -1,16 +1,16 @@
 import * as types from '../constants'
 
 const initialState = {
-  authenicated: false,
+  authenticated: false,
   user: null
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.AUTH_USER:
-      return { ...state, authenicated: true, user: action.user }
+      return { ...state, authenticated: true, user: action.user }
     case types.SIGN_OUT:
-      return { authenicated: false, user: null }
+      return { authenticated: false, user: null }
     default:
       return state
   }

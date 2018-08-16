@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ImageBackground, Text, View } from 'react-native'
 import PropTypes from 'prop-types'
 
-import Button from '../common/Button'
+import Button from '../shared/Button'
 import styles from '../../styles'
 
 const bg = require('../../../assets/splash.png')
@@ -14,7 +14,7 @@ export default class SplashScreen extends Component {
     navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
   }
 
-  onPress = () => this.props.navigation.navigate('auth')
+  onPress = () => this.props.navigation.navigate('PhoneInput')
 
   render() {
     return (
@@ -22,7 +22,6 @@ export default class SplashScreen extends Component {
         <View style={styles.logoContainer}>
           <Text style={styles.logo}>ChattyWagon</Text>
         </View>
-
         <View style={styles.splashButtonContainer}>
           <Button navigate={this.onPress}>GET A RIDE</Button>
         </View>
