@@ -86,9 +86,10 @@ class Contact extends React.Component {
               style={styles.titleInput}
               keyboardType="default"
               type="text"
-              onChangeText={title => this.setState({ title })}
-              name="text"
               value={this.state.title}
+              onChangeText={title => this.setState({ title })}
+              returnKeyType="next"
+              onSubmitEditing={() => this.titleInput.focus()}
             />
           </View>
           <View style={styles.titleContainer}>
@@ -97,11 +98,11 @@ class Contact extends React.Component {
               style={styles.textInput}
               keyboardType="default"
               type="text"
+              value={this.state.text}
               multiline={true}
               numberOfLines={10}
               onChangeText={text => this.setState({ text })}
-              name="text"
-              value={this.state.text}
+              ref={input => (this.titleInput = input)}
             />
           </View>
           <TouchableOpacity onPress={this.handleSubmit} style={styles.buttonContainer}>
