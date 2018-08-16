@@ -20,17 +20,19 @@ import genstyles from '../../styles'
 
 class Contact extends React.Component {
   state = {
+    title: '',
     text: '',
     contacts: []
   }
 
-  // handleInput = e => {
-  //   console.log(e)
-  // }
-  handleSubmit = () => {}
+  handleSubmit = () => {
+    const contacts = [...this.state.contacts, { title: this.state.title, text: this.state.text }]
+
+    this.setState({ contacts, title: '', text: '' })
+  }
 
   render() {
-    console.log('here', this.state.text)
+    console.log('here', this.state)
     const styles = StyleSheet.create({
       titleContainer: {
         width: wp('80%'),
@@ -84,9 +86,9 @@ class Contact extends React.Component {
               style={styles.titleInput}
               keyboardType="default"
               type="text"
-              onChangeText={text => this.setState({ text })}
+              onChangeText={title => this.setState({ title })}
               name="text"
-              value={this.state.value}
+              value={this.state.title}
             />
           </View>
           <View style={styles.titleContainer}>
@@ -97,9 +99,9 @@ class Contact extends React.Component {
               type="text"
               multiline={true}
               numberOfLines={10}
-              onChangeText={this.handleInput}
+              onChangeText={text => this.setState({ text })}
               name="text"
-              value={this.state.value}
+              value={this.state.text}
             />
           </View>
           <TouchableOpacity onPress={this.handleSubmit} style={styles.buttonContainer}>
