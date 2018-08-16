@@ -16,7 +16,8 @@ const styles = {
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowRadius: 10,
-    shadowOffset: { width: 10, height: 10 }
+    shadowOffset: { width: 10, height: 10 },
+    marginBottom: 10
   },
   buttonText: {
     fontFamily: 'black',

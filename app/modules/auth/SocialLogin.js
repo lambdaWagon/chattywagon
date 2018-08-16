@@ -17,6 +17,8 @@ import { LinearGradient } from 'expo'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
+import Button from '../common/Button'
+
 class SocialLogin extends React.Component {
   static navigationOptions = {
     headerTransparent: true,
@@ -24,6 +26,8 @@ class SocialLogin extends React.Component {
   }
 
   state = {}
+
+  onPress = () => this.props.navigation.navigate('main')
 
   render() {
     const { navigate } = this.props.navigation
@@ -114,10 +118,9 @@ class SocialLogin extends React.Component {
               <Ionicons name="md-key" size={wp('7.5%')} color="black" />
             </View>
           </View>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('main')}>
-            <Text style={styles.text}>SIGN IN</Text>
-            <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
-          </TouchableOpacity>
+          <View style={styles.splashButtonContainer}>
+            <Button navigate={this.onPress}>SIGN IN</Button>
+          </View>
         </View>
       </KeyboardAvoidingView>
     )

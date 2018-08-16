@@ -17,6 +17,8 @@ import {
 import { LinearGradient } from 'expo'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import Button from '../common/Button'
+
 class PhoneInput extends React.Component {
   static navigationOptions = {
     headerTransparent: true,
@@ -27,15 +29,7 @@ class PhoneInput extends React.Component {
     input: ''
   }
 
-  //  TODO refactor to update after each part of the number
-  // handleNumber = value => {
-  //   if (value.length === 10) {
-  //     //  reformat and return num number
-  //     // const phoneNum = value.replace(/(\d{3})/, '($1) ');
-  //     const phoneNum = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-  //     this.setState({ phoneNum });
-  //   }
-  // };
+  onPress = () => this.props.navigation.navigate('CodeInput')
 
   phoneNumberFormatter = n => {
     const num = n.replace(/[^0-9]/g, '')
@@ -142,10 +136,9 @@ class PhoneInput extends React.Component {
             </View>
             <Text style={styles.belowInputText}>We'll text a code to verify your phone</Text>
           </View>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('CodeInput')}>
-            <Text style={styles.text}>Get Code</Text>
-            <Icon name="long-arrow-right" size={wp('7.5%')} color="white" />
-          </TouchableOpacity>
+          <View style={styles.splashButtonContainer}>
+            <Button navigate={this.onPress}>GET CODE</Button>
+          </View>
         </View>
         <TouchableOpacity style={styles.socialContainer} onPress={() => navigate('SocialAccount')}>
           <Text style={styles.socialText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
