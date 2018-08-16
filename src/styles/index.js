@@ -41,7 +41,11 @@ export default StyleSheet.create({
 
   /* Map */
   map: {
-    flex: 1
+    flex: 1,
+    left: 0,
+    top: 0,
+    right: width,
+    bottom: height
   },
   mapUI: {
     position: 'absolute',

@@ -7,7 +7,7 @@ import styles from '../../styles'
 const { height } = Dimensions.get('window')
 
 export default () => (
-  <View style={styles.mapUI}>
+  <View pointerEvents="box-none" style={styles.mapUI}>
     <Button style={{ top: height - 173 }} navigate={() => console.log('Confirmed')}>
       CONFIRM RIDE
     </Button>
