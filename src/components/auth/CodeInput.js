@@ -1,31 +1,10 @@
 import React from 'react'
-import { LinearGradient } from 'expo'
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import PropTypes from 'prop-types'
 
-import Button from '../shared/Button'
+import { Button, Gradient } from '../shared'
 
 const styles = StyleSheet.create({
-  linearGradient: {
-    height: hp('100%'),
-    width: wp('100%')
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   inputContainer: {
     backgroundColor: 'white',
     width: 294,
@@ -83,39 +62,37 @@ class CodeInput extends React.Component {
   state = { value: '' }
 
   render() {
+    const { value } = this.state
     const {
       navigation: { navigate }
     } = this.props
-    const { value } = this.state
 
     return (
-      <LinearGradient colors={['#c4f4ff', '#c4f4ff', '#e8863c']} style={styles.linearGradient}>
-        <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.aboveInputText}>ENTER THE 4-DIGIT CODE</Text>
-            <TextInput
-              placeholderTextColor="#e5e5e5"
-              style={styles.textInput}
-              keyboardType="number-pad"
-              name="value"
-              type="number"
-              onChangeText={v => this.setState({ value: v })}
-              value={value}
-              maxLength={4}
-            />
-            <Text style={styles.underline}>— — — —</Text>
-          </View>
-          <Button
-            style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
-            navigate={() => navigate('main')}
-          >
-            VERIFY CODE
-          </Button>
-          <TouchableOpacity style={styles.noCodeContainer}>
-            <Text style={styles.noCodeText}>I DIDN&apos;T RECEIVE A CODE</Text>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </LinearGradient>
+      <Gradient>
+        <View style={styles.inputContainer}>
+          <Text style={styles.aboveInputText}>ENTER THE 4-DIGIT CODE</Text>
+          <TextInput
+            placeholderTextColor="#e5e5e5"
+            style={styles.textInput}
+            keyboardType="number-pad"
+            name="value"
+            type="number"
+            onChangeText={v => this.setState({ value: v })}
+            value={value}
+            maxLength={4}
+          />
+          <Text style={styles.underline}>— — — —</Text>
+        </View>
+        <Button
+          style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+          navigate={() => navigate('Main')}
+        >
+          VERIFY CODE
+        </Button>
+        <TouchableOpacity style={styles.noCodeContainer}>
+          <Text style={styles.noCodeText}>I DIDN&apos;T RECEIVE A CODE</Text>
+        </TouchableOpacity>
+      </Gradient>
     )
   }
 }

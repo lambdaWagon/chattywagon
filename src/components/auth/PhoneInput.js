@@ -1,32 +1,12 @@
 import React, { Component } from 'react'
-import { LinearGradient } from 'expo'
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PropTypes from 'prop-types'
 
-import Button from '../shared/Button'
+import { Button, Gradient } from '../shared'
 
 const styles = StyleSheet.create({
-  linearGradient: {
-    height: hp('100%'),
-    width: wp('100%')
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   inputContainer: {
     backgroundColor: 'white',
     width: 294,
@@ -70,6 +50,10 @@ const styles = StyleSheet.create({
     fontFamily: 'black',
     fontSize: 10,
     letterSpacing: 1.5
+  },
+  button: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0
   }
 })
 
@@ -99,46 +83,38 @@ class PhoneInput extends Component {
   }
 
   render() {
+    const { input } = this.state
     const {
       navigation: { navigate }
     } = this.props
-    const { input } = this.state
 
     return (
-      <LinearGradient colors={['#c4f4ff', '#c4f4ff', '#e8863c']} style={styles.linearGradient}>
-        <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.aboveInputText}>ENTER YOUR PHONE NUMBER</Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                placeholder="(555) 555-5555"
-                placeholderTextColor="#e5e5e5"
-                style={styles.textInput}
-                keyboardType="number-pad"
-                name="phoneNum"
-                type="number"
-                onChangeText={this.handleInput}
-                value={input}
-                maxLength={14}
-              />
-              <Icon name="mobile" size={wp('7.5%')} color="black" />
-            </View>
-            <Text style={styles.belowInputText}>We&apos;ll text a code to verify your phone</Text>
+      <Gradient>
+        <View style={styles.inputContainer}>
+          <Text style={styles.aboveInputText}>ENTER YOUR PHONE NUMBER</Text>
+          <View style={styles.inputRow}>
+            <TextInput
+              placeholder="(555) 555-5555"
+              placeholderTextColor="#e5e5e5"
+              style={styles.textInput}
+              keyboardType="number-pad"
+              name="phoneNum"
+              type="number"
+              onChangeText={this.handleInput}
+              value={input}
+              maxLength={14}
+            />
+            <Icon name="mobile" size={wp('7.5%')} color="black" />
           </View>
-          <Button
-            style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
-            navigate={() => navigate('CodeInput')}
-          >
-            GET CODE
-          </Button>
-          <TouchableOpacity
-            style={styles.socialContainer}
-            onPress={() => navigate('SocialAccount')}
-          >
-            <Text style={styles.socialText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </LinearGradient>
+          <Text style={styles.belowInputText}>We&apos;ll text a code to verify your phone</Text>
+        </View>
+        <Button style={styles.button} navigate={() => navigate('CodeInput')}>
+          GET CODE
+        </Button>
+        <TouchableOpacity style={styles.socialContainer} onPress={() => navigate('SocialAccount')}>
+          <Text style={styles.socialText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
+        </TouchableOpacity>
+      </Gradient>
     )
   }
 }
