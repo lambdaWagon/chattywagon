@@ -26,19 +26,34 @@ const styles = StyleSheet.create({
   }
 })
 
-const Button = ({ children, navigate, style }) => (
-  <TouchableOpacity style={[style, styles.button]} onPress={navigate}>
-    <Text style={styles.buttonText}>{children}</Text>
-    <SvgComponent />
+const Button = ({ children, disabled, icon, navigate, style, textStyle }) => (
+  <TouchableOpacity
+    activeOpacity={0.75}
+    disabled={disabled}
+    style={[styles.button, style]}
+    onPress={navigate}
+  >
+    <Text style={[styles.buttonText, textStyle]}>{children}</Text>
+    {icon ? <SvgComponent /> : null}
   </TouchableOpacity>
 )
 
-Button.defaultProps = { children: null, style: null }
+Button.defaultProps = {
+  children: null,
+  disabled: false,
+  icon: true,
+  navigate: null,
+  style: null,
+  textStyle: null
+}
 
 Button.propTypes = {
   children: PropTypes.string,
-  navigate: PropTypes.func.isRequired,
-  style: PropTypes.object
+  disabled: PropTypes.bool,
+  icon: PropTypes.bool,
+  navigate: PropTypes.func,
+  style: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  textStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 }
 
 const SvgComponent = props => (
@@ -49,14 +64,5 @@ const SvgComponent = props => (
     />
   </Svg>
 )
-
-// const SvgComponent = props => (
-//   <Svg viewBox="0 0 477.175 477.175" width={20} height={20} {...props}>
-//     <Path
-//       d="M360.731 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"
-//       fill="#FFF"
-//     />
-//   </Svg>
-// )
 
 export default Button
