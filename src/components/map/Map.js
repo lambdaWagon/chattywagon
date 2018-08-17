@@ -47,7 +47,7 @@ class Map extends Component {
       <Fragment>
         <MapView
           ref={c => (this.map = c)}
-          initialRegion={region}
+          region={region}
           provider={PROVIDER_GOOGLE}
           onRegionChangeComplete={() => this.marker && this.marker.showCallout()}
           showsPointsOfInterest={false}

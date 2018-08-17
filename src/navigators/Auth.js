@@ -13,8 +13,8 @@ import { BackButton } from '../components/shared'
 const styles = StyleSheet.create({
   button: {
     position: 'absolute',
-    marginLeft: wp('7%'),
-    marginTop: hp('7%'),
+    marginLeft: wp('6%'),
+    marginTop: hp('6%'),
     zIndex: 999
   }
 })
@@ -30,8 +30,14 @@ export const AuthNavigator = createSwitchNavigator({
 const Auth = ({ navigation }) => {
   const { index } = navigation.state
   const previous = navigation.state.routes[index - 1]
-  const navigate = () => navigation.navigate(previous)
-
+  let navigate = () => navigation.navigate(previous)
+  if (index === 3) {
+    navigate = () =>
+      navigation.navigate({
+        key: 'PhoneInput',
+        routeName: 'PhoneInput'
+      })
+  }
   return (
     <Fragment>
       {index > 0 && <BackButton style={styles.button} navigate={navigate} />}
