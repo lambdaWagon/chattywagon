@@ -1,34 +1,22 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import * as actions from '../../actions'
 import { Button, Gradient, SocialButton } from '../shared'
-
-const styles = StyleSheet.create({
-  socialIconsContainer: {
-    width: 294,
-    padding: 25,
-    backgroundColor: 'white'
-  },
-  button: {
-    justifyContent: 'center',
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0
-  }
-})
+import styles from '../../styles'
+import * as actions from '../../actions'
 
 const SocialAccount = ({ navigation: { navigate }, signInWithFacebook, signUserOut }) => (
   <Gradient>
-    <View style={styles.socialIconsContainer}>
+    <View style={styles.authContainer}>
       <SocialButton type="Google" navigate={() => navigate('SocialLogin')} />
       <SocialButton type="Twitter" navigate={signUserOut} />
       <SocialButton type="Facebook" navigate={signInWithFacebook} />
       <SocialButton type="Email" navigate={() => navigate('SocialLogin')} />
     </View>
-    <Button disabled icon={false} style={styles.button}>
+    <Button disabled icon={false} style={styles.socialButton}>
       CHOOSE AN ACCOUNT
     </Button>
   </Gradient>

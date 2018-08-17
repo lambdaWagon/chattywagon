@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ImageBackground, Text, View } from 'react-native'
 import PropTypes from 'prop-types'
 
-import Button from '../shared/Button'
+import { Button } from '../shared'
 import styles from '../../styles'
 
 const bg = require('../../../assets/splash.png')

@@ -1,61 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import PropTypes from 'prop-types'
 
 import { Button, Gradient } from '../shared'
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    backgroundColor: 'white',
-    width: 294,
-    height: 132,
-    padding: 25,
-    borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
-    shadowColor: 'black',
-    shadowOpacity: 0.35,
-    shadowRadius: 25,
-    shadowOffset: { width: 0, height: 15 }
-  },
-  aboveInputText: {
-    fontSize: 10,
-    fontFamily: 'black',
-    letterSpacing: 1.5,
-    marginBottom: 10
-  },
-  inputRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginRight: 10
-  },
-  textInput: {
-    fontSize: 20,
-    fontFamily: 'black',
-    letterSpacing: 1.5,
-    width: '100%'
-  },
-  belowInputText: {
-    marginTop: 15,
-    fontSize: 10,
-    letterSpacing: 1
-  },
-  socialContainer: {
-    marginTop: 20,
-    width: 294
-  },
-  socialText: {
-    textAlign: 'center',
-    fontFamily: 'black',
-    fontSize: 10,
-    letterSpacing: 1.5
-  },
-  button: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0
-  }
-})
+import { Phone } from '../shared/icons'
+import styles from '../../styles'
 
 class PhoneInput extends Component {
   static propTypes = {
@@ -89,14 +38,14 @@ class PhoneInput extends Component {
     } = this.props
 
     return (
-      <Gradient>
-        <View style={styles.inputContainer}>
-          <Text style={styles.aboveInputText}>ENTER YOUR PHONE NUMBER</Text>
-          <View style={styles.inputRow}>
+      <Gradient keyboard>
+        <View style={styles.authContainer}>
+          <Text style={styles.inputHeader}>ENTER YOUR PHONE NUMBER</Text>
+          <View style={[styles.inputRow, { marginRight: 20 }]}>
             <TextInput
               placeholder="(555) 555-5555"
               placeholderTextColor="#e5e5e5"
-              style={styles.textInput}
+              style={styles.inputText}
               keyboardType="number-pad"
               name="phoneNum"
               type="number"
@@ -104,15 +53,15 @@ class PhoneInput extends Component {
               value={input}
               maxLength={14}
             />
-            <Icon name="mobile" size={wp('7.5%')} color="black" />
+            <Phone />
           </View>
-          <Text style={styles.belowInputText}>We&apos;ll text a code to verify your phone</Text>
+          <Text style={styles.inputFooter}>We&apos;ll text a code to verify your phone</Text>
         </View>
-        <Button style={styles.button} navigate={() => navigate('CodeInput')}>
+        <Button style={styles.authButton} navigate={() => navigate('CodeInput')}>
           GET CODE
         </Button>
-        <TouchableOpacity style={styles.socialContainer} onPress={() => navigate('SocialAccount')}>
-          <Text style={styles.socialText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
+        <TouchableOpacity style={styles.footerButton} onPress={() => navigate('SocialAccount')}>
+          <Text style={styles.footerText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
         </TouchableOpacity>
       </Gradient>
     )
