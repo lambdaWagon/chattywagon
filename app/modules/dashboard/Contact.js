@@ -47,7 +47,7 @@ class Contact extends React.Component {
       },
       titleInput: {
         backgroundColor: 'rgba(255,255,255, 0.3)',
-        borderRadius: 7,
+        // borderRadius: 7,
         height: hp('5%'),
         paddingLeft: wp('5%'),
         paddingRight: wp('5%'),
@@ -55,7 +55,7 @@ class Contact extends React.Component {
       },
       textInput: {
         backgroundColor: 'rgba(255,255,255, 0.3)',
-        borderRadius: 7,
+        // borderRadius: 7,
         paddingLeft: wp('5%'),
         paddingRight: wp('5%'),
         paddingTop: wp('5%'),
@@ -63,13 +63,12 @@ class Contact extends React.Component {
         height: hp('20%')
       },
       buttonContainer: {
-        borderWidth: 1,
         width: wp('50%'),
         height: hp('7%'),
-        backgroundColor: 'grey',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 7
+        borderColor: '#c4f4ff',
+        backgroundColor: 'rgba(0, 0, 0, .65)'
       }
     })
     return (
@@ -109,7 +108,7 @@ class Contact extends React.Component {
             />
           </View>
           <TouchableOpacity onPress={this.handleSubmit} style={styles.buttonContainer}>
-            <Text>Submit</Text>
+            <Text style={{ color: 'white' }}>Submit</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </LinearGradient>

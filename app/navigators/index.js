@@ -1,6 +1,11 @@
 import React, { Fragment } from 'react'
-import { Animated, Easing, Image, StyleSheet, View } from 'react-native'
-import { createDrawerNavigator, createSwitchNavigator, DrawerItems } from 'react-navigation'
+import { Image, StyleSheet, View } from 'react-native'
+import {
+  createDrawerNavigator,
+  createSwitchNavigator,
+  DrawerItems,
+  createStackNavigator
+} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   widthPercentageToDP as wp,
@@ -42,6 +47,7 @@ const DrawerNavigation = createDrawerNavigator(
     Rides,
     Profile,
     Contact
+    // TODO implement below at later date
     // Help,
     // Payment,
     // Promos,
@@ -71,7 +77,7 @@ export const DrawerWrapper = ({ navigation }) => (
 
 DrawerWrapper.router = DrawerNavigation.router
 
-export const AuthNavigator = createSwitchNavigator({
+export const AuthNavigator = createStackNavigator({
   SplashScreen,
   PhoneInput,
   CodeInput,
@@ -80,17 +86,9 @@ export const AuthNavigator = createSwitchNavigator({
   // Login,
 })
 
-// const StackNavigator = createSwitchNavigator({
-//   Home,
-//   PhoneInput,
-//   CodeInput,
-//   SocialAccount,
-//   SocialLogin,
-// })
-
 export const AppNavigator = createSwitchNavigator(
   {
-    auth: AuthNavigator,
+    // auth: AuthNavigator,
     main: DrawerWrapper
   },
   {
@@ -98,30 +96,6 @@ export const AppNavigator = createSwitchNavigator(
     mode: 'modal',
     navigationOptions: {
       gesturesEnabled: false
-    },
-    transitionConfig: () => ({
-      transitionSpec: {
-        duration: 300,
-        easing: Easing.out(Easing.poly(4)),
-        timing: Animated.timing
-      },
-      screenInterpolator: sceneProps => {
-        const { layout, position, scene } = sceneProps
-        const { index } = scene
-
-        const height = layout.initHeight
-        const translateY = position.interpolate({
-          inputRange: [index - 1, index, index + 1],
-          outputRange: [height, 0, 0]
-        })
-
-        const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1]
-        })
-
-        return { opacity, transform: [{ translateY }] }
-      }
-    })
+    }
   }
 )

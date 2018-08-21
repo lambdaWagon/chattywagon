@@ -116,7 +116,8 @@ export default StyleSheet.create({
     flex: 1,
     height: hp('100%'),
     alignItems: 'center',
-    top: hp('15%')
+    top: hp('15%'),
+    marginBottom: hp('20%')
   },
   icon: {
     marginLeft: wp('3%')

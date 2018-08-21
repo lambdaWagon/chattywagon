@@ -48,6 +48,13 @@ class Rides extends React.Component {
         end: '1515 Rome St',
         distance: 0.01,
         travelTime: '30sec'
+      },
+      {
+        timestamp: '09-19-57',
+        start: '1514 Rome St',
+        end: '1515 Rome St',
+        distance: 0.01,
+        travelTime: '30sec'
       }
     ]
   }
@@ -55,7 +62,7 @@ class Rides extends React.Component {
   render() {
     return (
       <LinearGradient colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']} style={styles.gradient}>
-        <View style={styles.rideViewContainer}>
+        <SafeAreaView style={styles.rideViewContainer}>
           <ScrollView>
             {this.state.rides.map(ride => {
               return (
@@ -71,7 +78,7 @@ class Rides extends React.Component {
               )
             })}
           </ScrollView>
-        </View>
+        </SafeAreaView>
       </LinearGradient>
     )
   }

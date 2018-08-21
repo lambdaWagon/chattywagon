@@ -71,13 +71,12 @@ class Profile extends React.Component {
         marginBottom: hp('3%')
       },
       buttonContainer: {
-        borderWidth: 1,
         width: wp('50%'),
         height: hp('7%'),
-        backgroundColor: 'grey',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 7
+        borderColor: '#c4f4ff',
+        backgroundColor: 'rgba(0, 0, 0, .65)'
       }
     })
     return (
@@ -131,8 +130,12 @@ class Profile extends React.Component {
             <Text style={styles.text}>email</Text>
 
             <View style={{ alignItems: 'center' }}>
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Delete Account</Text>
+              <TouchableOpacity
+                shadowColor="black"
+                shadowOffset={{ width: 10, height: 10 }}
+                style={styles.buttonContainer}
+              >
+                <Text style={{ color: 'white' }}>Delete Account</Text>
               </TouchableOpacity>
             </View>
           </SafeAreaView>
