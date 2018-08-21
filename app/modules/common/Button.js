@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity, Animated } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
 
@@ -28,9 +28,11 @@ const styles = {
 }
 
 const Button = ({ children, navigate, style }) => (
-  <TouchableOpacity style={[style, styles.button]} onPress={navigate}>
-    <Text style={styles.buttonText}>{children}</Text>
-    <SvgComponent />
+  <TouchableOpacity onPress={navigate}>
+    <Animated.View style={[style, styles.button]}>
+      <Text style={styles.buttonText}>{children}</Text>
+      <SvgComponent />
+    </Animated.View>
   </TouchableOpacity>
 )
 

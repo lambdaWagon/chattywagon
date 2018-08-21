@@ -26,7 +26,8 @@ class Profile extends React.Component {
     username: 'John Huggett',
     number: '(777) 777-7777',
     email: 'fake@fake.com',
-    avatarImg: avatarPlaceholder
+    avatarImg: avatarPlaceholder,
+    display: true
   }
 
   phoneNumberFormatter = n => {
@@ -80,18 +81,37 @@ class Profile extends React.Component {
       }
     })
     return (
-      <LinearGradient
-        colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']}
-        style={genstyles.gradient}
+      <KeyboardAvoidingView
+        enabled
+        behavior="padding"
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? -150 : 0}
       >
-        <KeyboardAvoidingView
-          enabled
-          style={genstyles.rideViewContainer}
-          behavior="padding" // {Platform.OS === 'ios' ? 'padding' : null}
+        <LinearGradient
+          colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']}
+          style={genstyles.gradient}
         >
-          <SafeAreaView>
+          <SafeAreaView style={genstyles.rideViewContainer}>
             <View style={styles.avatarContainer}>
-              <Image style={styles.image} source={this.state.avatarImg} />
+              <Image
+                style={
+                  this.state.display
+                    ? styles.image
+                    : this.state.display
+                      ? styles.avatarContainer
+                      : {
+                          width: 115,
+                          height: 115,
+                          borderRadius: 55,
+                          marginBottom: hp('1%')
+                        }
+                }
+                source={this.state.avatarImg}
+              />
               <View style={{ flexDirection: 'row' }}>
                 <Text style={{ marginRight: wp('3%') }}>edit</Text>
                 <TouchableOpacity>
@@ -104,7 +124,10 @@ class Profile extends React.Component {
                 onChangeText={username => this.setState({ username })}
                 style={styles.input}
                 value={this.state.username}
+                onFocus={() => this.setState({ display: false })}
+                onBlur={() => this.setState({ display: true })}
               />
+
               <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
             </View>
             <Text style={styles.text}>name</Text>
@@ -114,6 +137,8 @@ class Profile extends React.Component {
                 style={styles.input}
                 value={this.state.number}
                 maxLength={14}
+                onFocus={() => this.setState({ display: false })}
+                onBlur={() => this.setState({ display: true })}
               />
               <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
             </View>
@@ -124,6 +149,8 @@ class Profile extends React.Component {
                 onChangeText={email => this.setState({ email })}
                 style={styles.input}
                 value={this.state.email}
+                onFocus={() => this.setState({ display: false })}
+                onBlur={() => this.setState({ display: true })}
               />
               <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
             </View>
@@ -139,8 +166,8 @@ class Profile extends React.Component {
               </TouchableOpacity>
             </View>
           </SafeAreaView>
-        </KeyboardAvoidingView>
-      </LinearGradient>
+        </LinearGradient>
+      </KeyboardAvoidingView>
     )
   }
 }

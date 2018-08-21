@@ -7,7 +7,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
-  Alert
+  Alert,
+  SafeAreaView
 } from 'react-native'
 import { LinearGradient } from 'expo'
 
@@ -47,7 +48,6 @@ class Contact extends React.Component {
       },
       titleInput: {
         backgroundColor: 'rgba(255,255,255, 0.3)',
-        // borderRadius: 7,
         height: hp('5%'),
         paddingLeft: wp('5%'),
         paddingRight: wp('5%'),
@@ -55,7 +55,6 @@ class Contact extends React.Component {
       },
       textInput: {
         backgroundColor: 'rgba(255,255,255, 0.3)',
-        // borderRadius: 7,
         paddingLeft: wp('5%'),
         paddingRight: wp('5%'),
         paddingTop: wp('5%'),
@@ -78,11 +77,15 @@ class Contact extends React.Component {
       >
         <KeyboardAvoidingView
           enabled
-          style={genstyles.rideViewContainer}
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
           behavior={Platform.OS === 'ios' ? 'padding' : null}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? -60 : 0}
         >
-          <View style={styles.titleContainer}>
+          <SafeAreaView style={styles.titleContainer}>
             <Text style={styles.text}>Title</Text>
             <TextInput
               style={styles.titleInput}
@@ -93,7 +96,7 @@ class Contact extends React.Component {
               returnKeyType="next"
               onSubmitEditing={() => this.titleInput.focus()}
             />
-          </View>
+          </SafeAreaView>
           <View style={styles.titleContainer}>
             <Text style={styles.text}>Text</Text>
             <TextInput
