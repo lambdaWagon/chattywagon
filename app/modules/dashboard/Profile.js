@@ -53,11 +53,18 @@ class Profile extends React.Component {
         alignItems: 'center',
         marginBottom: hp('5%')
       },
+
       image: {
         height: 200,
         width: 200,
         borderRadius: 100,
         marginBottom: hp('1.5%')
+      },
+      imageWithKeyboard: {
+        width: 115,
+        height: 115,
+        borderRadius: 55,
+        marginBottom: hp('1%')
       },
       inputContainer: {
         flexDirection: 'row'
@@ -98,18 +105,7 @@ class Profile extends React.Component {
           <SafeAreaView style={genstyles.rideViewContainer}>
             <View style={styles.avatarContainer}>
               <Image
-                style={
-                  this.state.display
-                    ? styles.image
-                    : this.state.display
-                      ? styles.avatarContainer
-                      : {
-                          width: 115,
-                          height: 115,
-                          borderRadius: 55,
-                          marginBottom: hp('1%')
-                        }
-                }
+                style={this.state.display ? styles.avatarContainer : styles.imageWithKeyboard}
                 source={this.state.avatarImg}
               />
               <View style={{ flexDirection: 'row' }}>

@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { ImageBackground, Text, View } from 'react-native'
+import { ImageBackground, Text, View, Dimensions, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 
 import Button from '../common/Button'
 import styles from '../../styles'
 
 const bg = require('../../../assets/splash.png')
+
+const { height, width } = Dimensions.get('window')
 
 export default class SplashScreen extends Component {
   static navigationOptions = { header: null }
@@ -20,7 +22,15 @@ export default class SplashScreen extends Component {
     return (
       <ImageBackground source={bg} style={styles.container}>
         <View style={styles.logoContainer}>
-          <Text style={styles.logo}>ChattyWagon</Text>
+          <Text
+            style={
+              Platform.OS === 'ios' && (height === 812 || width === 812)
+                ? styles.logoX
+                : styles.logo
+            }
+          >
+            ChattyWagon
+          </Text>
         </View>
         <View style={styles.splashButtonContainer}>
           <Button navigate={this.onPress}>GET A RIDE</Button>

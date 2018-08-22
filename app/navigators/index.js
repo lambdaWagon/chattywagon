@@ -42,9 +42,9 @@ const Dashboard = props => (
 
 const DrawerNavigation = createDrawerNavigator(
   {
-    // Map,
-    // Search,
-    // Rides,
+    Map,
+    Search,
+    Rides,
     Profile,
     Contact
     // TODO implement below at later date
@@ -78,17 +78,17 @@ export const DrawerWrapper = ({ navigation }) => (
 DrawerWrapper.router = DrawerNavigation.router
 
 export const AuthNavigator = createStackNavigator({
-  SplashScreen,
-  PhoneInput,
-  CodeInput,
-  SocialAccount,
-  SocialLogin
+  // SplashScreen,
+  // PhoneInput,
+  // CodeInput,
+  SocialAccount
+  // SocialLogin
   // Login,
 })
 
 export const AppNavigator = createSwitchNavigator(
   {
-    // auth: AuthNavigator,
+    auth: AuthNavigator,
     main: DrawerWrapper
   },
   {

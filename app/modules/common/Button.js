@@ -1,7 +1,9 @@
 import React from 'react'
-import { Text, TouchableOpacity, Animated } from 'react-native'
+import { Text, TouchableOpacity, Animated, Platform, Dimensions } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
+
+const { height, width } = Dimensions.get('window')
 
 const styles = {
   button: {
@@ -24,17 +26,45 @@ const styles = {
     fontSize: 10,
     color: 'white',
     letterSpacing: 1.5
+  },
+  buttonTextX: {
+    fontFamily: 'black',
+    fontSize: 7,
+    color: 'white',
+    letterSpacing: 1.5
   }
 }
 
-const Button = ({ children, navigate, style }) => (
-  <TouchableOpacity onPress={navigate}>
-    <Animated.View style={[style, styles.button]}>
-      <Text style={styles.buttonText}>{children}</Text>
-      <SvgComponent />
-    </Animated.View>
-  </TouchableOpacity>
-)
+class Button extends React.Component {
+  state = {}
+
+  transition = () => {}
+
+  render() {
+    const { children, navigate, style } = this.props
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          navigate()
+          this.transition()
+        }}
+      >
+        <Animated.View style={[style, styles.button]}>
+          <Text
+            style={
+              Platform.OS === 'ios' && (height === 812 || width === 812)
+                ? styles.buttonTextX
+                : styles.buttonText
+            }
+          >
+            {children}
+          </Text>
+          <SvgComponent />
+        </Animated.View>
+      </TouchableOpacity>
+    )
+  }
+}
 
 Button.defaultProps = { children: null, style: null }
 

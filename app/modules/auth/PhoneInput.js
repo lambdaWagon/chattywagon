@@ -6,7 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Dimensions,
+  Platform
 } from 'react-native'
 
 import {
@@ -18,6 +20,8 @@ import { LinearGradient } from 'expo'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Button from '../common/Button'
+
+const { height, width } = Dimensions.get('window')
 
 class PhoneInput extends React.Component {
   static navigationOptions = {
@@ -66,6 +70,10 @@ class PhoneInput extends React.Component {
         height: hp('31%'),
         width: wp('80%')
       },
+      middleContainerX: {
+        height: hp('29%'),
+        width: wp('80%')
+      },
       inputContainer: {
         flex: 1,
         paddingTop: hp('4%'),
@@ -77,6 +85,11 @@ class PhoneInput extends React.Component {
         fontWeight: 'bold',
         marginBottom: hp('1.5%')
       },
+      aboveInputTextX: {
+        fontSize: wp('1.7%'),
+        fontWeight: 'bold',
+        marginBottom: hp('1.5%')
+      },
       inputRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -85,19 +98,19 @@ class PhoneInput extends React.Component {
       textInput: {
         width: wp('35%')
       },
+      textInputX: {
+        width: wp('35%'),
+        fontSize: wp('2.3%')
+      },
       belowInputText: {
         marginTop: hp('2%'),
         fontSize: wp('3%')
       },
-      buttonContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: wp('5%'),
-        backgroundColor: 'black',
-        marginBottom: hp('2.25%'),
-        height: hp('9.5%')
+      belowInputTextX: {
+        marginTop: hp('2%'),
+        fontSize: wp('1.8%')
       },
+
       text: {
         color: 'white',
         paddingLeft: wp('1%'),
@@ -110,7 +123,14 @@ class PhoneInput extends React.Component {
       socialText: {
         fontWeight: 'bold',
         fontSize: wp('3.25%'),
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: '2%'
+      },
+      socialTextX: {
+        fontWeight: 'bold',
+        fontSize: wp('1.8%'),
+        textAlign: 'center',
+        marginTop: hp('2.25%')
       }
     })
 
@@ -118,13 +138,31 @@ class PhoneInput extends React.Component {
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
         <LinearGradient colors={['#7fbeff', '#fff', '#ff8200']} style={styles.linearGradient} />
 
-        <View style={styles.middleContainer}>
+        <View
+          style={
+            Platform.OS === 'ios' && (height === 812 || width === 812)
+              ? styles.middleContainerX
+              : styles.middleContainer
+          }
+        >
           <View style={styles.inputContainer}>
-            <Text style={styles.aboveInputText}>ENTER YOUR PHONE NUMBER</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.aboveInputTextX
+                  : styles.aboveInputText
+              }
+            >
+              ENTER YOUR PHONE NUMBER
+            </Text>
             <View style={styles.inputRow}>
               <TextInput
                 placeholder="(555) 555-5555"
-                style={styles.textInput}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.textInputX
+                    : styles.textInput
+                }
                 keyboardType="number-pad"
                 name="phoneNum"
                 type="number"
@@ -134,14 +172,30 @@ class PhoneInput extends React.Component {
               />
               <Icon name="mobile" size={wp('7.5%')} color="black" />
             </View>
-            <Text style={styles.belowInputText}>We'll text a code to verify your phone</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.belowInputTextX
+                  : styles.belowInputText
+              }
+            >
+              We'll text a code to verify your phone
+            </Text>
           </View>
           <View style={styles.splashButtonContainer}>
             <Button navigate={this.onPress}>GET CODE</Button>
           </View>
         </View>
         <TouchableOpacity style={styles.socialContainer} onPress={() => navigate('SocialAccount')}>
-          <Text style={styles.socialText}>OR CONNECT USING A SOCIAL ACCOUNT </Text>
+          <Text
+            style={
+              Platform.OS === 'ios' && (height === 812 || width === 812)
+                ? styles.socialTextX
+                : styles.socialText
+            }
+          >
+            OR CONNECT USING A SOCIAL ACCOUNT{' '}
+          </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )

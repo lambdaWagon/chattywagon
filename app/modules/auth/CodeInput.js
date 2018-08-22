@@ -6,7 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform,
+  Dimensions
 } from 'react-native'
 
 import {
@@ -15,9 +17,10 @@ import {
 } from 'react-native-responsive-screen'
 
 import { LinearGradient } from 'expo'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Button from '../common/Button'
+
+const { height, width } = Dimensions.get('window')
 
 class CodeInput extends React.Component {
   static navigationOptions = {
@@ -50,10 +53,29 @@ class CodeInput extends React.Component {
         height: hp('31%'),
         width: wp('80%')
       },
+      middleContainerX: {
+        height: hp('32%'),
+        width: wp('80%')
+      },
       aboveInputText: {
         fontSize: wp('3%'),
         fontWeight: 'bold',
         marginBottom: hp('1.5%')
+      },
+      aboveInputTextX: {
+        fontSize: wp('1.7%'),
+        fontWeight: 'bold',
+        marginBottom: hp('1.5%')
+      },
+      input: {
+        letterSpacing: 10,
+        fontSize: hp('3%'),
+        fontWeight: 'bold'
+      },
+      inputX: {
+        letterSpacing: 10,
+        fontSize: hp('1.5%'),
+        fontWeight: 'bold'
       },
       inputContainer: {
         flex: 1,
@@ -61,15 +83,7 @@ class CodeInput extends React.Component {
         paddingLeft: wp('5%'),
         backgroundColor: 'white'
       },
-      buttonContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: wp('5%'),
-        backgroundColor: 'black',
-        marginBottom: hp('2.25%'),
-        height: hp('9.5%')
-      },
+
       text: {
         color: 'white',
         paddingLeft: wp('1%'),
@@ -83,6 +97,12 @@ class CodeInput extends React.Component {
         fontWeight: 'bold',
         fontSize: wp('3.25%'),
         textAlign: 'center'
+      },
+      noCodeTextX: {
+        fontWeight: 'bold',
+        fontSize: wp('1.8%'),
+        textAlign: 'center',
+        marginTop: hp('2.15%')
       }
     })
 
@@ -90,13 +110,31 @@ class CodeInput extends React.Component {
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
         <LinearGradient colors={['#7fbeff', '#fff', '#ff8200']} style={styles.linearGradient} />
 
-        <View style={styles.middleContainer}>
+        <View
+          style={
+            Platform.OS === 'ios' && (height === 812 || width === 812)
+              ? styles.middleContainerX
+              : styles.middleContainer
+          }
+        >
           <View style={styles.inputContainer}>
-            <Text style={styles.aboveInputText}>ENTER YOUR PHONE NUMBER</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.aboveInputTextX
+                  : styles.aboveInputText
+              }
+            >
+              ENTER THE 4-DIGIT CODE
+            </Text>
             <TextInput
               placeholder="__       __       __       __"
               placeholderStyle={{ backgroundColor: 'blue' }}
-              style={{ letterSpacing: 40, fontSize: hp('3%'), fontWeight: 'bold' }}
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.inputX
+                  : styles.input
+              }
               keyboardType="number-pad"
               name="value"
               type="number"
@@ -111,7 +149,15 @@ class CodeInput extends React.Component {
             <Button navigate={this.onPress}>SIGN IN</Button>
           </View>
           <TouchableOpacity style={styles.noCodeContainer}>
-            <Text style={styles.noCodeText}>I DIDN'T RECEIVE A CODE</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.noCodeTextX
+                  : styles.noCodeText
+              }
+            >
+              I DIDN'T RECEIVE A CODE
+            </Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

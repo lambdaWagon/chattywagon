@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet, Platform } from 'react-native'
 
 import {
   widthPercentageToDP as wp,
@@ -8,7 +8,6 @@ import {
 const { height, width } = Dimensions.get('window')
 
 export default StyleSheet.create({
-  /* General */
   container: {
     flex: 1
   },
@@ -30,6 +29,20 @@ export default StyleSheet.create({
     top: 190,
     fontFamily: 'logo',
     fontSize: 48,
+    color: '#e8863c',
+    padding: 15,
+    textShadowColor: 'rgba(0, 0, 0, 0.15)',
+    textShadowOffset: {
+      width: -2,
+      height: 4
+    },
+    textShadowRadius: 0.5
+  },
+
+  logoX: {
+    top: 190,
+    fontFamily: 'logo',
+    fontSize: 22,
     color: '#e8863c',
     padding: 15,
     textShadowColor: 'rgba(0, 0, 0, 0.15)',
