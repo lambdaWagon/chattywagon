@@ -40,17 +40,9 @@ export const getLocation = () => dispatch => {
   navigator.geolocation.getCurrentPosition(success, e => handleErrors(dispatch, e), options)
 }
 
-export const setDestination = dest => {
-  const { description, place_id, structured_formatting } = dest
-  const destination = { description, place_id, structured_formatting }
-  return { type: types.SET_DESTINATION, destination }
-}
+export const setDestination = destination => ({ type: types.SET_DESTINATION, destination })
 
-export const setPickup = pickup => {
-  const { description, place_id, structured_formatting } = pickup
-  const pickupLocation = { description, place_id, structured_formatting }
-  return { type: types.SET_PICKUP, pickupLocation }
-}
+export const setPickup = pickupLocation => ({ type: types.SET_PICKUP, pickupLocation })
 
 export const setDirections = directions => ({ type: types.SET_DIRECTIONS, directions })
 
