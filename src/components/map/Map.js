@@ -32,6 +32,7 @@ class Map extends Component {
 
   fitToCoords = coordinates => {
     this.map.fitToCoordinates(coordinates, {
+      animated: true,
       edgePadding: {
         right: width / 5,
         bottom: height / 4,

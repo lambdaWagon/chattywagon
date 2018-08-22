@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
-import { StyleSheet } from 'react-native'
-import { connect } from 'react-redux'
-import { createDrawerNavigator } from 'react-navigation'
+import { Animated, Dimensions, Easing, StyleSheet } from 'react-native'
+import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -12,6 +11,8 @@ import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../c
 import { Map, MapUIConfirm, Search } from '../components/map'
 import { MenuButton } from '../components/shared'
 
+const { height } = Dimensions.get('window')
+
 const styles = StyleSheet.create({
   button: {
     position: 'absolute',
@@ -21,17 +22,49 @@ const styles = StyleSheet.create({
   }
 })
 
-export const MainNavigator = createDrawerNavigator(
+const MapNavigator = createStackNavigator(
   {
     Map,
+    MapUIConfirm,
+    Search
+  },
+  {
+    headerMode: 'none',
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 1000,
+        easing: Easing.out(Easing.poly(4)),
+        timing: Animated.timing
+      },
+      screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps
+        const { index } = scene
+
+        // const height = layout.initHeight
+        const translateY = position.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [height - 200, 0, 0]
+        })
+        const opacity = position.interpolate({
+          inputRange: [index - 1, index - 0.99, index],
+          outputRange: [0, 1, 1]
+        })
+
+        return { opacity, transform: [{ translateY }] }
+      }
+    })
+  }
+)
+
+export const MainNavigator = createDrawerNavigator(
+  {
+    Map: MapNavigator,
     Help,
     Payment,
     Promos,
     Profile,
     Rides,
-    Settings,
-    Search,
-    MapUIConfirm
+    Settings
   },
   {
     contentComponent: Dashboard,
@@ -43,27 +76,20 @@ export const MainNavigator = createDrawerNavigator(
   }
 )
 
-const Main = props => {
-  console.log(props)
-  const { destinationSet, navigation } = props
-  const goBack = () => navigation.navigate('Map')
-  const toggle = () => navigation.toggleDrawer()
-  const type = destinationSet ? 'arrow' : 'cross'
-  const color = destinationSet ? '#e8863c' : 'black'
-  const navigate = destinationSet ? toggle : toggle
-
-  return (
-    <Fragment>
-      <MenuButton color={color} type={type} style={styles.button} navigate={navigate} />
-      <MainNavigator navigation={navigation} />
-    </Fragment>
-  )
-}
+const Main = ({ navigation }) => (
+  <Fragment>
+    <MenuButton
+      drawerState={navigation.state.isDrawerOpen}
+      style={styles.button}
+      navigate={() => navigation.toggleDrawer()}
+    />
+    <MainNavigator navigation={navigation} />
+  </Fragment>
+)
 
 Main.router = MainNavigator.router
 Main.propTypes = {
-  destinationSet: PropTypes.bool.isRequired,
   navigation: PropTypes.object.isRequired
 }
 
-export default connect(({ geolocation: { destinationSet } }) => ({ destinationSet }))(Main)
+export default Main

@@ -106,7 +106,7 @@ export default StyleSheet.create({
   },
   underline: {
     fontSize: 20,
-    color: '#e5e5e5',
+    color: inactiveColor,
     top: 66,
     left: 25,
     position: 'absolute',
@@ -125,6 +125,7 @@ export default StyleSheet.create({
   mapUI: {
     position: 'absolute',
     alignItems: 'center',
+    justifyContent: 'flex-end',
     height,
     width
   }

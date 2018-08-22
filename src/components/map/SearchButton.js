@@ -9,6 +9,7 @@ const style = {
     height: 40,
     width: Dimensions.get('window').width - 20,
     marginTop: 100,
+    marginBottom: 100,
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowRadius: 10,
