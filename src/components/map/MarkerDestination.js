@@ -5,70 +5,108 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const styles = {
-  callout: {
-    flex: 1,
-    flexGrow: 1,
-    minWidth: 150,
+  container: {
+    flexDirection: 'column',
+    alignSelf: 'flex-start',
     shadowColor: 'black',
     shadowOpacity: 0.4,
-    shadowRadius: 2,
-    shadowOffset: { width: 2, height: 3 }
+    shadowRadius: 5,
+    shadowOffset: { width: 5, height: 5 }
   },
-  image: {
-    width: 15,
-    height: 15
-  },
-  destinationView: {
+  bubble: {
     flexDirection: 'row',
+    alignSelf: 'flex-start',
     backgroundColor: 'white',
-    maxHeight: 80,
-    borderRadius: 2,
-    alignItems: 'center',
-    justifyContent: 'flex-start'
+    borderRadius: 2
   },
   destinationText: {
-    flex: -1,
+    flex: 1,
+    justifyContent: 'center',
     paddingVertical: 3,
     paddingHorizontal: 10
   },
   timeView: {
     flex: -1,
-    minWidth: 37,
-    minHeight: 37,
+    minWidth: 30,
+    minHeight: 30,
     borderTopLeftRadius: 2,
     borderBottomLeftRadius: 2,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 1,
-    paddingBottom: 5,
+    paddingBottom: 3,
     paddingHorizontal: 5
   },
   timeText: { fontSize: 16, color: 'white' },
-  minText: { fontSize: 10, color: 'white', marginTop: -3 }
+  minText: { fontSize: 10, color: 'white', marginTop: -3 },
+  image: {
+    marginTop: 4,
+    width: 15,
+    height: 15
+  }
 }
 
-const MarkerDestination = ({ coordinates, destination, destinationSet, duration, setMarkerRef }) =>
-  coordinates && destinationSet ? (
+const MarkerDestination = ({
+  coordinates,
+  destination,
+  destinationSet,
+  duration,
+  setMarkerRef
+}) => {
+  let width = null
+  if (destination && destination.structured_formatting) {
+    const { length } = destination.structured_formatting.main_text
+    if (length < 5) {
+      // yelp [4]
+      width = 80
+    } else if (length >= 5 && length <= 8) {
+      // macy's [6]
+      width = 100
+    } else if (length <= 10) {
+      // art's cafe [10]
+      width = 115
+    } else if (length > 10 && length < 15) {
+      // 1 3rd street [12]
+      // real guitars [12]
+      // smugmug inc [11]
+      width = 140
+    } else if (length >= 16 || length <= 20) {
+      width = length * 8 + 26
+    } else if (length > 30) {
+      width = 200
+    } else {
+      width = length * 10 + 25
+    }
+    console.log(destination.structured_formatting.main_text, length, width)
+  }
+
+  return coordinates && destinationSet ? (
     <Marker
       anchor={{ x: 0.5, y: 1 }}
       calloutVisible
-      ref={setMarkerRef}
       coordinate={coordinates[coordinates.length - 1]}
+      ref={setMarkerRef}
       zIndex={5}
     >
-      <Callout tooltip style={styles.callout}>
-        <View style={styles.destinationView}>
-          <View style={styles.timeView}>
-            <Text style={styles.timeText}>{Math.round(duration)}</Text>
-            <Text style={styles.minText}>min</Text>
+      <Callout tooltip>
+        <View style={[styles.container, { width }]}>
+          <View style={styles.bubble}>
+            <View style={styles.timeView}>
+              <Text style={styles.timeText}>{Math.round(duration)}</Text>
+              <Text style={styles.minText}>min</Text>
+            </View>
+            <View style={styles.destinationText}>
+              <Text numberOfLines={1} ellipsizeMode="clip">
+                {destination.structured_formatting.main_text}
+              </Text>
+            </View>
           </View>
-          <Text style={styles.destinationText}>{destination.structured_formatting.main_text}</Text>
         </View>
       </Callout>
       <Image style={styles.image} source={require('../../../assets/marker4.png')} />
     </Marker>
   ) : null
+}
 
 MarkerDestination.defaultProps = {
   coordinates: null,
