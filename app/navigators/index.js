@@ -42,11 +42,11 @@ const Dashboard = props => (
 
 const DrawerNavigation = createDrawerNavigator(
   {
-    // Map,
-    // Search,
-    // Rides,
-    Profile
-    // Contact
+    Map,
+    Search,
+    Rides,
+    Profile,
+    Contact
     // TODO implement below at later date
     // Help,
     // Payment,
