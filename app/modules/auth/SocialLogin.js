@@ -4,9 +4,10 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableOpacity,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform,
+  Dimensions
 } from 'react-native'
 import {
   widthPercentageToDP as wp,
@@ -18,6 +19,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import Button from '../common/Button'
+
+const { height, width } = Dimensions.get('window')
 
 class SocialLogin extends React.Component {
   static navigationOptions = {
@@ -47,6 +50,10 @@ class SocialLogin extends React.Component {
         height: hp('40%'),
         width: wp('80%')
       },
+      middleContainerX: {
+        height: hp('38%'),
+        width: wp('80%')
+      },
       inputContainer: {
         flex: 1,
         paddingTop: hp('5%'),
@@ -55,6 +62,10 @@ class SocialLogin extends React.Component {
       },
       aboveInputText: {
         fontSize: wp('3%'),
+        fontWeight: 'bold'
+      },
+      aboveInputTextX: {
+        fontSize: wp('2%'),
         fontWeight: 'bold'
       },
       inputRow: {
@@ -84,9 +95,23 @@ class SocialLogin extends React.Component {
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
         <LinearGradient colors={['#7fbeff', '#fff', '#ff8200']} style={styles.linearGradient} />
 
-        <View style={styles.middleContainer}>
+        <View
+          style={
+            Platform.OS === 'ios' && (height === 812 || width === 812)
+              ? styles.middleContainerX
+              : styles.middleContainer
+          }
+        >
           <View style={styles.inputContainer}>
-            <Text style={styles.aboveInputText}>EMAIL</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.aboveInputTextX
+                  : styles.aboveInputText
+              }
+            >
+              EMAIL
+            </Text>
             <View style={styles.inputRow}>
               <TextInput
                 placeholder="name@mail.com"
@@ -95,6 +120,11 @@ class SocialLogin extends React.Component {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? { marginTop: hp('1%'), fontSize: wp('2%') }
+                    : null
+                }
               />
               <Icon name="envelope" size={wp('7.5%')} color="black" />
             </View>
@@ -107,13 +137,26 @@ class SocialLogin extends React.Component {
                 opacity: 0.1
               }}
             />
-            <Text style={styles.aboveInputText}>PASSWORD</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.aboveInputTextX
+                  : styles.aboveInputText
+              }
+            >
+              PASSWORD
+            </Text>
             <View style={styles.inputRow}>
               <TextInput
                 placeholder="******"
                 returnKeyType="go"
                 secureTextEntry
                 ref={input => (this.passwordInput = input)}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? { marginTop: hp('1%'), fontSize: wp('2%') }
+                    : null
+                }
               />
               <Ionicons name="md-key" size={wp('7.5%')} color="black" />
             </View>

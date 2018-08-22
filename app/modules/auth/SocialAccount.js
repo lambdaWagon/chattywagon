@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Platform, Dimensions } from 'react-native'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -8,6 +8,8 @@ import {
 
 import { LinearGradient } from 'expo'
 import Icon from 'react-native-vector-icons/FontAwesome'
+
+const { height, width } = Dimensions.get('window')
 
 class SocialAccount extends React.Component {
   static navigationOptions = {
@@ -52,6 +54,9 @@ class SocialAccount extends React.Component {
       socialText: {
         fontSize: wp('5%')
       },
+      socialTextX: {
+        fontSize: wp('3.5%')
+      },
       buttonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -66,6 +71,12 @@ class SocialAccount extends React.Component {
         paddingLeft: wp('1%'),
         fontSize: wp('4.5%'),
         fontWeight: 'bold'
+      },
+      textX: {
+        color: 'white',
+        paddingLeft: wp('1%'),
+        fontSize: wp('2.5%'),
+        fontWeight: 'bold'
       }
     })
 
@@ -77,12 +88,28 @@ class SocialAccount extends React.Component {
           <View style={styles.socialIconsContainer}>
             <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon style={styles.socialIcons} name="google" size={wp('7.5%')} color="black" />
-              <Text style={styles.socialText}>Google</Text>
+              <Text
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.socialTextX
+                    : styles.socialText
+                }
+              >
+                Google
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon style={styles.socialIcons} name="twitter" size={wp('7.5%')} color="black" />
-              <Text style={styles.socialText}>Twitter</Text>
+              <Text
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.socialTextX
+                    : styles.socialText
+                }
+              >
+                Twitter
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
@@ -92,17 +119,41 @@ class SocialAccount extends React.Component {
                 size={wp('7.5%')}
                 color="black"
               />
-              <Text style={styles.socialText}>Facebook</Text>
+              <Text
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.socialTextX
+                    : styles.socialText
+                }
+              >
+                Facebook
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.socialTouch} onPress={() => navigate('SocialLogin')}>
               <Icon style={styles.socialIcons} name="envelope" size={wp('7.5%')} color="black" />
-              <Text style={styles.socialText}>Email</Text>
+              <Text
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.socialTextX
+                    : styles.socialText
+                }
+              >
+                Email
+              </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.buttonContainer}>
-            <Text style={styles.text}>CHOOSE AN ACCOUNT</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.textX
+                  : styles.text
+              }
+            >
+              CHOOSE AN ACCOUNT
+            </Text>
           </View>
         </View>
       </View>
