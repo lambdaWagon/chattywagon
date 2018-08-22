@@ -30,7 +30,7 @@ const Directions = ({
         setDirections(data)
       }}
       strokeWidth={3}
-      strokeColor="black"
+      strokeColor="#e8863c"
     />
   )
 
