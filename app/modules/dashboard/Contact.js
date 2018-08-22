@@ -29,7 +29,7 @@ class Contact extends React.Component {
 
   handleSubmit = () => {
     if (!this.state.title.length || !this.state.text.length) {
-      return Alert.alert('Please fill out both tilte and text fields before submitting')
+      return Alert.alert('Please fill out both title and text fields before submitting')
     }
 
     const contacts = [...this.state.contacts, { title: this.state.title, text: this.state.text }]

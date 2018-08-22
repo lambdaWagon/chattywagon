@@ -1,8 +1,10 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native'
+import { SafeAreaView, Text, View, ScrollView, Dimensions, Platform } from 'react-native'
 import { LinearGradient } from 'expo'
 
 import styles from '../../styles'
+
+const { height, width } = Dimensions.get('window')
 
 class Rides extends React.Component {
   state = {
@@ -67,12 +69,52 @@ class Rides extends React.Component {
             {this.state.rides.map(ride => {
               return (
                 <View style={styles.rideContainer} key={ride.timestamp}>
-                  <Text style={styles.textMargin}>Date: {ride.timestamp}</Text>
-                  <Text>Start: {ride.start}</Text>
-                  <Text style={styles.textMargin}>End: {ride.end}</Text>
+                  <Text
+                    style={
+                      Platform.OS === 'ios' && (height === 812 || width === 812)
+                        ? { fontSize: 10, marginBottom: 10 }
+                        : styles.textMargin
+                    }
+                  >
+                    Date: {ride.timestamp}
+                  </Text>
+                  <Text
+                    style={
+                      Platform.OS === 'ios' && (height === 812 || width === 812)
+                        ? { fontSize: 10 }
+                        : null
+                    }
+                  >
+                    Start: {ride.start}
+                  </Text>
+                  <Text
+                    style={
+                      Platform.OS === 'ios' && (height === 812 || width === 812)
+                        ? styles.textMarginX
+                        : styles.textMargin
+                    }
+                  >
+                    End: {ride.end}
+                  </Text>
                   <View style={styles.bottomText}>
-                    <Text>Miles: {ride.distance}</Text>
-                    <Text>Time: {ride.travelTime}</Text>
+                    <Text
+                      style={
+                        Platform.OS === 'ios' && (height === 812 || width === 812)
+                          ? { fontSize: 10 }
+                          : null
+                      }
+                    >
+                      Miles: {ride.distance}
+                    </Text>
+                    <Text
+                      style={
+                        Platform.OS === 'ios' && (height === 812 || width === 812)
+                          ? { fontSize: 10 }
+                          : null
+                      }
+                    >
+                      Time: {ride.travelTime}
+                    </Text>
                   </View>
                 </View>
               )

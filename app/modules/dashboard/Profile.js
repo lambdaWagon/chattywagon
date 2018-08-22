@@ -8,7 +8,8 @@ import {
   Platform,
   TouchableOpacity,
   SafeAreaView,
-  Image
+  Image,
+  Dimensions
 } from 'react-native'
 import { LinearGradient } from 'expo'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -19,7 +20,8 @@ import {
 
 import avatarPlaceholder from '../../../assets/avatarplaceholder.png'
 import genstyles from '../../styles'
-// import styles from '../../styles'
+
+const { height, width } = Dimensions.get('window')
 
 class Profile extends React.Component {
   state = {
@@ -48,12 +50,24 @@ class Profile extends React.Component {
 
   render() {
     const styles = StyleSheet.create({
+      profileContainer: {
+        flex: 1,
+        height: hp('100%'),
+        alignItems: 'center',
+        top: hp('15%'),
+        marginBottom: hp('20%')
+      },
+      profileContainerX: {
+        flex: 1,
+        height: hp('100%'),
+        alignItems: 'center',
+        top: hp('10%')
+      },
       avatarContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: hp('5%')
       },
-
       image: {
         height: 200,
         width: 200,
@@ -67,7 +81,8 @@ class Profile extends React.Component {
         marginBottom: hp('1%')
       },
       inputContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
       },
       input: {
         borderBottomWidth: 2,
@@ -75,8 +90,21 @@ class Profile extends React.Component {
         marginRight: wp('1%'),
         width: wp('70%')
       },
+      inputX: {
+        borderBottomWidth: 2,
+        marginRight: wp('1%'),
+        width: wp('70%'),
+        fontSize: wp('3%')
+      },
+      socialIcons: {
+        alignItems: 'center'
+      },
       text: {
         marginBottom: hp('3%')
+      },
+      textX: {
+        marginBottom: hp('1.5%'),
+        fontSize: wp('3')
       },
       buttonContainer: {
         width: wp('50%'),
@@ -85,6 +113,15 @@ class Profile extends React.Component {
         alignItems: 'center',
         borderColor: '#c4f4ff',
         backgroundColor: 'rgba(0, 0, 0, .65)'
+      },
+      buttonContainerX: {
+        width: wp('60%'),
+        height: hp('7%'),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#c4f4ff',
+        backgroundColor: 'rgba(0, 0, 0, .65)',
+        marginTop: hp('2%')
       }
     })
     return (
@@ -96,69 +133,133 @@ class Profile extends React.Component {
           justifyContent: 'center',
           alignItems: 'center'
         }}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? -150 : 0}
+        keyboardVerticalOffset={
+          Platform.OS === 'ios' && (height === 812 || width === 812) ? -232 : -58
+        }
       >
         <LinearGradient
           colors={['#c4f4ff', '#c4f4ff', '#e8863c', '#e8863c']}
           style={genstyles.gradient}
         >
-          <SafeAreaView style={genstyles.rideViewContainer}>
+          <SafeAreaView
+            style={
+              Platform.OS === 'ios' && (height === 812 || width === 812)
+                ? styles.profileContainerX
+                : styles.profileContainer
+            }
+          >
             <View style={styles.avatarContainer}>
               <Image
-                style={this.state.display ? styles.avatarContainer : styles.imageWithKeyboard}
+                style={this.state.display ? styles.image : styles.imageWithKeyboard}
                 source={this.state.avatarImg}
               />
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={{ marginRight: wp('3%') }}>edit</Text>
+              <View style={styles.inputContainer}>
+                <Text
+                  style={
+                    Platform.OS === 'ios' && (height === 812 || width === 812)
+                      ? { marginRight: wp('3%'), fontSize: wp('3%') }
+                      : { marginRight: wp('3%') }
+                  }
+                >
+                  edit
+                </Text>
                 <TouchableOpacity>
-                  <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
+                  <Icon name="pencil" size={wp('4%')} color="black" />
                 </TouchableOpacity>
               </View>
             </View>
             <View style={styles.inputContainer}>
               <TextInput
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.inputX
+                    : styles.input
+                }
                 onChangeText={username => this.setState({ username })}
-                style={styles.input}
                 value={this.state.username}
                 onFocus={() => this.setState({ display: false })}
                 onBlur={() => this.setState({ display: true })}
               />
 
-              <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
+              <Icon name="pencil" size={wp('4%')} color="black" />
             </View>
-            <Text style={styles.text}>name</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.textX
+                  : styles.text
+              }
+            >
+              name
+            </Text>
             <View style={styles.inputContainer}>
               <TextInput
                 onChangeText={this.handleInput}
-                style={styles.input}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.inputX
+                    : styles.input
+                }
                 value={this.state.number}
                 maxLength={14}
                 onFocus={() => this.setState({ display: false })}
                 onBlur={() => this.setState({ display: true })}
               />
-              <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
+              <Icon name="pencil" size={wp('4%')} color="black" />
             </View>
-            <Text style={styles.text}>phone number</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.textX
+                  : styles.text
+              }
+            >
+              phone number
+            </Text>
 
             <View style={styles.inputContainer}>
               <TextInput
                 onChangeText={email => this.setState({ email })}
-                style={styles.input}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.inputX
+                    : styles.input
+                }
                 value={this.state.email}
                 onFocus={() => this.setState({ display: false })}
                 onBlur={() => this.setState({ display: true })}
               />
-              <Icon style={styles.socialIcons} name="pencil" size={wp('4%')} color="black" />
+              <Icon name="pencil" size={wp('4%')} color="black" />
             </View>
-            <Text style={styles.text}>email</Text>
+            <Text
+              style={
+                Platform.OS === 'ios' && (height === 812 || width === 812)
+                  ? styles.textX
+                  : styles.text
+              }
+            >
+              email
+            </Text>
 
             <View style={{ alignItems: 'center' }}>
               <TouchableOpacity
                 shadowColor="black"
                 shadowOffset={{ width: 10, height: 10 }}
-                style={styles.buttonContainer}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.buttonContainerX
+                    : styles.buttonContainer
+                }
               >
-                <Text style={{ color: 'white' }}>Delete Account</Text>
+                <Text
+                  style={
+                    Platform.OS === 'ios' && (height === 812 || width === 812)
+                      ? { color: 'white', fontSize: wp('2.5%') }
+                      : { color: 'white' }
+                  }
+                >
+                  Delete Account
+                </Text>
               </TouchableOpacity>
             </View>
           </SafeAreaView>

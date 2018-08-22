@@ -141,10 +141,16 @@ export default StyleSheet.create({
     padding: wp('3%'),
     borderRadius: 7,
     width: wp('80%'),
-    marginBottom: hp('1%')
+    marginBottom: hp('1%'),
+    justifyContent: 'center'
   },
   textMargin: {
     marginBottom: hp('2%')
+  },
+
+  textMarginX: {
+    marginBottom: hp('2%'),
+    fontSize: 10
   },
   bottomText: {
     flexDirection: 'row',
