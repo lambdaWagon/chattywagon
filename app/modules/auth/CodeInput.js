@@ -83,7 +83,6 @@ class CodeInput extends React.Component {
         paddingLeft: wp('5%'),
         backgroundColor: 'white'
       },
-
       text: {
         color: 'white',
         paddingLeft: wp('1%'),
@@ -127,23 +126,25 @@ class CodeInput extends React.Component {
             >
               ENTER THE 4-DIGIT CODE
             </Text>
-            <TextInput
-              placeholder="__       __       __       __"
-              placeholderStyle={{ backgroundColor: 'blue' }}
-              style={
-                Platform.OS === 'ios' && (height === 812 || width === 812)
-                  ? styles.inputX
-                  : styles.input
-              }
-              keyboardType="number-pad"
-              name="value"
-              type="number"
-              onChangeText={value => {
-                this.setState({ value })
-              }}
-              value={value}
-              maxLength={4}
-            />
+            <View style={{ alignItems: 'center' }}>
+              <TextInput
+                placeholder="__       __       __       __"
+                placeholderStyle={{ backgroundColor: 'blue' }}
+                style={
+                  Platform.OS === 'ios' && (height === 812 || width === 812)
+                    ? styles.inputX
+                    : styles.input
+                }
+                keyboardType="number-pad"
+                name="value"
+                type="number"
+                onChangeText={value => {
+                  this.setState({ value })
+                }}
+                value={value}
+                maxLength={4}
+              />
+            </View>
           </View>
           <View style={styles.splashButtonContainer}>
             <Button navigate={this.onPress}>SIGN IN</Button>

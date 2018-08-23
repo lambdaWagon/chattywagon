@@ -2,8 +2,22 @@ import React from 'react'
 import { Text, TouchableOpacity, Animated, Platform, Dimensions } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const { height, width } = Dimensions.get('window')
+// let AnimatedVal = new Animated.Value(0)
+
+const SvgComponent = props => (
+  <Svg viewBox="0 0 31.49 31.49" width={20} height={20} {...props}>
+    <Path
+      d="M21.205 5.007a1.112 1.112 0 0 0-1.587 0 1.12 1.12 0 0 0 0 1.571l8.047 8.047H1.111A1.106 1.106 0 0 0 0 15.737c0 .619.492 1.127 1.111 1.127h26.554l-8.047 8.032c-.429.444-.429 1.159 0 1.587a1.112 1.112 0 0 0 1.587 0l9.952-9.952a1.093 1.093 0 0 0 0-1.571l-9.952-9.953z"
+      fill="#FFF"
+    />
+  </Svg>
+)
 
 const styles = {
   button: {
@@ -13,13 +27,17 @@ const styles = {
     backgroundColor: 'black',
     borderRadius: 2,
     height: 73,
-    width: 294,
+    width: wp('80%'),
     padding: 25,
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowRadius: 10,
     shadowOffset: { width: 10, height: 10 },
     marginBottom: 10
+    // opacity: AnimatedVal.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: [0, 1]
+    // })
   },
   buttonText: {
     fontFamily: 'black',
@@ -38,7 +56,12 @@ const styles = {
 class Button extends React.Component {
   state = {}
 
-  transition = () => {}
+  // transition = () => {
+  //   Animated.timing(AnimatedVal, {
+  //     toValue: 1,
+  //     duration: 3000
+  //   }).start()
+  // }
 
   render() {
     const { children, navigate, style } = this.props
@@ -46,7 +69,6 @@ class Button extends React.Component {
       <TouchableOpacity
         onPress={() => {
           navigate()
-          this.transition()
         }}
       >
         <Animated.View style={[style, styles.button]}>
@@ -73,15 +95,6 @@ Button.propTypes = {
   navigate: PropTypes.func.isRequired,
   style: PropTypes.object
 }
-
-const SvgComponent = props => (
-  <Svg viewBox="0 0 31.49 31.49" width={20} height={20} {...props}>
-    <Path
-      d="M21.205 5.007a1.112 1.112 0 0 0-1.587 0 1.12 1.12 0 0 0 0 1.571l8.047 8.047H1.111A1.106 1.106 0 0 0 0 15.737c0 .619.492 1.127 1.111 1.127h26.554l-8.047 8.032c-.429.444-.429 1.159 0 1.587a1.112 1.112 0 0 0 1.587 0l9.952-9.952a1.093 1.093 0 0 0 0-1.571l-9.952-9.953z"
-      fill="#FFF"
-    />
-  </Svg>
-)
 
 // const SvgComponent = props => (
 //   <Svg viewBox="0 0 477.175 477.175" width={20} height={20} {...props}>

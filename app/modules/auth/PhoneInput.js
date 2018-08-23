@@ -8,7 +8,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Dimensions,
-  Platform
+  Platform,
+  Animated
 } from 'react-native'
 
 import {
@@ -22,6 +23,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Button from '../common/Button'
 
 const { height, width } = Dimensions.get('window')
+const AnimatedVal = new Animated.Value(0)
+Animated.timing(AnimatedVal, {
+  toValue: 1,
+  duration: 3000
+}).start()
 
 class PhoneInput extends React.Component {
   static navigationOptions = {
@@ -33,7 +39,11 @@ class PhoneInput extends React.Component {
     input: ''
   }
 
+  componentDidMount() {}
+
   onPress = () => this.props.navigation.navigate('CodeInput')
+
+  transition = () => {}
 
   phoneNumberFormatter = n => {
     const num = n.replace(/[^0-9]/g, '')
@@ -68,7 +78,11 @@ class PhoneInput extends React.Component {
       },
       middleContainer: {
         height: hp('31%'),
-        width: wp('80%')
+        width: wp('80%'),
+        opacity: AnimatedVal.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1]
+        })
       },
       middleContainerX: {
         height: hp('29%'),
@@ -183,7 +197,14 @@ class PhoneInput extends React.Component {
             </Text>
           </View>
           <View style={styles.splashButtonContainer}>
-            <Button navigate={this.onPress}>GET CODE</Button>
+            <Button
+              navigate={() => {
+                this.onPress()
+                this.transition()
+              }}
+            >
+              GET CODE
+            </Button>
           </View>
         </View>
         <TouchableOpacity style={styles.socialContainer} onPress={() => navigate('SocialAccount')}>
