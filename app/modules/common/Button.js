@@ -8,7 +8,7 @@ import {
 } from 'react-native-responsive-screen'
 
 const { height, width } = Dimensions.get('window')
-// let AnimatedVal = new Animated.Value(0)
+const AnimatedVal = new Animated.Value(0)
 
 const SvgComponent = props => (
   <Svg viewBox="0 0 31.49 31.49" width={20} height={20} {...props}>
@@ -33,11 +33,11 @@ const styles = {
     shadowOpacity: 0.25,
     shadowRadius: 10,
     shadowOffset: { width: 10, height: 10 },
-    marginBottom: 10
-    // opacity: AnimatedVal.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange: [0, 1]
-    // })
+    marginBottom: 10,
+    opacity: AnimatedVal.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1]
+    })
   },
   buttonText: {
     fontFamily: 'black',
@@ -56,12 +56,12 @@ const styles = {
 class Button extends React.Component {
   state = {}
 
-  // transition = () => {
-  //   Animated.timing(AnimatedVal, {
-  //     toValue: 1,
-  //     duration: 3000
-  //   }).start()
-  // }
+  transition = () => {
+    Animated.timing(AnimatedVal, {
+      toValue: 1,
+      duration: 3000
+    }).start()
+  }
 
   render() {
     const { children, navigate, style } = this.props
@@ -69,6 +69,7 @@ class Button extends React.Component {
       <TouchableOpacity
         onPress={() => {
           navigate()
+          this.transition()
         }}
       >
         <Animated.View style={[style, styles.button]}>
