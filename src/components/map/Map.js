@@ -55,9 +55,7 @@ class Map extends Component {
           style={styles.map}
           customMapStyle={mapStyle}
         >
-          {drivers.map(d => (
-            <MarkerDriver key={d.key} d={d} />
-          ))}
+          {drivers.map(d => <MarkerDriver key={d.key} d={d} />)}
           <Directions fitToCoords={this.fitToCoords} />
           {!destinationSet && <MarkerCurrentLocation />}
           <MarkerOrigin />
