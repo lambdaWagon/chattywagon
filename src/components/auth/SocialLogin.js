@@ -2,8 +2,6 @@ import React from 'react'
 import { Text, TextInput, View } from 'react-native'
 import PropTypes from 'prop-types'
 
-import { checker } from '../../styles'
-
 import { Button, Gradient } from '../shared'
 import { Email, Password } from '../shared/icons'
 import styles from '../../styles'

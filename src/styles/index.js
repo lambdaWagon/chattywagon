@@ -6,8 +6,7 @@ const primaryColor = '#e8863c'
 const inactiveColor = '#e5e5e5'
 const textShadowColor = 'rgba(0, 0, 0, 0.15)'
 
-// checks for iPhoneX screen
-export const checker = (a, b) =>
+export const deviceCheck = (a, b) =>
   Platform.OS === 'ios' && (height === 812 || width === 812) ? a : b
 
 export default StyleSheet.create({
@@ -41,7 +40,7 @@ export default StyleSheet.create({
   logo: {
     top: 190,
     fontFamily: 'logo',
-    fontSize: checker(23, 48),
+    fontSize: deviceCheck(23, 48),
     color: primaryColor,
     padding: 15,
     textShadowColor,
@@ -83,19 +82,19 @@ export default StyleSheet.create({
   },
   inputHeader: {
     fontFamily: 'black',
-    fontSize: checker(6, 10),
+    fontSize: deviceCheck(6, 10),
     letterSpacing: 1.5,
     marginBottom: 10
   },
   inputText: {
     fontFamily: 'black',
-    fontSize: checker(10, 20),
+    fontSize: deviceCheck(10, 20),
     letterSpacing: 1.5,
     width: '100%'
   },
   inputFooter: {
     marginTop: 15,
-    fontSize: checker(5, 10),
+    fontSize: deviceCheck(5, 10),
     letterSpacing: 1
   },
   footerButton: {
@@ -105,11 +104,11 @@ export default StyleSheet.create({
   footerText: {
     fontFamily: 'black',
     textAlign: 'center',
-    fontSize: checker(4.75, 10),
+    fontSize: deviceCheck(4.75, 10),
     letterSpacing: 1.5
   },
   underline: {
-    fontSize: checker(9, 20),
+    fontSize: deviceCheck(9, 20),
     color: inactiveColor,
     top: 66,
     left: 25,
@@ -118,7 +117,7 @@ export default StyleSheet.create({
     zIndex: 1
   },
   socialInput: {
-    fontSize: checker(8, null)
+    fontSize: deviceCheck(8, null)
   },
 
   /* Map */
@@ -135,7 +134,49 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     height,
     width
-  }
+  },
+
+  /* Map Marker Labels */
+  markerContainer: {
+    alignItems: 'center',
+    paddingRight: 10,
+    paddingTop: 2
+  },
+  bubble: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 0,
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    borderRadius: 2,
+    shadowColor: 'black',
+    shadowOpacity: 0.35,
+    shadowRadius: 3,
+    shadowOffset: { width: 4, height: 4 }
+  },
+  markerImage: {
+    width: 15,
+    height: 15,
+    marginTop: 5
+  },
+  markerText: {
+    paddingVertical: 3,
+    paddingHorizontal: 10
+  },
+  timeContainer: {
+    flex: -1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 3,
+    paddingHorizontal: 5,
+    maxWidth: 100,
+    minHeight: 30,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
+    backgroundColor: 'black'
+  },
+  timeText: { fontSize: 16, color: 'white' },
+  minText: { fontSize: 10, color: 'white', marginTop: -3 }
 })
 
 export const searchDestStyle = {

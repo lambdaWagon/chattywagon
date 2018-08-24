@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
 
-import { checker } from '../../styles'
+import { deviceCheck } from '../../styles'
 
 const styles = StyleSheet.create({
   button: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: 'black',
-    fontSize: checker(6, 10),
+    fontSize: deviceCheck(6, 10),
     color: 'white',
     letterSpacing: 1.5
   }

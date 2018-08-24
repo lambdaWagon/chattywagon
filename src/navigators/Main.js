@@ -11,8 +11,6 @@ import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../c
 import { Map, MapUIConfirm, Search } from '../components/map'
 import { MenuButton } from '../components/shared'
 
-const { height } = Dimensions.get('window')
-
 const styles = StyleSheet.create({
   button: {
     position: 'absolute',
@@ -32,7 +30,7 @@ const MapNavigator = createStackNavigator(
     headerMode: 'none',
     transitionConfig: () => ({
       transitionSpec: {
-        duration: 1000,
+        duration: 500,
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing
       },
@@ -40,7 +38,7 @@ const MapNavigator = createStackNavigator(
         const { layout, position, scene } = sceneProps
         const { index } = scene
 
-        // const height = layout.initHeight
+        const height = layout.initHeight
         const translateY = position.interpolate({
           inputRange: [index - 1, index, index + 1],
           outputRange: [height - 200, 0, 0]
@@ -71,8 +69,8 @@ export const MainNavigator = createDrawerNavigator(
     contentOptions: {
       activeTintColor: 'black',
       inactiveTintColor: 'white'
-    },
-    drawerType: 'push-screen'
+    }
+    // drawerType: 'push-screen'
   }
 )
 
@@ -88,6 +86,7 @@ const Main = ({ navigation }) => (
 )
 
 Main.router = MainNavigator.router
+
 Main.propTypes = {
   navigation: PropTypes.object.isRequired
 }

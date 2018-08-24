@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { Email, Facebook, Google, Twitter } from './icons'
 
-import { checker } from '../../styles'
+import { deviceCheck } from '../../styles'
 
 const styles = StyleSheet.create({
   button: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 15,
     fontFamily: 'bold',
-    fontSize: checker(12, 15),
+    fontSize: deviceCheck(12, 15),
     letterSpacing: 1
   }
 })
