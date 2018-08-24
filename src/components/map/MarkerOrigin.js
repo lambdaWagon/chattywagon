@@ -4,39 +4,21 @@ import { Marker } from 'react-native-maps'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const styles = {
-  image: {
-    width: 15,
-    height: 15,
-    marginTop: 5
-  },
-  originView: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderRadius: 2,
-    alignItems: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.35,
-    shadowRadius: 2,
-    shadowOffset: { width: 2, height: 3 }
-  },
-  originText: {
-    paddingVertical: 3,
-    paddingHorizontal: 10
-  }
-}
+import styles from '../../styles'
 
 const MarkerOrigin = ({ address, coordinates, pickupLocation, pickupLocationSet }) =>
   coordinates ? (
-    <Marker anchor={{ x: 0.05, y: 1 }} coordinate={coordinates[0]} zIndex={5}>
-      <View style={styles.originView}>
-        {pickupLocationSet ? (
-          <Text style={styles.originText}>{pickupLocation.structured_formatting.main_text}</Text>
-        ) : (
-          <Text style={styles.originText}>{address.substr(0, address.indexOf(','))}</Text>
-        )}
+    <Marker anchor={{ x: 0.5, y: 1 }} coordinate={coordinates[0]} zIndex={5}>
+      <View style={styles.markerContainer}>
+        <View style={styles.bubble}>
+          {pickupLocationSet ? (
+            <Text style={styles.markerText}>{pickupLocation.structured_formatting.main_text}</Text>
+          ) : (
+            <Text style={styles.markerText}>{address.substr(0, address.indexOf(','))}</Text>
+          )}
+        </View>
+        <Image style={styles.markerImage} source={require('../../../assets/marker4.png')} />
       </View>
-      <Image style={styles.image} source={require('../../../assets/marker4.png')} />
     </Marker>
   ) : null
 

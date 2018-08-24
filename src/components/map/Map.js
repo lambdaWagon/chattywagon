@@ -28,8 +28,6 @@ class Map extends Component {
 
   map = null
 
-  marker = null
-
   fitToCoords = coordinates => {
     this.map.fitToCoordinates(coordinates, {
       animated: true,
@@ -50,16 +48,17 @@ class Map extends Component {
           ref={c => (this.map = c)}
           region={region}
           provider={PROVIDER_GOOGLE}
-          onRegionChangeComplete={() => this.marker && this.marker.showCallout()}
           showsPointsOfInterest={false}
           style={styles.map}
           customMapStyle={mapStyle}
         >
-          {drivers.map(d => <MarkerDriver key={d.key} d={d} />)}
+          {drivers.map(d => (
+            <MarkerDriver key={d.key} d={d} />
+          ))}
           <Directions fitToCoords={this.fitToCoords} />
           {!destinationSet && <MarkerCurrentLocation />}
           <MarkerOrigin />
-          <MarkerDestination setMarkerRef={m => (this.marker = m)} />
+          <MarkerDestination />
         </MapView>
         {destinationSet ? (
           <MapUIConfirm navigate={navigation.navigate} />
