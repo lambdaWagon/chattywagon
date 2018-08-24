@@ -2,6 +2,8 @@ import React from 'react'
 import { Text, TextInput, View } from 'react-native'
 import PropTypes from 'prop-types'
 
+import { checker } from '../../styles'
+
 import { Button, Gradient } from '../shared'
 import { Email, Password } from '../shared/icons'
 import styles from '../../styles'
@@ -21,6 +23,7 @@ const SocialLogin = ({ navigation: { navigate } }) => (
           onSubmitEditing={() => passwordInput.focus()}
           placeholder="name@mail.com"
           returnKeyType="next"
+          style={styles.socialInput}
         />
         <Email />
       </View>
@@ -32,6 +35,7 @@ const SocialLogin = ({ navigation: { navigate } }) => (
           returnKeyType="go"
           secureTextEntry
           ref={r => (passwordInput = r)}
+          style={styles.socialInput}
         />
         <Password />
       </View>

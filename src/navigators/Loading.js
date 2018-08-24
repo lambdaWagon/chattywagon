@@ -25,7 +25,7 @@ const Loading = ({ navigation }) => {
 
     setCustomText(customProps.text)
     setCustomTextInput(customProps.textInput)
-    navigation.navigate(!user ? 'Main' : 'Auth')
+    navigation.navigate(user ? 'Main' : 'Auth')
   }
 
   return <AppLoading startAsync={loadAssets} onFinish={onAssetLoad} />

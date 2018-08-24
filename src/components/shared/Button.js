@@ -3,6 +3,8 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import PropTypes from 'prop-types'
 
+import { checker } from '../../styles'
+
 const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: 'black',
-    fontSize: 10,
+    fontSize: checker(6, 10),
     color: 'white',
     letterSpacing: 1.5
   }

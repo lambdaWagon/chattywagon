@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 
 import { Email, Facebook, Google, Twitter } from './icons'
 
+import { checker } from '../../styles'
+
 const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 15,
     fontFamily: 'bold',
-    fontSize: 15,
+    fontSize: checker(12, 15),
     letterSpacing: 1
   }
 })

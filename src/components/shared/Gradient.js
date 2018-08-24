@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardAvoidingView, View } from 'react-native'
+import { KeyboardAvoidingView, View, Platform } from 'react-native'
 import { LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
 

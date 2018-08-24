@@ -1,10 +1,14 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet, Platform } from 'react-native'
 
 const { height, width } = Dimensions.get('window')
 
 const primaryColor = '#e8863c'
 const inactiveColor = '#e5e5e5'
 const textShadowColor = 'rgba(0, 0, 0, 0.15)'
+
+// checks for iPhoneX screen
+export const checker = (a, b) =>
+  Platform.OS === 'ios' && (height === 812 || width === 812) ? a : b
 
 export default StyleSheet.create({
   /* General */
@@ -37,7 +41,7 @@ export default StyleSheet.create({
   logo: {
     top: 190,
     fontFamily: 'logo',
-    fontSize: 48,
+    fontSize: checker(23, 48),
     color: primaryColor,
     padding: 15,
     textShadowColor,
@@ -79,19 +83,19 @@ export default StyleSheet.create({
   },
   inputHeader: {
     fontFamily: 'black',
-    fontSize: 10,
+    fontSize: checker(6, 10),
     letterSpacing: 1.5,
     marginBottom: 10
   },
   inputText: {
     fontFamily: 'black',
-    fontSize: 20,
+    fontSize: checker(10, 20),
     letterSpacing: 1.5,
     width: '100%'
   },
   inputFooter: {
     marginTop: 15,
-    fontSize: 10,
+    fontSize: checker(5, 10),
     letterSpacing: 1
   },
   footerButton: {
@@ -101,17 +105,20 @@ export default StyleSheet.create({
   footerText: {
     fontFamily: 'black',
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: checker(4.75, 10),
     letterSpacing: 1.5
   },
   underline: {
-    fontSize: 20,
+    fontSize: checker(9, 20),
     color: inactiveColor,
     top: 66,
     left: 25,
     position: 'absolute',
     letterSpacing: 13,
     zIndex: 1
+  },
+  socialInput: {
+    fontSize: checker(8, null)
   },
 
   /* Map */
