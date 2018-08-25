@@ -34,7 +34,10 @@ class GooglePlacesInput extends Component {
   handleDestination = data => {
     const { navigation, setDestination } = this.props
     setDestination(data)
-    navigation.goBack()
+    navigation.navigate('Map')
+    // const { goBack, state } = navigation
+    // console.log(navigation)
+    // goBack(state.key)
   }
 
   render() {

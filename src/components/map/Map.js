@@ -21,9 +21,7 @@ const { width, height } = Dimensions.get('window')
 
 class Map extends Component {
   static navigationOptions = {
-    drawerLabel: () => null,
-    headerTransparent: true,
-    headerStyle: { zIndex: 100 }
+    drawerLabel: () => null
   }
 
   map = null
@@ -38,6 +36,9 @@ class Map extends Component {
         top: height / 5
       }
     })
+    setTimeout(() => {
+      this.props.navigation.navigate('MapUIConfirm')
+    }, 1000)
   }
 
   render() {
@@ -56,15 +57,11 @@ class Map extends Component {
             <MarkerDriver key={d.key} d={d} />
           ))}
           <Directions fitToCoords={this.fitToCoords} />
-          {!destinationSet && <MarkerCurrentLocation />}
+          <MarkerCurrentLocation />
           <MarkerOrigin />
           <MarkerDestination />
         </MapView>
-        {destinationSet ? (
-          <MapUIConfirm navigate={navigation.navigate} />
-        ) : (
-          <MapUISearch navigate={navigation.navigate} />
-        )}
+        {destinationSet || <MapUISearch navigate={navigation.navigate} />}
       </Fragment>
     )
   }

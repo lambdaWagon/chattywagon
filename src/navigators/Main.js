@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import { Animated, Dimensions, Easing, StyleSheet } from 'react-native'
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
+import { StyleSheet } from 'react-native'
+import { createDrawerNavigator } from 'react-navigation'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -8,8 +8,8 @@ import {
 import PropTypes from 'prop-types'
 
 import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../components/dashboard'
-import { Map, MapUIConfirm, Search } from '../components/map'
 import { MenuButton } from '../components/shared'
+import MapNavigator from './Map'
 
 const styles = StyleSheet.create({
   button: {
@@ -20,43 +20,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const MapNavigator = createStackNavigator(
-  {
-    Map,
-    MapUIConfirm,
-    Search
-  },
-  {
-    headerMode: 'none',
-    transitionConfig: () => ({
-      transitionSpec: {
-        duration: 500,
-        easing: Easing.out(Easing.poly(4)),
-        timing: Animated.timing
-      },
-      screenInterpolator: sceneProps => {
-        const { layout, position, scene } = sceneProps
-        const { index } = scene
-
-        const height = layout.initHeight
-        const translateY = position.interpolate({
-          inputRange: [index - 1, index, index + 1],
-          outputRange: [height - 200, 0, 0]
-        })
-        const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1]
-        })
-
-        return { opacity, transform: [{ translateY }] }
-      }
-    })
-  }
-)
-
 export const MainNavigator = createDrawerNavigator(
   {
-    Map: MapNavigator,
+    MapNavigator,
     Help,
     Payment,
     Promos,
@@ -70,20 +36,35 @@ export const MainNavigator = createDrawerNavigator(
       activeTintColor: 'black',
       inactiveTintColor: 'white'
     }
-    // drawerType: 'push-screen'
   }
 )
 
-const Main = ({ navigation }) => (
-  <Fragment>
-    <MenuButton
-      drawerState={navigation.state.isDrawerOpen}
-      style={styles.button}
-      navigate={() => navigation.toggleDrawer()}
-    />
-    <MainNavigator navigation={navigation} />
-  </Fragment>
-)
+const Main = ({ navigation }) => {
+  // console.log('📍 main nav', navigation.state)
+  // if (navigation.state.routes[0].index === 0) {
+  //   return (
+  //     <Fragment>
+  //       <MenuButton
+  //         drawerState={navigation.state.isDrawerOpen}
+  //         navigate={() => navigation.toggleDrawer()}
+  //         style={styles.button}
+  //       />
+  //       <MainNavigator navigation={navigation} />
+  //     </Fragment>
+  //   )
+  // }
+  // return <MainNavigator navigation={navigation} />
+  return (
+    <Fragment>
+      <MenuButton
+        drawerState={navigation.state.isDrawerOpen}
+        navigate={() => navigation.toggleDrawer()}
+        style={styles.button}
+      />
+      <MainNavigator navigation={navigation} />
+    </Fragment>
+  )
+}
 
 Main.router = MainNavigator.router
 

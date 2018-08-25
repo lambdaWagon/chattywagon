@@ -7,7 +7,7 @@
     "publish": "exp publish",
     "precommit": "lint-staged",
     "pretty": "prettier --write \"**/*.js\"",
-    "postinstall": "remotedev-debugger --hostname localhost --port 5678 --injectserver"
+    "postinstall": "remotedev-debugger --hostname localhost --port 8080 --injectserver=react-native"
   },
   "lint-staged": {
     "*.js": [

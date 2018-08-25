@@ -12,7 +12,7 @@ export default (initialState => {
 
   const enhancer = compose(
     applyMiddleware(thunk, saga),
-    devTools({ name: Platform.OS, hostname: 'localhost', port: 5678 })
+    devTools({ name: Platform.OS, hostname: 'localhost', port: 8080 })
   )
 
   const store = createStore(reducers, initialState, enhancer)
