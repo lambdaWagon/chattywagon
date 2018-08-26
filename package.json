@@ -2,7 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "start": "exp start --ios",
+    "start": "exp start",
+    "ios": "exp start --ios",
     "android": "exp start --android",
     "publish": "exp publish",
     "precommit": "lint-staged",
