@@ -6,8 +6,7 @@
     "android": "exp start --android",
     "publish": "exp publish",
     "precommit": "lint-staged",
-    "pretty": "prettier --write \"**/*.js\"",
-    "postinstall": "remotedev-debugger --hostname localhost --port 8080 --injectserver=react-native"
+    "pretty": "prettier --write \"**/*.js\""
   },
   "lint-staged": {
     "*.js": [
@@ -45,8 +44,6 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "prettier": "^1.13.7",
-    "react-native-dotenv": "^0.2.0",
-    "remote-redux-devtools": "^0.5.12",
-    "remotedev-rn-debugger": "^0.8.3"
+    "react-native-dotenv": "^0.2.0"
   }
 }

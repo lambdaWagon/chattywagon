@@ -1,21 +1,16 @@
-import { Platform } from 'react-native'
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
 import thunk from 'redux-thunk'
-import devTools from 'remote-redux-devtools'
 
 import root, { getLocation } from '../actions'
 import reducers from '../reducers'
 
-export default (initialState => {
+export default (() => {
   const saga = createSagaMiddleware()
 
-  const enhancer = compose(
-    applyMiddleware(thunk, saga),
-    devTools({ name: Platform.OS, hostname: 'localhost', port: 8080 })
-  )
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-  const store = createStore(reducers, initialState, enhancer)
+  const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk, saga)))
 
   saga.run(root)
   store.close = () => store.dispatch(END)
