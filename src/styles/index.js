@@ -135,12 +135,20 @@ export default StyleSheet.create({
     height,
     width
   },
+  mapUIContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: '40%',
+    width: '98%',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2
+  },
 
   /* Map Marker Labels */
   markerContainer: {
     alignItems: 'center',
-    paddingRight: 10,
-    paddingTop: 2
+    paddingHorizontal: 4.5
   },
   bubble: {
     flexDirection: 'row',
@@ -152,7 +160,7 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 0.35,
     shadowRadius: 3,
-    shadowOffset: { width: 4, height: 4 }
+    shadowOffset: { width: 0, height: 4 }
   },
   markerImage: {
     width: 15,
@@ -160,14 +168,17 @@ export default StyleSheet.create({
     marginTop: 5
   },
   markerText: {
-    paddingVertical: 3,
+    lineHeight: 15,
+    paddingTop: 4,
+    paddingBottom: 3,
     paddingHorizontal: 10
   },
   timeContainer: {
     flex: -1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 3,
+    paddingTop: 2,
+    paddingBottom: 5,
     paddingHorizontal: 5,
     maxWidth: 100,
     minHeight: 30,
@@ -175,8 +186,15 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 2,
     backgroundColor: 'black'
   },
-  timeText: { fontSize: 16, color: 'white' },
-  minText: { fontSize: 10, color: 'white', marginTop: -3 }
+  timeText: {
+    fontSize: 16,
+    color: 'white'
+  },
+  minText: {
+    fontSize: 10,
+    color: 'white',
+    marginTop: -4
+  }
 })
 
 export const searchDestStyle = {

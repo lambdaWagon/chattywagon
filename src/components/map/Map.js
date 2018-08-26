@@ -11,7 +11,6 @@ import MarkerCurrentLocation from './MarkerCurrentLocation'
 import MarkerDestination from './MarkerDestination'
 import MarkerOrigin from './MarkerOrigin'
 import MapUISearch from './MapUISearch'
-import MapUIConfirm from './MapUIConfirm'
 
 import * as actions from '../../actions'
 import styles from '../../styles'
@@ -20,25 +19,28 @@ import mapStyle from '../../styles/mapStyle'
 const { width, height } = Dimensions.get('window')
 
 class Map extends Component {
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
-
   map = null
+
+  static propTypes = {
+    destinationSet: PropTypes.bool.isRequired,
+    drivers: PropTypes.array.isRequired,
+    navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
+    region: PropTypes.object.isRequired
+  }
 
   fitToCoords = coordinates => {
     this.map.fitToCoordinates(coordinates, {
       animated: true,
       edgePadding: {
-        right: width / 5,
-        bottom: height / 4,
-        left: width / 5,
-        top: height / 5
+        right: width / 4.5,
+        bottom: height / 2,
+        left: width / 4.5,
+        top: height / 7
       }
     })
     setTimeout(() => {
       this.props.navigation.navigate('MapUIConfirm')
-    }, 1000)
+    }, 500)
   }
 
   render() {
@@ -46,12 +48,12 @@ class Map extends Component {
     return (
       <Fragment>
         <MapView
+          customMapStyle={mapStyle}
+          provider={PROVIDER_GOOGLE}
           ref={c => (this.map = c)}
           region={region}
-          provider={PROVIDER_GOOGLE}
           showsPointsOfInterest={false}
           style={styles.map}
-          customMapStyle={mapStyle}
         >
           {drivers.map(d => (
             <MarkerDriver key={d.key} d={d} />
@@ -65,13 +67,6 @@ class Map extends Component {
       </Fragment>
     )
   }
-}
-
-Map.propTypes = {
-  destinationSet: PropTypes.bool.isRequired,
-  drivers: PropTypes.array.isRequired,
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
-  region: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ geolocation: { destinationSet, drivers, region } }) => ({

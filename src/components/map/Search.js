@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -7,7 +7,7 @@ import SearchDestinaton from './SearchDestination'
 import SearchPickup from './SearchPickup'
 import * as actions from '../../actions'
 
-class GooglePlacesInput extends Component {
+class GooglePlacesInput extends PureComponent {
   static navigationOptions = {
     drawerLabel: () => null
   }
@@ -34,10 +34,10 @@ class GooglePlacesInput extends Component {
   handleDestination = data => {
     const { navigation, setDestination } = this.props
     setDestination(data)
-    navigation.navigate('Map')
-    // const { goBack, state } = navigation
+    // navigation.navigate('Map')
+    const { goBack, state } = navigation
     // console.log(navigation)
-    // goBack(state.key)
+    goBack(state.key)
   }
 
   render() {

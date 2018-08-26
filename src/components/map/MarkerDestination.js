@@ -1,41 +1,60 @@
-import React from 'react'
-import { Image, Text, View } from 'react-native'
+import React, { Component } from 'react'
+import { LayoutAnimation, Image, Text, View } from 'react-native'
 import { Marker } from 'react-native-maps'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import styles from '../../styles'
 
-const MarkerDestination = ({ coordinates, destination, destinationSet, duration }) =>
-  coordinates && destinationSet ? (
-    <Marker anchor={{ x: 0.5, y: 1 }} coordinate={coordinates[coordinates.length - 1]} zIndex={5}>
-      <View style={[styles.markerContainer]}>
-        <View style={styles.bubble}>
-          <View style={styles.timeContainer}>
-            <Text style={styles.timeText}>{Math.round(duration)}</Text>
-            <Text style={styles.minText}>min</Text>
-          </View>
-          <View style={styles.markerText}>
-            <Text numberOfLines={1} ellipsizeMode="clip">
+const marker = require('../../../assets/marker4.png')
+
+class MarkerDestination extends Component {
+  static propTypes = {
+    coordinates: PropTypes.array,
+    destination: PropTypes.object.isRequired,
+    destinationSet: PropTypes.bool.isRequired
+  }
+
+  static defaultProps = { coordinates: null }
+
+  state = { width: null }
+
+  onLayout = ({
+    nativeEvent: {
+      layout: { width }
+    }
+  }) => {
+    if (width > 170) {
+      LayoutAnimation.spring({ mass: 8, friction: 1 })
+      this.setState({ width: 125 })
+    }
+  }
+
+  render() {
+    const { coordinates, destination, destinationSet } = this.props
+    const { width } = this.state
+    return coordinates && destinationSet ? (
+      <Marker
+        anchor={{ x: 0.5, y: 1 }}
+        coordinate={coordinates[coordinates.length - 1]}
+        onLayout={this.onLayout}
+        zIndex={5}
+      >
+        <View style={styles.markerContainer}>
+          <View style={styles.bubble}>
+            <Text
+              ellipsizeMode="tail"
+              numberOfLines={2}
+              style={[styles.markerText, { paddingVertical: 5, width }]}
+            >
               {destination.structured_formatting.main_text}
             </Text>
           </View>
+          <Image style={styles.markerImage} source={marker} />
         </View>
-        <Image style={styles.markerImage} source={require('../../../assets/marker4.png')} />
-      </View>
-    </Marker>
-  ) : null
-
-MarkerDestination.defaultProps = {
-  coordinates: null,
-  duration: null
-}
-
-MarkerDestination.propTypes = {
-  coordinates: PropTypes.array,
-  destination: PropTypes.object.isRequired,
-  destinationSet: PropTypes.bool.isRequired,
-  duration: PropTypes.number
+      </Marker>
+    ) : null
+  }
 }
 
 export default connect(
@@ -43,7 +62,7 @@ export default connect(
     geolocation: {
       destination,
       destinationSet,
-      directions: { coordinates, duration }
+      directions: { coordinates }
     }
-  }) => ({ coordinates, destination, destinationSet, duration })
+  }) => ({ coordinates, destination, destinationSet })
 )(MarkerDestination)
