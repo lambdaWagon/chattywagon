@@ -1,29 +1,15 @@
 import React, { Fragment } from 'react'
-import { StyleSheet } from 'react-native'
 import { createDrawerNavigator } from 'react-navigation'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
 import PropTypes from 'prop-types'
 
 import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../components/dashboard'
 import { MenuButton } from '../components/shared'
 import MapNavigator from './Map'
 
-const styles = StyleSheet.create({
-  button: {
-    position: 'absolute',
-    marginLeft: wp('6%'),
-    marginTop: hp('6%'),
-    zIndex: 999
-  }
-})
-
 export const MainNavigator = createDrawerNavigator(
   {
-    MapNavigator,
     Help,
+    MapNavigator,
     Payment,
     Promos,
     Profile,
@@ -35,7 +21,8 @@ export const MainNavigator = createDrawerNavigator(
     contentOptions: {
       activeTintColor: 'black',
       inactiveTintColor: 'white'
-    }
+    },
+    drawerLockMode: 'locked-closed'
   }
 )
 
@@ -57,9 +44,9 @@ const Main = ({ navigation }) => {
   return (
     <Fragment>
       <MenuButton
-        drawerState={navigation.state.isDrawerOpen}
-        navigate={() => navigation.toggleDrawer()}
-        style={styles.button}
+        // drawerState={navigation.state.isDrawerOpen}
+        // navigate={() => navigation.toggleDrawer()}
+        navigation={navigation}
       />
       <MainNavigator navigation={navigation} />
     </Fragment>
@@ -67,6 +54,19 @@ const Main = ({ navigation }) => {
 }
 
 Main.router = MainNavigator.router
+
+// const defaultGetStateForAction = Main.router.getStateForAction
+
+// Main.router.getStateForAction = (action, state) => {
+//   console.log(state, action)
+//   if (state && action.type === 'Navigation/NAVIGATE' && action.routeName === 'DrawerClose') {
+//     console.log(state, action)
+//   }
+//   if (state && action.type === 'Navigation/NAVIGATE' && action.routeName === 'DrawerOpen') {
+//     console.log(state, action)
+//   }
+//   return defaultGetStateForAction(action, state)
+// }
 
 Main.propTypes = {
   navigation: PropTypes.object.isRequired
