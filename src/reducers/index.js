@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux'
+import { createNavigationReducer } from 'react-navigation-redux-helpers'
 
 import authentication from './authentication'
 import geolocation from './geolocation'
+import { RootNavigator } from '../navigators'
 
-export default combineReducers({ authentication, geolocation })
+const navigation = createNavigationReducer(RootNavigator)
+
+export default combineReducers({ authentication, geolocation, navigation })

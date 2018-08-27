@@ -2,11 +2,11 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 import store from './src/store'
-import Root from './src/navigators'
+import { AppWithNavState } from './src/navigators'
 
 export default () => (
   <Provider store={store}>
-    <Root />
+    <AppWithNavState />
   </Provider>
 )
 
