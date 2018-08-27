@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ImageBackground, Text, View } from 'react-native'
+import { AsyncStorage, ImageBackground, Text, View } from 'react-native'
 import PropTypes from 'prop-types'
 
 import { Button } from '../shared'
@@ -10,6 +10,11 @@ const bg = require('../../../assets/splash.png')
 export default class SplashScreen extends Component {
   static propTypes = {
     navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired
+  }
+
+  async componentDidMount() {
+    const user = await AsyncStorage.getItem('user_data')
+    if (user) this.props.navigation.navigate('Main')
   }
 
   onPress = () => this.props.navigation.navigate('PhoneInput')

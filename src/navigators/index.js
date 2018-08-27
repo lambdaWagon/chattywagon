@@ -5,17 +5,12 @@ import {
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 
-import Loading from './Loading'
 import Auth from './Auth'
 import Main from './Main'
 
 const navMiddleware = createReactNavigationReduxMiddleware('root', state => state.navigation)
 
-const RootNavigator = createSwitchNavigator({
-  Loading,
-  Auth,
-  Main
-})
+const RootNavigator = createSwitchNavigator({ Auth, Main })
 
 const AppWithNavState = connect(({ navigation }) => ({ state: navigation }))(
   reduxifyNavigator(RootNavigator, 'root')
