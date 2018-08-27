@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Dimensions } from 'react-native'
+import { Dimensions, InteractionManager } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -38,9 +38,9 @@ class Map extends Component {
         top: height / 7
       }
     })
-    setTimeout(() => {
+    InteractionManager.runAfterInteractions(() => {
       this.props.navigation.navigate('MapUIConfirm')
-    }, 500)
+    })
   }
 
   render() {
