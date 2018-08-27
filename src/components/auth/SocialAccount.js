@@ -8,11 +8,11 @@ import { Button, Gradient, SocialButton } from '../shared'
 import styles from '../../styles'
 import * as actions from '../../actions'
 
-const SocialAccount = ({ navigation: { navigate }, signInWithFacebook, signUserOut }) => (
+const SocialAccount = ({ navigation: { navigate }, signInWithFacebook }) => (
   <Gradient>
     <View style={styles.authContainer}>
       <SocialButton type="Google" navigate={() => navigate('SocialLogin')} />
-      <SocialButton type="Twitter" navigate={signUserOut} />
+      <SocialButton type="Twitter" navigate={() => navigate('SocialLogin')} />
       <SocialButton type="Facebook" navigate={signInWithFacebook} />
       <SocialButton type="Email" navigate={() => navigate('SocialLogin')} />
     </View>
@@ -26,8 +26,7 @@ SocialAccount.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired
   }).isRequired,
-  signInWithFacebook: PropTypes.func.isRequired,
-  signUserOut: PropTypes.func.isRequired
+  signInWithFacebook: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
