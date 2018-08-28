@@ -36,10 +36,10 @@ const selector = type => {
   }
 }
 
-const SocialButton = ({ navigate, type }) => (
+const SocialButton = ({ navigate, type, style }) => (
   <TouchableOpacity activeOpactiy={0.75} onPress={navigate} style={styles.button}>
     {selector(type)}
-    <Text style={styles.text}>{type}</Text>
+    <Text style={[styles.text, style]}>{type}</Text>
   </TouchableOpacity>
 )
 

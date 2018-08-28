@@ -11,10 +11,22 @@ import * as actions from '../../actions'
 const SocialAccount = ({ navigation: { navigate }, signInWithFacebook }) => (
   <Gradient>
     <View style={styles.authContainer}>
-      <SocialButton type="Google" navigate={() => navigate('SocialLogin')} />
-      <SocialButton type="Twitter" navigate={() => navigate('SocialLogin')} />
+      <SocialButton
+        style={{ color: 'grey' }}
+        type="Google"
+        navigate={() => navigate('SocialLogin')}
+      />
+      <SocialButton
+        style={{ color: 'grey' }}
+        type="Twitter"
+        navigate={() => navigate('SocialLogin')}
+      />
       <SocialButton type="Facebook" navigate={signInWithFacebook} />
-      <SocialButton type="Email" navigate={() => navigate('SocialLogin')} />
+      <SocialButton
+        style={{ color: 'grey' }}
+        type="Email"
+        navigate={() => navigate('SocialLogin')}
+      />
     </View>
     <Button disabled icon={false} style={styles.socialButton}>
       CHOOSE AN ACCOUNT
