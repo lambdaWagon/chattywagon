@@ -8,13 +8,14 @@ import MapNavigator from './Map'
 
 export const MainNavigator = createDrawerNavigator(
   {
-    MapNavigator,
-    Help,
-    Payment,
-    Promos,
+    Map: MapNavigator,
+    // Help,
+    // Payment,
+    // Promos,
     Profile,
     Rides,
     Settings
+
     /*Help,
     MapNavigator,
     Payment,
