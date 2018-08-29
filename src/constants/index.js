@@ -9,5 +9,9 @@ export const SET_LOCATION = 'SET_LOCATION'
 export const SET_DESTINATION = 'SET_DESTINATION'
 export const SET_PICKUP = 'SET_PICKUP'
 export const SET_DIRECTIONS = 'SET_DIRECTIONS'
+export const RESET_DIRECTIONS = 'RESET_DIRECTIONS'
+
+/* Navigation */
+export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 
 export const ERROR = 'ERROR'

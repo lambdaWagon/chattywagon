@@ -13,16 +13,8 @@ export const MainNavigator = createDrawerNavigator(
     // Payment,
     // Promos,
     Profile,
-    Rides,
-    Settings
-
-    /*Help,
-    MapNavigator,
-    Payment,
-    Promos,
-    Profile,
-    Rides,
-    Settings */
+    Rides
+    // Settings
   },
   {
     contentComponent: Dashboard,
@@ -35,49 +27,19 @@ export const MainNavigator = createDrawerNavigator(
 )
 
 const Main = ({ navigation }) => {
-  // console.log('📍 main nav', navigation.state)
-  // if (navigation.state.routes[0].index === 0) {
-  //   return (
-  //     <Fragment>
-  //       <MenuButton
-  //         drawerState={navigation.state.isDrawerOpen}
-  //         navigate={() => navigation.toggleDrawer()}
-  //         style={styles.button}
-  //       />
-  //       <MainNavigator navigation={navigation} />
-  //     </Fragment>
-  //   )
-  // }
-  // return <MainNavigator navigation={navigation} />
-  return (
-    <Fragment>
-      <MenuButton
-        // drawerState={navigation.state.isDrawerOpen}
-        // navigate={() => navigation.toggleDrawer()}
-        navigation={navigation}
-      />
-      <MainNavigator navigation={navigation} />
-    </Fragment>
-  )
+  if (navigation.state.routes[0].index === 0) {
+    return (
+      <Fragment>
+        <MenuButton navigate={navigation} />
+        <MainNavigator navigation={navigation} />
+      </Fragment>
+    )
+  }
+  return <MainNavigator navigation={navigation} />
 }
 
 Main.router = MainNavigator.router
 
-// const defaultGetStateForAction = Main.router.getStateForAction
-
-// Main.router.getStateForAction = (action, state) => {
-//   console.log(state, action)
-//   if (state && action.type === 'Navigation/NAVIGATE' && action.routeName === 'DrawerClose') {
-//     console.log(state, action)
-//   }
-//   if (state && action.type === 'Navigation/NAVIGATE' && action.routeName === 'DrawerOpen') {
-//     console.log(state, action)
-//   }
-//   return defaultGetStateForAction(action, state)
-// }
-
-Main.propTypes = {
-  navigation: PropTypes.object.isRequired
-}
+Main.propTypes = { navigation: PropTypes.object.isRequired }
 
 export default Main

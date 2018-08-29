@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
   let nextState
 
   switch (action.type) {
-    case 'TOGGLE_DRAWER':
+    case types.TOGGLE_DRAWER:
       nextState = RootNavigator.router.getStateForAction(DrawerActions.toggleDrawer(), state)
       break
     case types.AUTH_USER:
@@ -25,6 +25,9 @@ export default (state = initialState, action) => {
         NavigationActions.navigate({ routeName: 'Auth' }),
         state
       )
+      break
+    case types.RESET_DIRECTIONS:
+      nextState = RootNavigator.router.getStateForAction(NavigationActions.back(), state)
       break
     default:
       nextState = RootNavigator.router.getStateForAction(action, state)

@@ -1,31 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Animated, TouchableOpacity } from 'react-native'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
 import PropTypes from 'prop-types'
+
+import * as actions from '../../actions'
+import style from '../../styles'
 
 class MenuButton extends Component {
   static propTypes = {
     nav: PropTypes.object.isRequired,
-    // navigation: PropTypes.object.isRequired,
-    toggle: PropTypes.func.isRequired
+    toggleDrawer: PropTypes.func.isRequired
   }
 
-  // state = { active: false }
-
-  // componentDidMount() {
-  //   if (!this.props.nav.isDrawerOpen && this.state.active) {
-  //     this.closeAnimation()
-  //   }
-  // }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // if (this.state.active !== nextState.active) {
-    //   return true
-    // }
+  shouldComponentUpdate(nextProps) {
     if (this.props.nav.isDrawerOpen !== nextProps.nav.isDrawerOpen) {
       return true
     }
@@ -41,7 +29,6 @@ class MenuButton extends Component {
       Animated.spring(this.bottomBarY, config),
       Animated.spring(this.middleBarOpacity, { toValue: 1, useNativeDriver: true })
     ]).start()
-    // this.setState({ active: false })
   }
 
   openAnimation = () => {
@@ -52,21 +39,19 @@ class MenuButton extends Component {
       Animated.spring(this.bottomBarY, { toValue: -10, useNativeDriver: true }),
       Animated.spring(this.middleBarOpacity, { toValue: 0, useNativeDriver: true })
     ]).start()
-    // this.setState({ active: true })
   }
 
   animate = () => {
     if (this.props.nav.isDrawerOpen) {
       this.closeAnimation()
-      this.props.toggle()
+      this.props.toggleDrawer()
     } else {
       this.openAnimation()
-      this.props.toggle()
+      this.props.toggleDrawer()
     }
   }
 
   render() {
-    // console.log(this.state.active)
     this.bottomBar = this.bottomBar || new Animated.Value(0)
     this.bottomBarX = this.bottomBarX || new Animated.Value(0)
     this.bottomBarY = this.bottomBarY || new Animated.Value(0)
@@ -117,17 +102,11 @@ class MenuButton extends Component {
           { translateX: this.bottomBarX },
           { translateY: this.bottomBarY }
         ]
-      },
-      button: {
-        position: 'absolute',
-        marginLeft: wp('6%'),
-        marginTop: hp('6%'),
-        zIndex: 999
       }
     }
 
     return (
-      <TouchableOpacity style={styles.button} onPress={this.animate}>
+      <TouchableOpacity style={style.menuButton} onPress={this.animate}>
         <Animated.View style={styles.container}>
           <Animated.View style={styles.topBar} />
           <Animated.View style={styles.middleBar} />
@@ -140,7 +119,7 @@ class MenuButton extends Component {
 
 const mapStateToProps = state => ({ nav: state.navigation.routes[1] })
 
-const mapDispatchToProps = dispatch => ({ toggle: () => dispatch({ type: 'TOGGLE_DRAWER' }) })
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 export default connect(
   mapStateToProps,

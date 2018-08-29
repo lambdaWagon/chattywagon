@@ -30,6 +30,12 @@ export default StyleSheet.create({
     marginBottom: 25,
     opacity: 0.1
   },
+  menuButton: {
+    position: 'absolute',
+    marginLeft: 20,
+    marginTop: 40,
+    zIndex: 999
+  },
 
   /* Splashscreen */
   logoContainer: {

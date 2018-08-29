@@ -51,6 +51,19 @@ export default (state = initialState, action) => {
       }
     case types.SET_DIRECTIONS:
       return { ...state, directions: action.directions }
+    case types.RESET_DIRECTIONS:
+      return {
+        ...state,
+        directions: {
+          coordinates: null,
+          distance: null,
+          duration: null
+        },
+        destination: {},
+        destinationSet: false,
+        pickupLocation: {},
+        pickupLocationSet: false
+      }
     default:
       return state
   }

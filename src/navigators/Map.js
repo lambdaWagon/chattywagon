@@ -1,24 +1,14 @@
 import React, { Fragment } from 'react'
-import { Animated, Easing, StyleSheet } from 'react-native'
+import { Animated, Easing } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { Map, MapUIConfirm, Search } from '../components/map'
 import { BackButton } from '../components/shared'
-
-const styles = StyleSheet.create({
-  button: {
-    position: 'absolute',
-    marginLeft: wp('6%'),
-    /* temporary position */
-    marginTop: hp('50%'),
-    zIndex: 999
-  }
-})
+import * as actions from '../actions'
+import styles from '../styles'
 
 const transitionConfig = () => ({
   transitionSpec: {
@@ -60,25 +50,28 @@ const Navigator = createStackNavigator(
   }
 )
 
-const MapNavigator = ({ navigation }) => {
-  // console.log('📍 map nav', navigation.state)
-  const { state, goBack } = navigation
-  const nav = {
-    ...navigation,
-    dismiss: () => goBack(state.key)
+const MapNavigator = ({ resetDirections, navigation }) => {
+  if (navigation.state.index > 0) {
+    return (
+      <Fragment>
+        <BackButton navigate={resetDirections} style={styles.menuButton} />
+        <Navigator navigation={navigation} />
+      </Fragment>
+    )
   }
-  return (
-    <Fragment>
-      <BackButton navigate={() => goBack(null)} style={styles.button} />
-      <Navigator navigation={nav} />
-    </Fragment>
-  )
+  return <Navigator navigation={navigation} />
 }
 
 MapNavigator.router = Navigator.router
 
 MapNavigator.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  resetDirections: PropTypes.func.isRequired
 }
 
-export default MapNavigator
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MapNavigator)
