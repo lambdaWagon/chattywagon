@@ -8,19 +8,26 @@ import MapNavigator from './Map'
 
 export const MainNavigator = createDrawerNavigator(
   {
-    Help,
     MapNavigator,
+    Help,
     Payment,
     Promos,
     Profile,
     Rides,
     Settings
+    /*Help,
+    MapNavigator,
+    Payment,
+    Promos,
+    Profile,
+    Rides,
+    Settings */
   },
   {
     contentComponent: Dashboard,
     contentOptions: {
-      activeTintColor: 'black',
-      inactiveTintColor: 'white'
+      activeTintColor: '#585858',
+      inactiveTintColor: 'black'
     },
     drawerLockMode: 'locked-closed'
   }

@@ -14,7 +14,7 @@ export default class SplashScreen extends Component {
 
   async componentDidMount() {
     const user = await AsyncStorage.getItem('user_data')
-    if (user) this.props.navigation.navigate('Main')
+    if (!user) this.props.navigation.navigate('Main') //TODO: change back to if (user)
   }
 
   onPress = () => this.props.navigation.navigate('PhoneInput')

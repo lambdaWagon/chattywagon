@@ -13,12 +13,13 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 75,
-    backgroundColor: '#e8863c'
+    backgroundColor: 'white'
   },
   view: {
     height: 150,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#F5F5F5'
   },
   image: {
     height: 100,
@@ -29,7 +30,7 @@ const style = StyleSheet.create({
     height: 40
   },
   text: {
-    color: 'white',
+    color: 'black',
     marginHorizontal: 16
   }
 })

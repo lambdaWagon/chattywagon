@@ -194,6 +194,68 @@ export default StyleSheet.create({
     fontSize: 10,
     color: 'white',
     marginTop: -4
+  },
+  /* Profile */
+  profileContainer: {
+    flex: 1,
+    height: '100%',
+    alignItems: 'center',
+    top: 85,
+    marginBottom: 30
+  },
+  avatarContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  image: {
+    height: 200,
+    width: 200,
+    borderRadius: 100,
+    marginBottom: 10
+  },
+  imageWithKeyboard: {
+    width: deviceCheck(150, 100),
+    height: deviceCheck(150, 100),
+    borderRadius: deviceCheck(75, 50),
+    marginBottom: 10
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  editTouch: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: deviceCheck(20, 30)
+  },
+  editText: {
+    marginRight: 10,
+    fontSize: deviceCheck(10, 0)
+  },
+  input: {
+    borderBottomWidth: 2,
+    paddingBottom: 5,
+    marginRight: 10,
+    width: '70%',
+    fontSize: deviceCheck(10, 15)
+  },
+  socialIcons: {
+    alignItems: 'center'
+  },
+  text: {
+    marginBottom: 15,
+    fontSize: deviceCheck(10, 15)
+  },
+  buttonContainer: {
+    width: deviceCheck(250, 200),
+    height: deviceCheck(75, 50),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#c4f4ff',
+    backgroundColor: 'rgba(0, 0, 0, .65)',
+    marginTop: deviceCheck(40, 10)
   }
 })
 
