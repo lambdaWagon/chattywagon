@@ -46,6 +46,8 @@ export const setPickup = pickupLocation => ({ type: types.SET_PICKUP, pickupLoca
 
 export const setDirections = directions => ({ type: types.SET_DIRECTIONS, directions })
 
+export const resetDirections = () => ({ type: types.RESET_DIRECTIONS })
+
 const updateDriver = (type, { key, location, distance }) => ({
   type,
   driver: { key, latitude: location[0], longitude: location[1], distance }
