@@ -12,8 +12,8 @@ const style = {
     marginBottom: 100,
     shadowColor: 'black',
     shadowOpacity: 0.25,
-    shadowRadius: 10,
-    shadowOffset: { width: 10, height: 10 }
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 4 }
   },
   buttonText: {
     fontSize: 16,

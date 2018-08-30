@@ -310,8 +310,8 @@ export const searchDestStyle = {
     fontSize: 16,
     shadowColor: 'black',
     shadowOpacity: 0.25,
-    shadowRadius: 10,
-    shadowOffset: { width: 10, height: 10 },
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 4 },
     width: width - 20
   }
 }
@@ -337,8 +337,8 @@ export const searchPickupStyle = {
     fontSize: 16,
     shadowColor: 'black',
     shadowOpacity: 0.25,
-    shadowRadius: 10,
-    shadowOffset: { width: 10, height: 10 },
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 4 },
     width: width - 20
   }
 }
