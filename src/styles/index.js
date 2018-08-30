@@ -201,6 +201,27 @@ export default StyleSheet.create({
     color: 'white',
     marginTop: -4
   },
+
+  /* Current Location */
+  currentLocation: {
+    width: 50,
+    height: 50,
+    marginTop: 8
+  },
+  currentLocAnim: {
+    width: 50,
+    height: 50,
+    zIndex: 3
+  },
+  currentLocMarker: {
+    left: 9.5,
+    top: -8,
+    width: 31,
+    height: 35,
+    zIndex: 4,
+    position: 'absolute'
+  },
+
   /* Profile */
   profileContainer: {
     flex: 1,

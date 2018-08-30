@@ -41,4 +41,4 @@ export default class App extends PureComponent {
   }
 }
 
-console.ignoredYellowBox = ['Remote debugger']
+console.ignoredYellowBox = ['Remote debugger', 'Trying to animate a view on an unmounted component']

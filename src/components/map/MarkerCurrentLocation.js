@@ -1,9 +1,13 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import { Marker } from 'react-native-maps'
 import { connect } from 'react-redux'
+import LottieView from 'lottie-react-native'
+
+import styles from '../../styles'
 
 const markerImage = require('../../../assets/marker.png')
+const pulse = require('../../../assets/pulse.json')
 
 const MarkerCurrentLocation = ({ currentLocation, currentLocationSet, destinationSet }) =>
   currentLocationSet &&
@@ -14,7 +18,10 @@ const MarkerCurrentLocation = ({ currentLocation, currentLocationSet, destinatio
       title={currentLocation.address}
       zIndex={2}
     >
-      <Image style={{ width: 31, height: 35 }} source={markerImage} />
+      <View style={styles.currentLocation}>
+        <LottieView style={styles.currentLocAnim} source={pulse} autoPlay loop />
+        <Image style={styles.currentLocMarker} source={markerImage} />
+      </View>
     </Marker>
   )
 
