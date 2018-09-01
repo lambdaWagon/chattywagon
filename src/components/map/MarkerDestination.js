@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { LayoutAnimation, Image, Text, View } from 'react-native'
 import { Marker } from 'react-native-maps'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import styles from '../../styles'
 
 const marker = require('../../../assets/marker4.png')
 
-class MarkerDestination extends Component {
+class MarkerDestination extends PureComponent {
   static propTypes = {
     coordinates: PropTypes.array,
     destination: PropTypes.object.isRequired,
@@ -25,7 +25,7 @@ class MarkerDestination extends Component {
     }
   }) => {
     if (width > 170) {
-      LayoutAnimation.spring({ mass: 8, friction: 1 })
+      LayoutAnimation.spring()
       this.setState({ width: 125 })
     }
   }
@@ -42,11 +42,7 @@ class MarkerDestination extends Component {
       >
         <View style={styles.markerContainer}>
           <View style={styles.bubble}>
-            <Text
-              ellipsizeMode="tail"
-              numberOfLines={2}
-              style={[styles.markerText, { paddingVertical: 5, width }]}
-            >
+            <Text ellipsizeMode="tail" numberOfLines={2} style={[styles.markerText, { width }]}>
               {destination.structured_formatting.main_text}
             </Text>
           </View>

@@ -143,12 +143,34 @@ export default StyleSheet.create({
   },
   mapUIContainer: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    height: '40%',
+    justifyContent: 'flex-start',
+    height: '45%',
     width: '98%',
     backgroundColor: 'white',
     borderTopLeftRadius: 2,
-    borderTopRightRadius: 2
+    borderTopRightRadius: 2,
+    shadowColor: 'black',
+    shadowOpacity: 0.35,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 0 }
+  },
+  confirmText: {
+    fontSize: 24,
+    fontFamily: 'mono',
+    color: primaryColor
+  },
+  confirmDetails: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: 25,
+    position: 'absolute',
+    width: 294
+  },
+  confirmRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%'
   },
 
   /* Map Marker Labels */
@@ -193,13 +215,15 @@ export default StyleSheet.create({
     backgroundColor: 'black'
   },
   timeText: {
+    fontFamily: 'mono',
     fontSize: 16,
     color: 'white'
   },
   minText: {
     fontSize: 10,
     color: 'white',
-    marginTop: -4
+    letterSpacing: 1,
+    marginTop: -3
   },
 
   /* Current Location */

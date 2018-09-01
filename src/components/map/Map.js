@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Dimensions, InteractionManager } from 'react-native'
+import { Dimensions } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -10,7 +10,9 @@ import MarkerDriver from './MarkerDriver'
 import MarkerCurrentLocation from './MarkerCurrentLocation'
 import MarkerDestination from './MarkerDestination'
 import MarkerOrigin from './MarkerOrigin'
-import MapUISearch from './MapUISearch'
+import SearchButton from './SearchButton'
+import Search from './Search'
+import ConfirmRide from './ConfirmRide'
 
 import * as actions from '../../actions'
 import styles from '../../styles'
@@ -22,9 +24,7 @@ class Map extends Component {
   map = null
 
   static propTypes = {
-    destinationSet: PropTypes.bool.isRequired,
     drivers: PropTypes.array.isRequired,
-    navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
     region: PropTypes.object.isRequired
   }
 
@@ -38,13 +38,10 @@ class Map extends Component {
         top: height / 7
       }
     })
-    InteractionManager.runAfterInteractions(() => {
-      this.props.navigation.navigate('MapUIConfirm')
-    })
   }
 
   render() {
-    const { destinationSet, drivers, navigation, region } = this.props
+    const { drivers, region } = this.props
     return (
       <Fragment>
         <MapView
@@ -55,20 +52,23 @@ class Map extends Component {
           showsPointsOfInterest={false}
           style={styles.map}
         >
-          {drivers.map(d => <MarkerDriver key={d.key} d={d} />)}
+          {drivers.map(d => (
+            <MarkerDriver key={d.key} d={d} />
+          ))}
           <Directions fitToCoords={this.fitToCoords} />
           <MarkerCurrentLocation />
           <MarkerOrigin />
           <MarkerDestination />
         </MapView>
-        {destinationSet || <MapUISearch navigate={navigation.navigate} />}
+        <ConfirmRide />
+        <Search />
+        <SearchButton />
       </Fragment>
     )
   }
 }
 
-const mapStateToProps = ({ geolocation: { destinationSet, drivers, region } }) => ({
-  destinationSet,
+const mapStateToProps = ({ geolocation: { drivers, region } }) => ({
   drivers,
   region
 })
