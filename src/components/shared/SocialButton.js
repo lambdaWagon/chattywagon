@@ -36,15 +36,18 @@ const selector = type => {
   }
 }
 
-const SocialButton = ({ navigate, type, style }) => (
+const SocialButton = ({ navigate, style, type }) => (
   <TouchableOpacity activeOpactiy={0.75} onPress={navigate} style={styles.button}>
     {selector(type)}
     <Text style={[styles.text, style]}>{type}</Text>
   </TouchableOpacity>
 )
 
+SocialButton.defaultProps = { style: undefined }
+
 SocialButton.propTypes = {
   navigate: PropTypes.func.isRequired,
+  style: PropTypes.object,
   type: PropTypes.string.isRequired
 }
 
