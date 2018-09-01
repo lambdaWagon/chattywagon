@@ -1,44 +1,71 @@
 import React, { PureComponent } from 'react'
 import { Provider } from 'react-redux'
-import { AppLoading, Asset, Font } from 'expo'
+import { AppLoading, Asset, Font, SplashScreen } from 'expo'
+import { ImageBackground, YellowBox } from 'react-native'
 import { setCustomText, setCustomTextInput } from 'react-native-global-props'
+import LottieView from 'lottie-react-native'
 
 import store from './src/store'
 import { AppWithNavState } from './src/navigators'
 import { customProps } from './src/styles'
 
-export default class App extends PureComponent {
-  state = { isReady: false }
+const loadingAnim = require('./assets/loader.json')
+const bg = require('./assets/splash.png')
 
-  onAssetLoad = () => {
-    setCustomText(customProps.text)
-    setCustomTextInput(customProps.textInput)
-    this.setState({ isReady: true })
+export default class App extends PureComponent {
+  state = {
+    splashScreen: false,
+    appReady: false
   }
 
-  loadAssets = async () => {
-    const bg = require('./assets/splash.png')
-    const fonts = Font.loadAsync({
+  loadFontsAsync = async () => {
+    SplashScreen.preventAutoHide()
+    SplashScreen.hide()
+    await Font.loadAsync({
       logo: require('./assets/fonts/logo.otf'),
       book: require('./assets/fonts/book.otf'),
       bold: require('./assets/fonts/bold.otf'),
-      black: require('./assets/fonts/black.otf')
+      black: require('./assets/fonts/black.otf'),
+      mono: require('./assets/fonts/mono-light.otf')
     })
-    const image = Asset.fromModule(bg).downloadAsync()
-
-    await Promise.all([fonts, image])
+    setCustomText(customProps.text)
+    setCustomTextInput(customProps.textInput)
+    setTimeout(() => {
+      this.setState({ splashScreen: false, appReady: true })
+    }, 2500)
   }
 
+  loadSplashAsync = async () => Asset.fromModule(bg).downloadAsync()
+
   render() {
-    if (this.state.isReady) {
+    const { appReady, splashScreen } = this.state
+
+    if (splashScreen) {
+      return (
+        <ImageBackground source={bg} onLoad={this.loadFontsAsync} style={{ flex: 1 }}>
+          <LottieView source={loadingAnim} style={{}} autoPlay={splashScreen} loop />
+        </ImageBackground>
+      )
+    }
+    if (appReady) {
       return (
         <Provider store={store}>
           <AppWithNavState />
         </Provider>
       )
     }
-    return <AppLoading startAsync={this.loadAssets} onFinish={this.onAssetLoad} />
+    return (
+      <AppLoading
+        startAsync={this.loadSplashAsync}
+        onFinish={() => this.setState({ splashScreen: true })}
+        autoHideSplash={false}
+      />
+    )
   }
 }
 
-console.ignoredYellowBox = ['Remote debugger', 'Trying to animate a view on an unmounted component']
+YellowBox.ignoreWarnings([
+  'Remote debugger',
+  'Trying to animate a view on an unmounted component',
+  "Warning: Can't call setState (or forceUpdate) on an unmounted component."
+])
