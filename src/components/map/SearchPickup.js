@@ -1,11 +1,14 @@
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import * as actions from '../../actions'
 import { config } from '../../config/firebase'
 import { searchPickupStyle } from '../../styles'
 
-const SearchPickup = ({ displayPickup, handleDisplay, handlePickupSubmit }) => (
+const SearchPickup = ({ handlePickupSubmit, pickupInput, blurPickup, focusPickup }) => (
   <GooglePlacesAutocomplete
     autoFocus={false}
     currentLocation
@@ -16,7 +19,7 @@ const SearchPickup = ({ displayPickup, handleDisplay, handlePickupSubmit }) => (
       rankby: 'distance',
       types: 'establishment'
     }}
-    listViewDisplayed={displayPickup}
+    listViewDisplayed={pickupInput}
     minLength={2}
     nearByPlacesAPI="GooglePlacesSearch"
     onPress={data => handlePickupSubmit(data)}
@@ -25,8 +28,8 @@ const SearchPickup = ({ displayPickup, handleDisplay, handlePickupSubmit }) => (
     returnKeyType="search"
     styles={searchPickupStyle}
     textInputProps={{
-      onBlur: () => handleDisplay(displayPickup, false),
-      onFocus: () => handleDisplay(displayPickup, true)
+      onBlur: blurPickup,
+      onFocus: focusPickup
     }}
     query={{
       key: config.apiKey,
@@ -40,9 +43,13 @@ const SearchPickup = ({ displayPickup, handleDisplay, handlePickupSubmit }) => (
 )
 
 SearchPickup.propTypes = {
-  displayPickup: PropTypes.bool.isRequired,
-  handleDisplay: PropTypes.func.isRequired,
-  handlePickupSubmit: PropTypes.func.isRequired
+  blurPickup: PropTypes.func.isRequired,
+  focusPickup: PropTypes.func.isRequired,
+  handlePickupSubmit: PropTypes.func.isRequired,
+  pickupInput: PropTypes.bool.isRequired
 }
 
-export default SearchPickup
+export default connect(
+  ({ ui: { pickupInput } }) => ({ pickupInput }),
+  dispatch => bindActionCreators(actions, dispatch)
+)(SearchPickup)
