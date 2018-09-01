@@ -1,29 +1,23 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { bindActionCreators } from 'redux'
+import { Animated, Modal } from 'react-native'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import SearchDestinaton from './SearchDestination'
 import SearchPickup from './SearchPickup'
+import BackButton from '../shared/BackButton'
 import * as actions from '../../actions'
+import styles from '../../styles'
 
 class GooglePlacesInput extends PureComponent {
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
+  opacity = new Animated.Value(0)
 
   destinationInput = null
-
-  state = {
-    displayPickup: false,
-    displayDestination: false
-  }
 
   setRef = r => {
     if (r) this.destinationInput = r.refs.textInput
   }
-
-  handleDisplay = (name, bool) => this.setState({ [name]: bool })
 
   handlePickupSubmit = data => {
     const { setPickup } = this.props
@@ -31,45 +25,46 @@ class GooglePlacesInput extends PureComponent {
     this.destinationInput.focus()
   }
 
-  handleDestination = data => {
-    const { navigation, setDestination } = this.props
-    setDestination(data)
-    // navigation.navigate('Map')
-    const { goBack, state } = navigation
-    // console.log(navigation)
-    goBack(state.key)
-  }
-
   render() {
-    const { displayPickup, displayDestination } = this.state
+    if (this.props.searchModal) {
+      Animated.timing(this.opacity, {
+        toValue: 1,
+        duration: 1500,
+        useNativeDriver: true
+      }).start()
+    } else {
+      Animated.timing(this.opacity, {
+        toValue: 0,
+        duration: 10,
+        useNativeDriver: true
+      }).start()
+    }
+    const style = {
+      opacity: this.opacity.interpolate({
+        inputRange: [0, 0, 1],
+        outputRange: [0, 0, 1]
+      })
+    }
 
     return (
-      <Fragment>
-        <SearchPickup
-          displayPickup={displayPickup}
-          handleDisplay={this.handleDisplay}
-          handlePickupSubmit={this.handlePickupSubmit}
-        />
-        <SearchDestinaton
-          displayDestination={displayDestination}
-          handleDisplay={this.handleDisplay}
-          handleDestination={this.handleDestination}
-          setRef={this.setRef}
-        />
-      </Fragment>
+      <Modal animationType="slide" transparent visible={this.props.searchModal}>
+        <Animated.View style={[styles.menuButton, style]}>
+          <BackButton navigate={this.props.hideSearch} />
+        </Animated.View>
+        <SearchPickup handlePickupSubmit={this.handlePickupSubmit} />
+        <SearchDestinaton setRef={this.setRef} />
+      </Modal>
     )
   }
 }
 
 GooglePlacesInput.propTypes = {
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
-  setDestination: PropTypes.func.isRequired,
-  setPickup: PropTypes.func.isRequired
+  searchModal: PropTypes.bool.isRequired,
+  setPickup: PropTypes.func.isRequired,
+  hideSearch: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
-
 export default connect(
-  null,
-  mapDispatchToProps
+  ({ ui: { searchModal } }) => ({ searchModal }),
+  dispatch => bindActionCreators(actions, dispatch)
 )(GooglePlacesInput)
