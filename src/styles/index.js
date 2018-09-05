@@ -199,7 +199,8 @@ export default StyleSheet.create({
     lineHeight: 15,
     paddingTop: 4,
     paddingBottom: 3,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    fontSize: deviceCheck(10, null)
   },
   timeContainer: {
     flex: -1,
@@ -216,11 +217,11 @@ export default StyleSheet.create({
   },
   timeText: {
     fontFamily: 'mono',
-    fontSize: 16,
+    fontSize: deviceCheck(10, 16),
     color: 'white'
   },
   minText: {
-    fontSize: 10,
+    fontSize: deviceCheck(8, 10),
     color: 'white',
     letterSpacing: 1,
     marginTop: -3
@@ -318,7 +319,9 @@ export const searchDestStyle = {
     position: 'absolute',
     top: 0
   },
+
   listView: { top: 4 },
+  description: { fontSize: deviceCheck(8, null) },
   textInputContainer: {
     alignSelf: 'center',
     backgroundColor: 'rgba(0,0,0,0)',

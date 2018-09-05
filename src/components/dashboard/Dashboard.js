@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { DrawerItems } from 'react-navigation'
 import PropTypes from 'prop-types'
 
+import { deviceCheck } from '../../styles'
 import * as actions from '../../actions'
 
 const avatar = require('../../../assets/avatarplaceholder.png')
@@ -49,7 +50,8 @@ const Dashboard = props => {
       </View>
       <DrawerItems {...props} />
       <TouchableOpacity style={style.drawerItem} onPress={signOut}>
-        <Text style={style.text}>Sign Out</Text>
+        <Text style={[style.text, { fontSize: deviceCheck(10, null) }]}>Sign Out</Text>{' '}
+        {/*[style.text, {}]*/}
       </TouchableOpacity>
     </View>
   )

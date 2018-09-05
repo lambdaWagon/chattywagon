@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Map } from '../components/map'
 import { Dashboard, Profile, Rides } from '../components/dashboard'
 import { MenuButton } from '../components/shared'
+import { deviceCheck } from '../styles'
 
 export const MainNavigator = createDrawerNavigator(
   {
@@ -18,6 +19,9 @@ export const MainNavigator = createDrawerNavigator(
   {
     contentComponent: Dashboard,
     contentOptions: {
+      labelStyle: {
+        fontSize: deviceCheck(10, null)
+      },
       activeTintColor: '#585858',
       inactiveTintColor: 'black'
     },
