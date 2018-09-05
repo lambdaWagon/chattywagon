@@ -2,18 +2,28 @@ import React, { Fragment } from 'react'
 import { createDrawerNavigator } from 'react-navigation'
 import PropTypes from 'prop-types'
 
-import { Dashboard, Help, Payment, Promos, Profile, Rides, Settings } from '../components/dashboard'
+import {
+  Dashboard,
+  Help,
+  Payment,
+  Promos,
+  Profile,
+  Rides,
+  Settings,
+  Contact
+} from '../components/dashboard'
 import { MenuButton } from '../components/shared'
 import MapNavigator from './Map'
 
 export const MainNavigator = createDrawerNavigator(
   {
     Map: MapNavigator,
+    Profile,
+    Rides
     // Help,
     // Payment,
     // Promos,
-    Profile,
-    Rides
+    // Contact,
     // Settings
   },
   {

@@ -2,11 +2,13 @@ import React from 'react'
 import { Dimensions, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 
+import { deviceCheck } from '../../styles/'
+
 const style = {
   button: {
     backgroundColor: 'white',
     borderRadius: 2,
-    height: 40,
+    height: deviceCheck(50, 40),
     width: Dimensions.get('window').width - 20,
     marginTop: 100,
     marginBottom: 100,
@@ -16,7 +18,7 @@ const style = {
     shadowOffset: { width: 10, height: 10 }
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: deviceCheck(12, 16),
     padding: 10
   }
 }
