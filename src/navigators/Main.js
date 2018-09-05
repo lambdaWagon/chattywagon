@@ -2,24 +2,13 @@ import React, { Fragment } from 'react'
 import { createDrawerNavigator } from 'react-navigation'
 import PropTypes from 'prop-types'
 
-import {
-  Dashboard,
-  Help,
-  Payment,
-  Promos,
-  Profile,
-  Rides,
-  Settings,
-  Contact
-} from '../components/dashboard'
+import { Map } from '../components/map'
+import { Dashboard, Profile, Rides } from '../components/dashboard'
 import { MenuButton } from '../components/shared'
-import MapNavigator from './Map'
 
 export const MainNavigator = createDrawerNavigator(
   {
-    Map: MapNavigator,
-    Profile,
-    Rides
+    Map
     // Help,
     // Payment,
     // Promos,
@@ -37,7 +26,7 @@ export const MainNavigator = createDrawerNavigator(
 )
 
 const Main = ({ navigation }) => {
-  if (navigation.state.routes[0].index === 0) {
+  if (navigation.state.routes[0].key === 'Map') {
     return (
       <Fragment>
         <MenuButton navigate={navigation} />

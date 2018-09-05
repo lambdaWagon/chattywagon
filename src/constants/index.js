@@ -12,6 +12,15 @@ export const SET_DIRECTIONS = 'SET_DIRECTIONS'
 export const RESET_DIRECTIONS = 'RESET_DIRECTIONS'
 
 /* Navigation */
-export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
+export const TOGGLE_DRAWER = 'Navigation/TOGGLE_DRAWER'
+
+/* UI */
+export const SHOW_SEARCH = 'UI/SHOW_SEARCH'
+export const HIDE_SEARCH = 'UI/HIDE_SEARCH'
+export const SHOW_CONFIRM = 'UI/SHOW_CONFIRM'
+export const BLUR_PICKUP = 'UI/BLUR_PICKUP'
+export const FOCUS_PICKUP = 'UI/FOCUS_PICKUP'
+export const BLUR_DEST = 'UI/BLUR_DESTINATION'
+export const FOCUS_DEST = 'UI/FOCUS_DESTINATION'
 
 export const ERROR = 'ERROR'

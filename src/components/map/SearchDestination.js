@@ -1,11 +1,14 @@
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import * as actions from '../../actions'
 import { config } from '../../config/firebase'
 import { searchDestStyle } from '../../styles'
 
-const SearchDestination = ({ displayDestination, handleDisplay, handleDestination, setRef }) => (
+const SearchDestination = ({ blurDest, destinationInput, focusDest, setDestination, setRef }) => (
   <GooglePlacesAutocomplete
     autoFocus
     debounce={200}
@@ -15,18 +18,18 @@ const SearchDestination = ({ displayDestination, handleDisplay, handleDestinatio
       rankby: 'distance',
       types: 'establishment'
     }}
-    listViewDisplayed={displayDestination}
+    listViewDisplayed={destinationInput}
     minLength={2}
     nearByPlacesAPI="GooglePlacesSearch"
-    onPress={data => handleDestination(data)}
+    onPress={data => setDestination(data)}
     placeholder="Where to?"
     placeholderTextColor="black"
     ref={setRef}
     returnKeyType="search"
     styles={searchDestStyle}
     textInputProps={{
-      onBlur: () => handleDisplay(displayDestination, false),
-      onFocus: () => handleDisplay(displayDestination, true)
+      onBlur: blurDest,
+      onFocus: focusDest
     }}
     query={{
       key: config.apiKey,
@@ -40,10 +43,14 @@ const SearchDestination = ({ displayDestination, handleDisplay, handleDestinatio
 )
 
 SearchDestination.propTypes = {
-  displayDestination: PropTypes.bool.isRequired,
-  handleDisplay: PropTypes.func.isRequired,
-  handleDestination: PropTypes.func.isRequired,
+  destinationInput: PropTypes.bool.isRequired,
+  blurDest: PropTypes.func.isRequired,
+  focusDest: PropTypes.func.isRequired,
+  setDestination: PropTypes.func.isRequired,
   setRef: PropTypes.func.isRequired
 }
 
-export default SearchDestination
+export default connect(
+  ({ ui: { destinationInput } }) => ({ destinationInput }),
+  dispatch => bindActionCreators(actions, dispatch)
+)(SearchDestination)

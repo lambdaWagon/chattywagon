@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ({ navigation }) => (
+export default () => (
   <SafeAreaView style={styles.container}>
     <Text>Placeholder</Text>
   </SafeAreaView>

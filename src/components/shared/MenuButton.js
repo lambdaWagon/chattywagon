@@ -59,6 +59,8 @@ class MenuButton extends Component {
     this.topBar = this.topBar || new Animated.Value(0)
     this.topBarMargin = this.topBarMargin || new Animated.Value(0)
 
+    const hitSlop = { top: 20, bottom: 20, left: 20, right: 20 }
+
     const styles = {
       container: {
         width: 35,
@@ -106,7 +108,7 @@ class MenuButton extends Component {
     }
 
     return (
-      <TouchableOpacity style={style.menuButton} onPress={this.animate}>
+      <TouchableOpacity hitSlop={hitSlop} style={style.menuButton} onPress={this.animate}>
         <Animated.View style={styles.container}>
           <Animated.View style={styles.topBar} />
           <Animated.View style={styles.middleBar} />
