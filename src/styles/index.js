@@ -177,7 +177,9 @@ export default StyleSheet.create({
   markerContainer: {
     alignItems: 'center',
     paddingHorizontal: 4.5,
-    height: deviceCheck(100, null)
+    height: deviceCheck(100, null),
+    marginLeft: deviceCheck(30, null),
+    marginRight: deviceCheck(100, null)
   },
   bubble: {
     flexDirection: 'row',
