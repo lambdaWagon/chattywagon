@@ -176,7 +176,8 @@ export default StyleSheet.create({
   /* Map Marker Labels */
   markerContainer: {
     alignItems: 'center',
-    paddingHorizontal: 4.5
+    paddingHorizontal: 4.5,
+    height: deviceCheck(100, null)
   },
   bubble: {
     flexDirection: 'row',
@@ -203,7 +204,7 @@ export default StyleSheet.create({
     fontSize: deviceCheck(10, null)
   },
   timeContainer: {
-    flex: -1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 2,
@@ -211,6 +212,7 @@ export default StyleSheet.create({
     paddingHorizontal: 5,
     maxWidth: 100,
     minHeight: 30,
+    height: deviceCheck('100%', null),
     borderTopLeftRadius: 2,
     borderBottomLeftRadius: 2,
     backgroundColor: 'black'
