@@ -155,7 +155,7 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 0 }
   },
   confirmText: {
-    fontSize: 24,
+    fontSize: deviceCheck(12, 24),
     fontFamily: 'mono',
     color: primaryColor
   },

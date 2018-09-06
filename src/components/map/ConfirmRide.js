@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import * as actions from '../../actions'
 import Button from '../shared/Button'
 import { Car, Time } from '../shared/icons'
+import { deviceCheck } from '../../styles'
 import styles from '../../styles'
 
 const marker = require('../../../assets/marker4.png')
@@ -57,7 +58,8 @@ class ConfirmRide extends Component {
         marginLeft: 6,
         opacity: 0.9,
         height: 45,
-        top: 71,
+        top: deviceCheck(82.5, 71),
+        height: deviceCheck('40%', '38%'),
         position: 'absolute'
       },
       location: {
@@ -67,11 +69,13 @@ class ConfirmRide extends Component {
       },
       text: {
         marginLeft: 10,
-        width: 263
+        width: 263,
+        fontSize: deviceCheck(10, null)
       },
       time: {
         marginLeft: 10,
-        fontFamily: 'mono'
+        fontFamily: 'mono',
+        fontSize: deviceCheck(10, null)
       },
       marker: {
         width: 15,
