@@ -4,10 +4,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { deviceCheck } from '../../styles/'
 import * as actions from '../../actions'
-import styles from '../../styles'
 import { SearchIcon } from '../shared/icons'
+import styles, { deviceCheck } from '../../styles'
 
 const hitSlop = { top: 20, bottom: 20, left: 20, right: 20 }
 

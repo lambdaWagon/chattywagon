@@ -8,8 +8,7 @@ import PropTypes from 'prop-types'
 import * as actions from '../../actions'
 import Button from '../shared/Button'
 import { Car, Time } from '../shared/icons'
-import { deviceCheck } from '../../styles'
-import styles from '../../styles'
+import styles, { deviceCheck } from '../../styles'
 
 const marker = require('../../../assets/marker4.png')
 
@@ -37,6 +36,7 @@ class ConfirmRide extends Component {
       outputRange: [0, -300]
     })
     const style = {
+      button: { marginBottom: 40 },
       vue: {
         bottom: -300,
         transform: [{ translateY: moveValue }]
@@ -57,7 +57,6 @@ class ConfirmRide extends Component {
         borderLeftWidth: 3,
         marginLeft: 6,
         opacity: 0.9,
-        height: 45,
         top: deviceCheck(82.5, 71),
         height: deviceCheck('40%', '38%'),
         position: 'absolute'
@@ -99,9 +98,9 @@ class ConfirmRide extends Component {
             <View style={styles.confirmDetails}>
               <View style={styles.confirmRow}>
                 <Car />
-                <Text style={styles.confirmText}>{Math.round(duration)} mi.</Text>
+                <Text style={styles.confirmText}>{Math.round(distance)} mi.</Text>
                 <Time />
-                <Text style={styles.confirmText}>{Math.round(distance)} min.</Text>
+                <Text style={styles.confirmText}>{Math.round(duration)} min.</Text>
               </View>
               <View style={style.line} />
               <View style={style.location}>
@@ -132,7 +131,7 @@ class ConfirmRide extends Component {
             </View>
           </Animated.View>
           <Animated.View style={style.view}>
-            <Button style={{ marginBottom: 50 }} navigate={() => console.log('Confirmed')}>
+            <Button style={style.button} navigate={() => console.log('Confirmed')}>
               CONFIRM RIDE
             </Button>
           </Animated.View>

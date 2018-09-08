@@ -32,7 +32,7 @@ export default class App extends PureComponent {
     setCustomTextInput(customProps.textInput)
     setTimeout(() => {
       this.setState({ splashScreen: false, appReady: true })
-    }, 2500)
+    }, 1500)
   }
 
   loadSplashAsync = async () => Asset.fromModule(bg).downloadAsync()
